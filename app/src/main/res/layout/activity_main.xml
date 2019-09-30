@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/brand_text"
+        android:layout_width="281dp"
+        android:layout_height="101dp"
+        android:text="브랜드 및 제품 선택하기"
+        app:layout_constraintBottom_toTopOf="@+id/clotButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/clotButton"
+        android:layout_width="284dp"
+        android:layout_height="70dp"
+        android:text="일반의류"
+        app:layout_constraintBottom_toTopOf="@+id/cosmeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/brand_text" />
+
+    <Button
+        android:id="@+id/cosmeButton"
+        android:layout_width="284dp"
+        android:layout_height="70dp"
+        android:text="화장품"
+        app:layout_constraintBottom_toTopOf="@+id/sportsButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clotButton" />
+
+    <Button
+        android:id="@+id/sportsButton"
+        android:layout_width="284dp"
+        android:layout_height="70dp"
+        android:text="스포츠"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cosmeButton" />
+
+    <Button
+        android:id="@+id/finButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택 완료"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sportsButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
