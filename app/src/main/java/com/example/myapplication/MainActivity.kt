@@ -66,17 +66,17 @@ class MainActivity : AppCompatActivity() {
             builder.setTitle("추천 동선")
             builder.setMessage(result(moveList))
             builder.setPositiveButton("확인") { _, which ->
-             val file = "savedata.txt"
+             val file = "saveData1.txt"
              val text = moveList.toString()
-             val route = getFilesDir()
+          //   val route = getFilesDir()
              when {
                     TextUtils.isEmpty(text) -> {
                         Toast.makeText(applicationContext, "저장할 내용이 없습니다", Toast.LENGTH_SHORT)
                             .show()
                     }
                     else -> {
-                        Toast.makeText(applicationContext, route.toString(), Toast.LENGTH_SHORT)
-                            .show()
+                        /*Toast.makeText(applicationContext, route.toString(), Toast.LENGTH_SHORT)
+                            .show()*/
                         save(text, file)
                         moveList = mutableListOf<String>()
                     }
