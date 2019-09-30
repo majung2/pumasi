@@ -100,7 +100,6 @@ class MainActivity : AppCompatActivity() {
                 var tmp = spot
                 temp = temp + tmp
             }
-
         }
         var result = """
                 선택하신 매장들을 바탕으로한 제일 빠른 쇼핑동선은
