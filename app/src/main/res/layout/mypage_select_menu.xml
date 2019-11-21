@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/selectChangeInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="개인 정보 수정"
+        android:onClick="onClickChangeInfo"
+        />
+
+    <Button
+        android:id="@+id/selectPreviousPath"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이전 쇼핑 루트 조회"
+        android:onClick="onClickPreviousPath"
+       />
+
+    <Button
+        android:id="@+id/selectPrefer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="선호/비선호 브랜드 조회 및 수정"
+        android:onClick="onClickPreferNonPreferInfo"/>
+
+    <Button
+        android:id="@+id/selectBought"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="구매내역"
+        android:onClick="onClickBought"
+        />
+</LinearLayout>
