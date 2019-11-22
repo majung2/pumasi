@@ -1,6 +1,5 @@
 package com.example.myapplication3.Login;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -10,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.myapplication3.BrancRecommendedBoundary;
+import com.example.myapplication3.CategorySelectBoundary;
 import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
 
@@ -59,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(// 다음 화면으로 전환
                         MainActivity.this,
-                        BrancRecommendedBoundary.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+                        CategorySelectBoundary.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
                 startActivity(intent);
             }
             else{//해당 사용자가 존재하지 않는 경우-> 토스트 띄우기
                 Toast.makeText(this,"존재하지 않는 회원입니다.",Toast.LENGTH_LONG).show();
             }
-            Intent intent = new Intent(// 다음 화면으로 전환
+           Intent intent = new Intent(// 다음 화면으로 전환
                     MainActivity.this,
                     MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
             startActivity(intent);

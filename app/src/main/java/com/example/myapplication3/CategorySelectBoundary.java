@@ -1,6 +1,4 @@
 package com.example.myapplication3;
-//show BrandRecommend ::
-//Click on a category to see a list of recommended brands
 
 
 import androidx.fragment.app.FragmentTransaction;
@@ -9,14 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.myapplication3.Category.Fragment1;
-import com.example.myapplication3.Category.Fragment2;
-import com.example.myapplication3.Category.Fragment3;
-import com.example.myapplication3.Category.Fragment4;
-import com.example.myapplication3.Category.Fragment5;
-import com.example.myapplication3.Category.Fragment6;
+import com.example.myapplication3.RecommendedListBoundary.Fragment1;
+import com.example.myapplication3.RecommendedListBoundary.Fragment2;
+import com.example.myapplication3.RecommendedListBoundary.Fragment3;
+import com.example.myapplication3.RecommendedListBoundary.Fragment4;
+import com.example.myapplication3.RecommendedListBoundary.Fragment5;
+import com.example.myapplication3.RecommendedListBoundary.Fragment6;
 
-public class BrancRecommendedBoundary extends AppCompatActivity implements View.OnClickListener{
+public class CategorySelectBoundary extends AppCompatActivity implements View.OnClickListener{
 
     private final int FRAGMENT1 = 1;
     private final int FRAGMENT2 = 2;

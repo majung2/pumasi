@@ -17,10 +17,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login.Register"/>
-        <activity android:name=".BrancRecommendedBoundary"/>
+        <activity android:name=".CategorySelectBoundary"/>
         <activity android:name=".MyPage.MyPageSelectMenu"/>
         <activity android:name=".MyPage.ChangePersonalInfo"/>
         <activity android:name=".MyPage.ChangePreferNonPreferBoundary"/>
+        <activity android:name=".MyPage.PreferNonpreferBrandBoundary"/>
+        <activity android:name=".MyPage.PreviousPathBoundary"/>
+        <activity android:name=".MyPage.PreviousPathSpecificBoundary"/>
+
+
     </application>
 
 </manifest>

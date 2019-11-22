@@ -1,4 +1,4 @@
-package com.example.myapplication3.Category;
+package com.example.myapplication3.RecommendedListBoundary;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;

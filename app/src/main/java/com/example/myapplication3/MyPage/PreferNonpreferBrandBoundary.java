@@ -48,7 +48,7 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
     public void onClickChangeBrand(View v){//사용자가 선호브랜드 또는 비선호 브랜드 수정하기 버튼을 눌렀을 때-> 선호비선호 브랜드 수정 화면으로 전환 + 사용자의 선호/비선호 브랜드 리스트 가져가기
         Intent intent = new Intent(// 다음 화면으로 전환
                 PreferNonpreferBrandBoundary.this,
-                ChangePreferNonPreferBoundary.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+                ChangePreferNonPreferBoundary.class); //
         startActivity(intent);
     }
 }
