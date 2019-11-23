@@ -1,5 +1,6 @@
 package com.example.myapplication3.MyPage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +11,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication3.Entity.User;
 import com.example.myapplication3.R;
 
 public class ChangePersonalInfo  extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class ChangePersonalInfo  extends AppCompatActivity {
     private RadioGroup userSexGroup;//사용자 성별 입력받는 라디오 그룹
     private Spinner ageSpinner;//나이 스피너
     public MyPageController mypagecontrol;
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,14 @@ public class ChangePersonalInfo  extends AppCompatActivity {
         ageSpinner = (Spinner)findViewById(R.id.spinner);
         changeButton = (Button)findViewById(R.id.changeButton);
 
-        mypagecontrol= new MyPageController();
+        mypagecontrol= new MyPageController();//컨틀롤러 생성
 
-        ageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//유저의 나이를 스피너를 통해 입력받음
+        //받아온 유저 클래스
+        Intent intent = getIntent();
+        currentUser = (User)intent.getSerializableExtra("currentUser");
+
+        //유저의 나이를 스피너를 통해 입력받음
+        ageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {//문자열을 정수형으로 바꾸기
                 if((parent.getItemAtPosition(position).toString().equals("10대"))){
@@ -84,6 +92,10 @@ public class ChangePersonalInfo  extends AppCompatActivity {
         if(femaleButton.isChecked()==false &&maleButton.isChecked()==false){//성별 체크를 하지 않은 경우 임의로 남성으로 처리
             userSex="남";
         }
+        MyPageController myControl = new MyPageController();
+        myControl.personalInfoChange(userSex,userAge,currentUser);
+
+
 
     }
 }

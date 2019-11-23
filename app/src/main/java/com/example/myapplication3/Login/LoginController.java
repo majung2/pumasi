@@ -18,7 +18,8 @@ public class LoginController {
     private String pw;
     private String sex;
     private Integer age;
-    public  User currentUser;//로그인 후에 유저 정보를 담는 객체
+
+    public  User controlUser;//로그인 후에 유저 정보를 담는 객체
     private FirebaseFirestore db;
     private boolean exists;
     public void LoginController() {//초기화
@@ -28,6 +29,7 @@ public class LoginController {
         this.sex=null;
         this.age=null;
         this.exists=false;
+
 
 
     }
@@ -41,8 +43,8 @@ public class LoginController {
     this.exists=false;
         final String TAG = "컨트롤러: ";
         Log.d(TAG,"완성");
-    currentUser = new User();
-    //currentUser.register(name,id,pw,sex,age);
+    controlUser.register(name,id,pw,sex,age);
+
 
     }
     public boolean login(String currentid, String currentpassword){//로그인(디비에서 읽어오는 코드 추가할 예정)
@@ -50,38 +52,16 @@ public class LoginController {
         exists=false;
         id=currentid;
         pw=currentpassword;
-        db = FirebaseFirestore.getInstance();
-        DocumentReference ref = db.collection("user").document(currentid);
-        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task< DocumentSnapshot > task) {//해당 아이디의 유저를 찾은 경우
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if(pw.equals(doc.get("password"))){//해당 아이디, 비밀번호가 일치하는 유저를 찾은 경우
-                        exists=true;
-                        name =  doc.get("name").toString();
-                        sex = doc.get("sex").toString();
-                        pw= doc.get("password").toString();
-                        age = Integer.parseInt(doc.get("age").toString());
-                        System.out.println("찾음");
-                        System.out.println(" "+id+name+sex+pw+age);
-
-                        //유저가 존재하므로 currentUser 객체를 만들어 디비에서 읽어온 정보들을 담아놓아야한다. 코딩 필요- 유저 객체를 만든 후-> 로그인 메소드 콜 하면 됨
-
-                    }
-
-
-                }
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        System.out.println("없음");
-                    }
-                });
+        this.controlUser= new User();
+        System.out.println("유저생성");
+        exists=controlUser.verifyLogin(id,pw);
 
         return exists;
     }
+    public User getUserFromLoginControll(){
+        return controlUser;
+    }
+
+
 
 }

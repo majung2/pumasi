@@ -3,9 +3,11 @@ package com.example.myapplication3.MyPage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +20,8 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
     private ArrayList<String> nonPreferBrands=new ArrayList<>();// 비선호 브랜드 리스트
     private Button changePrefer;
     private Button changeNonPrefer;
+    private TextView selected_item_textview;
+    private TextView selected_item_textview2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +39,47 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
         nonPreferBrands.add("ADIDAS");
 
         //선호 브랜드 어댑터 연결
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, preferBrands) ;
-        ListView listview = (ListView) findViewById(R.id.preferListView) ;
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, preferBrands);
+        ListView listview = (ListView) findViewById(R.id.preferListView);
         listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view, int position, long id) {
+
+                //클릭한 아이템의 문자열을 가져옴
+                String selected_item = (String)adapterView.getItemAtPosition(position);
+
+                //텍스트뷰에 출력
+                selected_item_textview.setText(selected_item);
+            }
+        });
+
+
+
 
         //비선호 브랜드 어댑터 연결
-        ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_2,  nonPreferBrands) ;
-        ListView listview2 = (ListView) findViewById(R.id.nonpreferListView) ;
-        listview.setAdapter(adapter2);
+        ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_2, nonPreferBrands);
+        ListView listview2 = (ListView) findViewById(R.id.nonpreferListView);
+        listview2.setAdapter(adapter2);
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view, int position, long id) {
+
+                //클릭한 아이템의 문자열을 가져옴
+                String selected_item = (String)adapterView.getItemAtPosition(position);
+
+                //텍스트뷰에 출력
+                selected_item_textview2.setText(selected_item);
+            }
+        });
+
     }
+
 
     public void onClickChangeBrand(View v){//사용자가 선호브랜드 또는 비선호 브랜드 수정하기 버튼을 눌렀을 때-> 선호비선호 브랜드 수정 화면으로 전환 + 사용자의 선호/비선호 브랜드 리스트 가져가기
         Intent intent = new Intent(// 다음 화면으로 전환

@@ -8,7 +8,9 @@
         android:id="@+id/UserNameText"
         android:layout_width="match_parent"
         android:layout_height="67dp"
-        android:text="사용자이름받아서 띄울것" />
+        android:text="성별 및 나이를 수정해주세요."
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,11 +66,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="473dp"
-        android:orientation="vertical"></LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -79,7 +76,8 @@
             android:onClick="onClickComplete"
             android:text="수정 완료"
             android:visibility="visible"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            />
     </LinearLayout>
 
 </LinearLayout>
