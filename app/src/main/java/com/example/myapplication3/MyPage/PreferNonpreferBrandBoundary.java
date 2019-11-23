@@ -3,6 +3,7 @@ package com.example.myapplication3.MyPage;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +19,8 @@ import com.example.myapplication3.R;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,비선호 브랜드 리스트 보는 화면
     private ArrayList<String> preferBrands=new ArrayList<>();//선호 브랜드 리스트
@@ -31,6 +34,8 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
     private ListView listView;
     private ListView listView2;
 
+    private MyPageController controller;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,25 +45,28 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
        changePrefer = (Button) findViewById(R.id.preferbrandadd);
        changeNonPrefer = (Button) findViewById(R.id.nonpreferbrandadd);
 
-        //리스트뷰 확인 위해 임의로 리스트에 데이터 추가, 디비 읽어들이는 과정 끝나면 최종 수정 예정
-        preferBrands.add("AbC MART");
-        preferBrands.add("NEANPOLE");
-        nonPreferBrands.add("BLACKYARK");
-        nonPreferBrands.add("ADIDAS");
+
+       //컨트롤러 통해 선호, 비선호 브랜드 받아옴
+        controller = new MyPageController();
+        preferBrands = controller.getPreferbrands();
+        nonPreferBrands = controller.getNonPreferbrands();
 
         //첫번째 리스트뷰 어댑터에 연결
-        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
+        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,preferBrands);
         listView = (ListView) findViewById(R.id.selected_1);
 
         listView.setAdapter(adapter);
         //listView.setOnItemClickListener(this);
 
+       /* for(int i=0;i<preferBrands.size();i++){
+            adapter.add(preferBrands[i]);
+        }
 
         adapter.add("안드로이드");
         adapter.add("열심히");
         adapter.add("공부합시다.");
         adapter.add("홍로이드");
-        adapter.add("리스트뷰");
+        adapter.add("리스트뷰");*/
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -75,16 +83,16 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
         });
 
         //두 번쨰 리스트 뷰 어댑터에 연결
-        adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
+        adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,nonPreferBrands);
         listView2 = (ListView) findViewById(R.id.selected_2);
 
         listView2.setAdapter(adapter2);
 
-        adapter2.add("두번째 리스트");
+       /* adapter2.add("두번째 리스트");
         adapter2.add("열심히");
         adapter2.add("공부합시다.");
         adapter2.add("홍로이드");
-        adapter2.add("리스트뷰");
+        adapter2.add("리스트뷰");*/
 
         listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -94,22 +102,99 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
 
                 // select route name or visited date(?)
                 String selectedPath = (String)adapterView.getItemAtPosition(position);
-                deleteHandler();//브랜드 클릭시 alertdialog 띄움
+                deleteHandler();//브랜드 클릭시 alert dialog 띄움
                 adapter2.notifyDataSetChanged();
             }
         });
 
+        //선호 브랜드 추가하기 버튼 클릭한 경우
+
 
 
     }
 
 
-    public void onClickChangeBrand(View v){//사용자가 선호브랜드 또는 비선호 브랜드 수정하기 버튼을 눌렀을 때-> 선호비선호 브랜드 수정 화면으로 전환 + 사용자의 선호/비선호 브랜드 리스트 가져가기
-        Intent intent = new Intent(// 다음 화면으로 전환
-                PreferNonpreferBrandBoundary.this,
-                ChangePreferNonPreferBoundary.class); //
-        startActivity(intent);
+
+    public void onClickAdd(View v) {//사용자가 추가하기 버튼을 눌렀을 경우, alertdialog 창을 띄워 추가할 브랜드를 선택하도록 한다.
+        AlertDialog.Builder builder = new AlertDialog.Builder(PreferNonpreferBrandBoundary.this);
+        // String array for alert dialog multi choice items
+        String[] colors = new String[]{
+                "Red",
+                "Green",
+                "Blue",
+                "Purple",
+                "Olive"
+        };
+
+        ArrayList <String> BrandList = new ArrayList<String>();
+        controller.getAllBrands();
+        // Boolean array for initial selected items
+        final boolean[] checkedColors = new boolean[]{
+                false, // Red
+                true, // Green
+                false, // Blue
+                true, // Purple
+                false // Olive
+
+        };
+
+        // Convert the color array to list
+        final List<String> colorsList = Arrays.asList(colors);
+
+        builder.setMultiChoiceItems(colors, checkedColors, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                // Update the current focused item's checked status
+                checkedColors[which] = isChecked;
+
+                // Get the current focused item
+                String currentItem = colorsList.get(which);
+
+                // Notify the current action
+                Toast.makeText(getApplicationContext(),
+                        currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Specify the dialog is not cancelable
+        builder.setCancelable(false);
+
+        // Set a title for alert dialog
+        builder.setTitle("Your preferred colors?");
+
+        // Set the positive/yes button click listener
+        builder.setPositiveButton("선택 완료", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do something when click positive button
+
+                for (int i = 0; i<checkedColors.length; i++){
+                    boolean checked = checkedColors[i];
+                    if (checked) {
+
+                    }
+                }
+            }
+        });
+
+        // Set the negative/no button click listener
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do something when click the negative button
+            }
+        });
+
+
+        AlertDialog dialog = builder.create();
+        // Display the alert dialog on interface
+        dialog.show();
     }
+
+
+
+
     public void deleteHandler(){//사용자가 브랜드를 클릭했을 때
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 

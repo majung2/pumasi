@@ -21,8 +21,8 @@
             android:id="@+id/preferbrandadd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="추가하기" />
-
+            android:text="추가하기"
+android:onClick="onClickAdd"/>
     </LinearLayout>
 
     <LinearLayout
@@ -53,8 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="추가하기" />
-    </LinearLayout>
+            android:text="추가하기"
+android:onClick="onClickAdd"/></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -20,6 +20,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
+
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -32,6 +35,7 @@ public class User implements Serializable {
     private Integer currentFloor;
     private ArrayList<String> preferBrands;
     private ArrayList<String> nonPreferBrands;
+    private ArrayList<String> totalBrandLIst;
     private FirebaseFirestore db;
     private boolean found;
 
@@ -46,7 +50,14 @@ public class User implements Serializable {
         this.currentXY=null;
         this.preferBrands= new ArrayList<>();
         this.nonPreferBrands= new ArrayList<>();
+        this.totalBrandLIst= new ArrayList<>();
         this.found=false;
+
+        //선호비선호 브랜드 리스트는 테스트를 위하여 임의로 설정해노았습니다 디비연결되면 로그인시 아예 유저 객체에 브랜드 리스트를 저장시켜놓으면 될 것 같아요
+        preferBrands.add("AbC MART");
+        preferBrands.add("NEANPOLE");
+        nonPreferBrands.add("BLACKYARK");
+        nonPreferBrands.add("ADIDAS");
     }
     //회원가입- 사용자가 입력한 정보 디비에 저장하는 함수
     public void register(String name, String id, String pw, String sex, Integer age){
@@ -65,15 +76,26 @@ public class User implements Serializable {
         this.pw=pw;
         this.age=age;
         this.sex=sex;
+
     }
-    public void getBrand(){
-        //사용자가 선호비선호하는 브랜드 디비에서 읽어오기
+    public ArrayList<String> getPreferBrand(){
+        return this.preferBrands;
     }
+    public ArrayList<String> getNonPreferBrand(){
+        return this.nonPreferBrands;
+    }
+
     public void setId(String inputid){
         this.id=inputid;
     }
     public void setPw(String inputpw){
         this.pw= inputpw;
+    }
+    public void setPrefer(ArrayList<String> list){
+        this.preferBrands=list;
+    }
+    public void setNonPrefer(ArrayList<String> list){
+        this.nonPreferBrands=list;
     }
     public void setSex(String sex){
         this.sex=sex;
@@ -93,6 +115,28 @@ public class User implements Serializable {
     }
     public Integer getAge(){
         return this.age;
+    }
+
+    public ArrayList<String> getAllBrands(){
+        db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("category").document("해외명품");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                       // totalBrandLIst.add(document.getData().[0]);-> firebase는 배열 가져올 수 없음
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+        return this.totalBrandLIst;
     }
 
     public void changePersonalInfo(String sex, Integer age){
