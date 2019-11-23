@@ -54,8 +54,8 @@ public class MyPageSelectMenu extends AppCompatActivity  {
 
         Intent intent = new Intent(// 다음 화면으로 전환
                 MyPageSelectMenu.this,
-               ChangePreferNonPreferBoundary.class); // 선호비선호 브랜드 조회 관련 클래스
-        intent.putExtra("currentUser", currentUser);
+               PreferNonpreferBrandBoundary.class); // 선호비선호 브랜드 조회 관련 클래스
+
         startActivity(intent);
 
     }
