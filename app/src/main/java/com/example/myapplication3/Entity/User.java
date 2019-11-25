@@ -35,7 +35,7 @@ public class User implements Serializable {
     private Integer currentFloor;
     private ArrayList<String> preferBrands;
     private ArrayList<String> nonPreferBrands;
-    private ArrayList<String> totalBrandLIst;
+    private ArrayList<String> totalBrandList;
     private FirebaseFirestore db;
     private boolean found;
 
@@ -50,7 +50,7 @@ public class User implements Serializable {
         this.currentXY=null;
         this.preferBrands= new ArrayList<>();
         this.nonPreferBrands= new ArrayList<>();
-        this.totalBrandLIst= new ArrayList<>();
+        this.totalBrandList= new ArrayList<>();
         this.found=false;
 
         //선호비선호 브랜드 리스트는 테스트를 위하여 임의로 설정해노았습니다 디비연결되면 로그인시 아예 유저 객체에 브랜드 리스트를 저장시켜놓으면 될 것 같아요
@@ -136,7 +136,7 @@ public class User implements Serializable {
                 }
             }
         });
-        return this.totalBrandLIst;
+        return this.totalBrandList;
     }
 
     public void changePersonalInfo(String sex, Integer age){

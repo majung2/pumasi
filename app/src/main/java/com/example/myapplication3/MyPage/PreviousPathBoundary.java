@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class PreviousPathBoundary extends AppCompatActivity {
 
-    public PreviousPathController Pathcontrol;
+    public MyPageController Pathcontrol;
 
     ArrayList<String> list ;
 
@@ -52,7 +52,7 @@ public class PreviousPathBoundary extends AppCompatActivity {
 
 
 
-                Pathcontrol = new PreviousPathController();
+                Pathcontrol = new MyPageController();
                 Pathcontrol.loadPath(selectedPath);
 
                 Intent intent = new Intent(PreviousPathBoundary.this,

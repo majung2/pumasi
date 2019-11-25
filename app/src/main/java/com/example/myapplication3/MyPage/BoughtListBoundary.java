@@ -1,52 +1,33 @@
 package com.example.myapplication3.MyPage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.myapplication3.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication3.Data;
 
-public class PreviousPathSpecificBoundary extends AppCompatActivity {
+import java.util.ArrayList;
 
-    private MyPageController pathController = new MyPageController();
-    private String path = null;
+public class BoughtListBoundary extends AppCompatActivity {
+    private ArrayList<Data> boughtdata = new ArrayList<Data>();
+    private MyPageController controller = new MyPageController();
 
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.bought_list);
 
-        // layout-resource xml
-        setContentView(R.layout.previous_path);
+        boughtdata = controller.getBought();
 
-        // layout -lv
-        final ListView listview = (ListView) findViewById(R.id.lv);
+        final ListView listview = (ListView) findViewById(R.id.boughtlist);
+        final BoughtListAdapter Adapter1 = new BoughtListAdapter(this, boughtdata, listview);
 
-
-        path = pathController.getPath();
-        Log.d("@@@test", "if path is not 0, then OK!  [path : " + path + " ]");
-
-        // entity ( from DB -> same Path -> load brand)
-        final List<Data> brand = new ArrayList<>();
-
-        brand.add(new Data("ABC MART"));
-        brand.add(new Data("BEANPOLE"));
-
-        // entity ( from DB -> same route -> load brand)
-
-        final PreviousPathAdapter Adapter1 = new PreviousPathAdapter(this, brand, listview);
-
-        // ListView, adapter connect
         listview.setAdapter(Adapter1);
-
 
         listview.setOnScrollListener(new AbsListView.OnScrollListener() {
 

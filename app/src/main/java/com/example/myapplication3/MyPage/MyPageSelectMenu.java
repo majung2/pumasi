@@ -61,6 +61,12 @@ public class MyPageSelectMenu extends AppCompatActivity  {
     }
     public void onClickBought(View v){// 이전 구매 목록 조회를 클릭했을 때
 
+        Intent intent = new Intent(// 다음 화면으로 전환
+                MyPageSelectMenu.this,
+                BoughtListBoundary.class); // 구매내역 조회 관련 클래스
+
+        startActivity(intent);
+
     }
 
 
