@@ -1,7 +1,7 @@
 package com.example.myapplication3;
 
 public class Path { //linked list (Path)
-
+    private int pathNum = 0; // 선택시만 DB에서 마지막 넘버 가져와서 +1로 설정
     private String recdate; //recommend date
     private Node head; // start brand Node
     private Node tail; // end brand Node
@@ -41,7 +41,7 @@ public class Path { //linked list (Path)
         }
     }
 
-        public void addBrandLast(Object input){
+    public void addBrandLast(Object input){
             Node newNode = new Node(input);
             if(pathsize == 0){
                 addFirst(input);
@@ -76,6 +76,10 @@ public class Path { //linked list (Path)
 
         return this.pathsize;
 
+    }
+
+    public void setPathNum(int pathNum){
+        this.pathNum = pathNum;
     }
 
 
