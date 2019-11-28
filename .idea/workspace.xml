@@ -9,7 +9,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Firebase" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7de9cc6d-70ad-471f-af03-b1d29bc8da71" name="Default Changelist" comment="">
+    <list default="true" id="7de9cc6d-70ad-471f-af03-b1d29bc8da71" name="Default Changelist" comment="Pathfinding generated&#10;PathfindingController generated&#10;Path changed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Pathfinding/PathfindingController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
@@ -65,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/MyPageController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="133">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
@@ -157,13 +157,28 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="My Application3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="My Application3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -333,7 +348,21 @@
       <option name="project" value="LOCAL" />
       <updated>1574921988786</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Pathfinding generated&#10;PathfindingController generated&#10;Path changed">
+      <created>1574949392569</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1574949392569</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Pathfinding generated&#10;PathfindingController generated&#10;Path changed">
+      <created>1574949455403</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1574949455403</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -347,10 +376,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.20536913" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.20536913" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -364,7 +392,7 @@
       <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.49946696" weight="0.329718" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.4181208" side_tool="true" visible="true" weight="0.30638298" />
       <window_info anchor="bottom" id="Build" order="5" sideWeight="0.5818792" visible="true" weight="0.30638298" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" />
+      <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="7" sideWeight="0.7110874" weight="0.35791758" />
       <window_info anchor="bottom" id="Debug" order="8" />
       <window_info anchor="bottom" id="Inspection Results" order="9" visible="true" weight="0.32936078" />
@@ -420,6 +448,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="project commit" />
     <MESSAGE value="prefer brand info changed" />
     <MESSAGE value="my page changed" />
@@ -690,14 +719,14 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/MyPageController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Pathfinding/PathfindingController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
