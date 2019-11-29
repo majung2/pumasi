@@ -7,10 +7,12 @@ public class SpotsInMall {
     private Integer SpotNr;//스팟의 번호
     private String SpotName;//스팟의 이름
     private Integer SpotFloor;//스팟이 위치한 층수
-    private String SpotType;//스팟의 타입
+    private String SpotType;//스팟의 타입(브랜드/음식/에스컬레이터및엘리베이터)
     private Category InCategory;//어떤 카테고리에 속하는지
 
     public SpotsInMall(){}
+
+
 
 
 }

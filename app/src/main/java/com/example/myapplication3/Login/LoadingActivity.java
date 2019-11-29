@@ -10,8 +10,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.myapplication3.Entity.Brand;
 import com.example.myapplication3.Entity.Category;
 import com.example.myapplication3.Entity.ShoppingMall;
+import com.example.myapplication3.Entity.SpotsInMall;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -33,6 +35,8 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
     private Category category;
     private ArrayList<Category> catList;
     private Integer check;
+    private SpotsInMall spot;
+    private Brand brand;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,6 +145,32 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
                 }
             });*/
 
+           for(Integer i=0;i<mall.getCategoryList().size();i++){
+               final Integer finalI = i;
+               db.collection("shoppingMall").document("M1").collection("category").document(mall.getCategoryList().get(i).getCNr()).collection("brand")
+                       .get()
+                       .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                           @Override
+                           public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                               if (task.isSuccessful()) {
+                                   for (QueryDocumentSnapshot document : task.getResult()) {
+                                       Log.d(TAG, document.getId() + " => " + document.getData().get("bName").toString());
+                                        if(document.getData().get("bName").toString().equals("음식") ||document.getData().get("bName").toString().equals("에스컬레이터및엘리베이터") ){
+                                                spot = new SpotsInMall();
+
+                                        }
+                                        else{//일반 브랜드인 경우
+
+                                        }
+
+                                   }
+
+                               } else {
+                                   Log.d(TAG, "Error getting documents: ", task.getException());
+                               }
+                           }
+                       });
+           }
         Thread.sleep(2000);
             System.out.println("로딩 화면 띄워지는 시간");
 
