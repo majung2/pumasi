@@ -12,8 +12,7 @@
         <activity android:name=".Login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".Login.Register"/>
@@ -24,6 +23,15 @@
         <activity android:name=".MyPage.PreviousPathBoundary"/>
         <activity android:name=".MyPage.PreviousPathSpecificBoundary"/>
         <activity android:name=".MyPage.BoughtListBoundary"/>
+        <activity android:name=".Login.LoadingActivity"
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
 
     </application>
