@@ -42,6 +42,8 @@ public class User implements Serializable {
     private FirebaseFirestore db;
     private boolean found;
 
+    private UserCallback usercallback ;
+
     //유저 초기화
     public User(){
         this.id=null;
@@ -55,6 +57,29 @@ public class User implements Serializable {
         this.nonPreferBrands= new ArrayList<>();
         this.totalBrandList= new ArrayList<>();
         this.found=false;
+
+        //선호비선호 브랜드 리스트는 테스트를 위하여 임의로 설정해노았습니다 디비연결되면 로그인시 아예 유저 객체에 브랜드 리스트를 저장시켜놓으면 될 것 같아요
+        preferBrands.add("AbC MART");
+        preferBrands.add("NEANPOLE");
+        nonPreferBrands.add("BLACKYARK");
+        nonPreferBrands.add("ADIDAS");
+    }
+
+    //콜백 초기화 (call back initialize)
+
+    public User(UserCallback usercallback){
+        this.id=null;
+        this.pw=null;
+        this.name=null;
+        this.sex=null;
+        this.age=null;
+        this.currentFloor=null;
+        this.currentXY=null;
+        this.preferBrands= new ArrayList<>();
+        this.nonPreferBrands= new ArrayList<>();
+        this.totalBrandList= new ArrayList<>();
+        this.found=false;
+        this.usercallback = usercallback;
 
         //선호비선호 브랜드 리스트는 테스트를 위하여 임의로 설정해노았습니다 디비연결되면 로그인시 아예 유저 객체에 브랜드 리스트를 저장시켜놓으면 될 것 같아요
         preferBrands.add("AbC MART");
@@ -177,11 +202,14 @@ public class User implements Serializable {
                         age = Integer.parseInt(doc.get("age").toString());
                         System.out.println("찾음");
                         System.out.println(" "+id+name+sex+pw+age);
+                        found = true;
+                        usercallback.finishLogin();
 
                     }
                 }
                 else{
-
+                    usercallback.failLogin();
+                    System.out.println("user단 else문 로그인 실패");
                 }
             }
         })
@@ -189,13 +217,18 @@ public class User implements Serializable {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         System.out.println("없음");
-
+                        usercallback.failLogin();
 
                     }
                 });
       return found;
     }
 
+public interface UserCallback{
 
+        public void finishLogin();
+        public void failLogin();
+
+    }
 
 }

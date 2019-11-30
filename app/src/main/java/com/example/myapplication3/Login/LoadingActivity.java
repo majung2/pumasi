@@ -141,8 +141,8 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
            readMall(new MyCallback() {
                @Override
                public void onCallback(ArrayList<SpotsInMall> spotList, ArrayList<Brand> brandList) {
-                //   System.out.println("긑");
-                 //  System.out.println(brandList.get(0).getSpotName());
+                   //System.out.println("긑");
+                   //System.out.println(brandList.get(0).getSpotName());
                }
            });
 
