@@ -37,12 +37,16 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
     private Integer check;
     private SpotsInMall spot;
     private Brand brand;
+    private ArrayList<Brand> brandList;
+    private ArrayList<SpotsInMall> spotList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         System.out.println("스플레시 화면 클래스 접근");
         mallList = new ArrayList<>();//리스트 초기화
         catList= new ArrayList<>();
+        spotList = new ArrayList<>();
+        brandList = new ArrayList<>();
         try{//몇 초동안 로딩화면 띄워지는지 설정
             db = FirebaseFirestore.getInstance();
             FirebaseFirestore db2 = FirebaseFirestore.getInstance();
@@ -134,43 +138,16 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
            // System.out.println(mall.getCategoryList().get(12).getCName());
             //디비 정보 읽고 shoppingMall, Category,Brand 클래스 생성
             System.out.println("before");
-           /* readMall(new MyCallback() {
-                @Override
-                public void onCallback(ArrayList<ShoppingMall> mallList) {
-                    for(int i=0;i<mallList.size();i++){
-                        System.out.println("mall list");
-                        System.out.println(mallList.get(i).getMNumber());
-                        System.out.println(mallList.get(i).getMName());
-                    }
-                }
-            });*/
+           readMall(new MyCallback() {
+               @Override
+               public void onCallback(ArrayList<SpotsInMall> spotList, ArrayList<Brand> brandList) {
+                //   System.out.println("긑");
+                 //  System.out.println(brandList.get(0).getSpotName());
+               }
+           });
 
-           for(Integer i=0;i<mall.getCategoryList().size();i++){
-               final Integer finalI = i;
-               db.collection("shoppingMall").document("M1").collection("category").document(mall.getCategoryList().get(i).getCNr()).collection("brand")
-                       .get()
-                       .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                           @Override
-                           public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                               if (task.isSuccessful()) {
-                                   for (QueryDocumentSnapshot document : task.getResult()) {
-                                       Log.d(TAG, document.getId() + " => " + document.getData().get("bName").toString());
-                                        if(document.getData().get("bName").toString().equals("음식") ||document.getData().get("bName").toString().equals("에스컬레이터및엘리베이터") ){
-                                                spot = new SpotsInMall();
 
-                                        }
-                                        else{//일반 브랜드인 경우
 
-                                        }
-
-                                   }
-
-                               } else {
-                                   Log.d(TAG, "Error getting documents: ", task.getException());
-                               }
-                           }
-                       });
-           }
         Thread.sleep(2000);
             System.out.println("로딩 화면 띄워지는 시간");
 
@@ -184,36 +161,56 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
     }
 
 
- /*  public void readMall(final MyCallback mycall){//쇼핑몰 찾아서 클래스 생성 후, 쇼핑몰 리스트에 추가
-        db.collection("shoppingMall")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d(TAG, document.getId() + " => " + document.getData().get("MName").toString());
+   public void readMall(final MyCallback mycall) {//쇼핑몰 찾아서 클래스 생성 후, 쇼핑몰 리스트에 추가
+       for (Integer i = 0; i < mall.getCategoryList().size(); i++) {
+           final Integer finalI = i;
 
-                                //쇼핑몰 클래스 생성후 디비에서 읽어온 기본 정보 저장, 쇼핑몰 리스트에 추가
-                                mall= new ShoppingMall();
-                                mall.setMName(document.getData().get("MName").toString());
-                                mall.setMNumber(document.getId());
-                                mallList.add(mall);
-                            }
-                            mycall.onCallback(mallList);
+           db.collection("shoppingMall").document("M1").collection("category").document(mall.getCategoryList().get(i).getCNr()).collection("brand")
+                   .get()
+                   .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                       @Override
+                       public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                           if (task.isSuccessful()) {
+                               for (QueryDocumentSnapshot document : task.getResult()) {
+                                   // Log.d(TAG, document.getId() + " => " + document.getData().get("bName").toString());
+                                   // System.out.println(mall.getCategoryList().get(finalI).getCNr());
+                                   if (mall.getCategoryList().get(finalI).getCName().equals("음식") || mall.getCategoryList().get(finalI).getCName().equals("에스컬레이터및엘리베이터")) {
+                                       spot = new SpotsInMall();
+                                       spot.setSpotNr(document.getId());
+                                       spot.setSpotName(document.getData().get("bName").toString());
+                                       spot.setInCategory(mall.getCategoryList().get(finalI));
+                                       spot.setSpotFloor(Integer.parseInt(document.getData().get("floor").toString()));
+                                       spot.setSpotType(mall.getCategoryList().get(finalI).getCName());
+                                       spot.setSpotLocation(Integer.parseInt(document.getData().get("x").toString()), Integer.parseInt(document.getData().get("y").toString()));
+                                       spotList.add(spot);
+                                       System.out.println(spot.getSpotName());
 
+                                   } else {//일반 브랜드인 경우
+                                       brand = new Brand();
+                                       brand.setSpotNr(document.getId());
+                                       brand.setSpotName(document.getData().get("bName").toString());
+                                       brand.setInCategory(mall.getCategoryList().get(finalI));
+                                       brand.setSpotFloor(Integer.parseInt(document.getData().get("floor").toString()));
+                                       brand.setSpotType(mall.getCategoryList().get(finalI).getCName());
+                                       brand.setSpotLocation(Integer.parseInt(document.getData().get("x").toString()), Integer.parseInt(document.getData().get("y").toString()));
+                                       brand.setPriceLevel(document.getData().get("priceLevel").toString());
+                                       brandList.add(brand);
+                                       System.out.println(brand.getSpotName());
+                                   }
 
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-    }
-
+                               }
+                               mycall.onCallback(spotList,brandList);
+                           } else {
+                               Log.d(TAG, "Error getting documents: ", task.getException());
+                           }
+                       }
+                   });;
+       }
+   }
   public interface MyCallback {
-      void onCallback(ArrayList<ShoppingMall> mallList);
+      void onCallback(ArrayList<SpotsInMall> spotList,ArrayList<Brand> brandList);
   }
-*/
+
 }
 
 

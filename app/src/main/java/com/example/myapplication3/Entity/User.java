@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.myapplication3.Login.LoadingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -158,8 +161,8 @@ public class User implements Serializable {
     }
 
     public boolean verifyLogin(String inputId, String InputPw){
-        this.id=inputId;
-        this.pw=InputPw;
+       this.id = inputId;
+       this.pw = InputPw;
         db = FirebaseFirestore.getInstance();
         DocumentReference ref = db.collection("user").document(id);
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -174,9 +177,11 @@ public class User implements Serializable {
                         age = Integer.parseInt(doc.get("age").toString());
                         System.out.println("찾음");
                         System.out.println(" "+id+name+sex+pw+age);
-                        found=true;
 
                     }
+                }
+                else{
+
                 }
             }
         })
@@ -184,8 +189,13 @@ public class User implements Serializable {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         System.out.println("없음");
+
+
                     }
                 });
-        return found;
+      return found;
     }
+
+
+
 }
