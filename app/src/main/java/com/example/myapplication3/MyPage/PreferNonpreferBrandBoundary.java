@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,비선호 브랜드 리스트 보는 화면
+public class PreferNonpreferBrandBoundary extends AppCompatActivity implements MyPageController.MyPageControlBrandCallback{//선호,비선호 브랜드 리스트 보는 화면
     private ArrayList<String> preferBrands=new ArrayList<>();//선호 브랜드 리스트
     private ArrayList<String> nonPreferBrands=new ArrayList<>();// 비선호 브랜드 리스트
     private Button changePrefer;
@@ -33,6 +33,11 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
     private ArrayAdapter<String>    adapter2;
     private ListView listView;
     private ListView listView2;
+    private String id;
+    private String pw;
+    private String name;
+    private String sex;
+    private Integer age;
 
     private MyPageController controller;
 
@@ -41,6 +46,14 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
         super.onCreate(savedInstanceState);
         setContentView(R.layout.prefer_nonprefer_brand_info);
 
+        //이전 화면으로부터 넘겨받은 유저에 대한 정보들
+        Intent intent=getIntent();
+        id = intent.getStringExtra("id");
+        pw = intent.getStringExtra("pw");
+
+
+
+
         //버튼 연결
        changePrefer = (Button) findViewById(R.id.preferbrandadd);
        changeNonPrefer = (Button) findViewById(R.id.nonpreferbrandadd);
@@ -48,39 +61,12 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
 
        //컨트롤러 통해 선호, 비선호 브랜드 받아옴
         controller = new MyPageController();
-        preferBrands = controller.getPreferbrands();
-        nonPreferBrands = controller.getNonPreferbrands();
-
+        controller.MyPageControllerBrand(this);
+        controller.setMyPageControlUser(id,pw);
+        controller.getPreferbrands();
+        System.out.println(preferBrands);
         //첫번째 리스트뷰 어댑터에 연결
-        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,preferBrands);
-        listView = (ListView) findViewById(R.id.selected_1);
 
-        listView.setAdapter(adapter);
-        //listView.setOnItemClickListener(this);
-
-       /* for(int i=0;i<preferBrands.size();i++){
-            adapter.add(preferBrands[i]);
-        }
-
-        adapter.add("안드로이드");
-        adapter.add("열심히");
-        adapter.add("공부합시다.");
-        adapter.add("홍로이드");
-        adapter.add("리스트뷰");*/
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView,
-                                    View view, int position, long id) {
-
-                // select route name or visited date(?)
-                String selectedPath = (String)adapterView.getItemAtPosition(position);
-                deleteHandler();//브랜드 클릭시 alertdialog 띄움
-
-                adapter.notifyDataSetChanged();
-            }
-        });
 
         //두 번쨰 리스트 뷰 어댑터에 연결
         adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,nonPreferBrands);
@@ -219,4 +205,44 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity {//선호,�
         alertDialog.show();
     }
 
-}
+    @Override
+    public void getPrefer2(String brand)
+    {
+
+            preferBrands.add(brand);
+            System.out.println(brand);
+        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,preferBrands);
+        listView = (ListView) findViewById(R.id.selected_1);
+
+        listView.setAdapter(adapter);
+        //listView.setOnItemClickListener(this);
+
+       /* for(int i=0;i<preferBrands.size();i++){
+            adapter.add(preferBrands[i]);
+        }
+
+        adapter.add("안드로이드");
+        adapter.add("열심히");
+        adapter.add("공부합시다.");
+        adapter.add("홍로이드");
+        adapter.add("리스트뷰");*/
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view, int position, long id) {
+
+                // select route name or visited date(?)
+                String selectedPath = (String)adapterView.getItemAtPosition(position);
+                deleteHandler();//브랜드 클릭시 alertdialog 띄움
+
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        }
+    }
+
+
+

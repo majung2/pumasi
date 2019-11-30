@@ -14,8 +14,11 @@ import com.example.myapplication3.Entity.User;
 import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements LoginController.LoginControllCallback{
+
+public class MainActivity extends AppCompatActivity implements LoginController.LoginControllCallback {
     private User currentUser;
     private Button Login;
     private Button Register;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements LoginController.L
     public LoginController logincontrol;
     private String userId;
     private String userPw;
+    private ArrayList<String> preferList;
+    private ArrayList<String> nonpreferList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements LoginController.L
         id = (EditText) findViewById(R.id.idtext);
         pw= (EditText) findViewById(R.id.pwtext);
 
+        preferList= new ArrayList<>();
+        nonpreferList = new ArrayList<>();
 
     }
     public void onClickRegister(View v){
@@ -67,10 +74,13 @@ public class MainActivity extends AppCompatActivity implements LoginController.L
 
         Toast.makeText(this,"로그인되었습니다.",Toast.LENGTH_LONG).show();
         currentUser = logincontrol.getUserFromLoginControll();
-
+      //  System.out.println(currentUser.getAge());
         Intent intent = new Intent(// 다음 화면으로 전환
                 MainActivity.this,
                 MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+       intent .putExtra("id",currentUser.getId());
+       intent.putExtra("pw",currentUser.getPw());
+
         startActivity(intent);
 
     }

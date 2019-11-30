@@ -8,22 +8,31 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication3.Entity.User;
 import com.example.myapplication3.R;
 
-public class ChangePersonalInfo  extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class ChangePersonalInfo  extends AppCompatActivity implements  MyPageController.MyPageControlCallback{
     private Button changeButton;//완료 버튼
     private String userSex;//사용자 성별
     private Integer userAge;//사용자 나이
+    private String userName;
+    private String userId;
+    private String userPw;
     private RadioButton femaleButton;//여자버튼
     private RadioButton maleButton;//남자버튼
     private RadioGroup userSexGroup;//사용자 성별 입력받는 라디오 그룹
     private Spinner ageSpinner;//나이 스피너
     public MyPageController mypagecontrol;
     private User currentUser;
+    private ArrayList<String> preferBrands;
+    private ArrayList<String> nonPreferBrands;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +46,17 @@ public class ChangePersonalInfo  extends AppCompatActivity {
         ageSpinner = (Spinner)findViewById(R.id.spinner);
         changeButton = (Button)findViewById(R.id.changeButton);
 
-        mypagecontrol= new MyPageController();//컨틀롤러 생성
+     //   mypagecontrol= new MyPageController(this);//컨틀롤러 생성
 
-        //받아온 유저 클래스
+        //받아온 유저 정보
         Intent intent = getIntent();
-        currentUser = (User)intent.getSerializableExtra("currentUser");
+        userId = intent.getStringExtra("id");
+        userPw = intent.getStringExtra("pw");
+
+        //컨트롤러 초기화 및 유저 객체 생성
+        mypagecontrol = new MyPageController();
+        mypagecontrol.MyPageController(this);
+        mypagecontrol.setMyPageControlUser(userId,userPw);
 
         //유저의 나이를 스피너를 통해 입력받음
         ageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -74,6 +89,7 @@ public class ChangePersonalInfo  extends AppCompatActivity {
             }
         });
 
+        //유저의 성별 선택
         userSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {//유저의 성별을 라디오 그룹을 이용해 입력받음
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -92,10 +108,10 @@ public class ChangePersonalInfo  extends AppCompatActivity {
         if(femaleButton.isChecked()==false &&maleButton.isChecked()==false){//성별 체크를 하지 않은 경우 임의로 남성으로 처리
             userSex="남";
         }
-        MyPageController myControl = new MyPageController();
-        myControl.personalInfoChange(userSex,userAge,currentUser);
+        mypagecontrol.personalInfoChange(userSex,userAge);
+    }
 
-
-
+    public void finishPersonalInfo2(){
+        Toast.makeText(this,"개인 정보 수정을 완료하였습니다.",Toast.LENGTH_LONG).show();
     }
 }

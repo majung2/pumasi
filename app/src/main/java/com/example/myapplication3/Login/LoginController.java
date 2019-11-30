@@ -11,8 +11,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 
-public class LoginController implements User.UserCallback {
+
+public class LoginController implements User.UserCallback,Serializable {
     private String name;
     private String id;
     private String pw;
@@ -64,7 +66,7 @@ public class LoginController implements User.UserCallback {
 
 
     }
-    public boolean login(String currentid, String currentpassword){//로그인(디비에서 읽어오는 코드 추가할 예정)
+    public boolean login(String currentid, String currentpassword){//로그인
         Log.d("결과:", "돌아감");
 
         id=currentid;
@@ -80,7 +82,6 @@ public class LoginController implements User.UserCallback {
         return controlUser;
     }
 
-
 public void finishLogin(){
 
     System.out.println("콜백: 유저 존재함");
@@ -95,7 +96,7 @@ public void failLogin(){
         logincontrollcallback.failLogin2();
 }
 
-public interface LoginControllCallback{
+public interface LoginControllCallback extends Serializable {
         public void finishLogin2();
         public void failLogin2();
     }
