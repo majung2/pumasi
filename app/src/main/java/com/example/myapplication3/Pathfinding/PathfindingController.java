@@ -46,7 +46,11 @@ public class PathfindingController { //finding path logic
     }
 
     private void disCal(){ //선택된 브랜드 간 거리계산
+        /*
+        for(int i=0; i<brands1.size();i++){
 
+        }
+*/
     }
 
 
