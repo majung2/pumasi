@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.myapplication3.Login.LoadingActivity;
+import com.example.myapplication3.MyPage.MyPageController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,8 +19,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
@@ -39,6 +44,8 @@ public class User implements Serializable {
     private FirebaseFirestore db;
     private boolean found;
 
+    private UserCallback usercallback ;
+    private MyPageCallback myPageCallback;
     //유저 초기화
     public User(){
         this.id=null;
@@ -53,11 +60,51 @@ public class User implements Serializable {
         this.totalBrandList= new ArrayList<>();
         this.found=false;
 
-        //선호비선호 브랜드 리스트는 테스트를 위하여 임의로 설정해노았습니다 디비연결되면 로그인시 아예 유저 객체에 브랜드 리스트를 저장시켜놓으면 될 것 같아요
+        //선호비선호 브랜드 리스트는 테스트를 위하여 임의로 설정해놨습니다 디비연결되면 로그인시 아예 유저 객체에 브랜드 리스트를 저장시켜놓으면 될 것 같아요
         preferBrands.add("AbC MART");
         preferBrands.add("NEANPOLE");
         nonPreferBrands.add("BLACKYARK");
         nonPreferBrands.add("ADIDAS");
+    }
+
+    //콜백 초기화 (call back initialize)
+
+    public User(UserCallback usercallback){
+        this.id=null;
+        this.pw=null;
+        this.name=null;
+        this.sex=null;
+        this.age=null;
+        this.currentFloor=null;
+        this.currentXY=null;
+        this.preferBrands= new ArrayList<>();
+        this.nonPreferBrands= new ArrayList<>();
+        this.totalBrandList= new ArrayList<>();
+        this.found=false;
+        this.usercallback = usercallback;
+
+
+        //선호비선호 브랜드 리스트는 테스트를 위하여 임의로 설정해노았습니다 디비연결되면 로그인시 아예 유저 객체에 브랜드 리스트를 저장시켜놓으면 될 것 같아요
+      /*  preferBrands.add("AbC MART");
+        preferBrands.add("NEANPOLE");
+        nonPreferBrands.add("BLACKYARK");
+        nonPreferBrands.add("ADIDAS");*/
+    }
+    public User(MyPageCallback myPageCallback){
+        this.id=null;
+        this.pw=null;
+        this.name=null;
+        this.sex=null;
+        this.age=null;
+        this.currentFloor=null;
+        this.currentXY=null;
+        this.preferBrands= new ArrayList<>();
+        this.nonPreferBrands= new ArrayList<>();
+        this.totalBrandList= new ArrayList<>();
+        this.found=false;
+        this.myPageCallback=myPageCallback;
+
+
     }
     //회원가입- 사용자가 입력한 정보 디비에 저장하는 함수
     public void register(String name, String id, String pw, String sex, Integer age){
@@ -103,6 +150,9 @@ public class User implements Serializable {
     public void setAge(Integer age){
         this.age=age;
     }
+    public void setName(String name){
+        this.name=name;
+    }
 
     public String getId(){
         return this.id;
@@ -116,7 +166,9 @@ public class User implements Serializable {
     public Integer getAge(){
         return this.age;
     }
-
+    public String getName(){
+        return this.name;
+    }
     public ArrayList<String> getAllBrands(){
         db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("category").document("해외명품");
@@ -139,11 +191,12 @@ public class User implements Serializable {
         return this.totalBrandList;
     }
 
-    public void changePersonalInfo(String sex, Integer age){
+    public boolean changePersonalInfo(String sex, Integer age){
         //객체 상 변경
         this.sex=sex;
         this.age=age;
 
+        found=false;
         //디비에 변경 반영
         db = FirebaseFirestore.getInstance();
         DocumentReference contact = db.collection("user").document(id);
@@ -152,20 +205,23 @@ public class User implements Serializable {
                 .addOnSuccessListener(new OnSuccessListener< Void >() {
                     @Override
                     public void onSuccess(Void aVoid) {//업데이트 성공시
+                            found = true;
 
                     }
-                });
+                });myPageCallback.finishPersonalInfo();
+
+        return found;
     }
 
     public boolean verifyLogin(String inputId, String InputPw){
-        this.id=inputId;
-        this.pw=InputPw;
+       this.id = inputId;
+       this.pw = InputPw;
         db = FirebaseFirestore.getInstance();
         DocumentReference ref = db.collection("user").document(id);
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task< DocumentSnapshot > task) {//해당 아이디의 유저를 찾은 경우
-                if (task.isSuccessful()) {
+            public void onComplete(@NonNull Task< DocumentSnapshot > task) {//디비 접근에 성공한 경우
+                if (task.isSuccessful()) {//해당 아이디의 유저를 찾은 경우
                     DocumentSnapshot doc = task.getResult();
                     if(pw.equals(doc.get("password"))){//해당 아이디, 비밀번호가 일치하는 유저를 찾은 경우
                         name =  doc.get("name").toString();
@@ -174,18 +230,117 @@ public class User implements Serializable {
                         age = Integer.parseInt(doc.get("age").toString());
                         System.out.println("찾음");
                         System.out.println(" "+id+name+sex+pw+age);
-                        found=true;
+                        //System.out.println(doc.get("preferbrand").split(","));
+                        String[] prefer = doc.get("preferbrand").toString().split(",");
+                        prefer[0]=prefer[0].split("\\[")[1];
+                        prefer[prefer.length-1]= prefer[prefer.length-1].split("\\]")[0];
+
+                        for(Integer i=0;i<prefer.length;i++){
+                            if(i!=0){
+                                prefer[i]=prefer[i].substring(1);
+                            }
+                            preferBrands.add(prefer[i]);
+
+                        }
+                        String[] nonprefer = doc.get("nonpreferbrand").toString().split(",");
+                        nonprefer[0]=nonprefer[0].split("\\[")[1];
+                        nonprefer[nonprefer.length-1]= nonprefer[nonprefer.length-1].split("\\]")[0];
+
+                        for(Integer i=0;i<nonprefer.length;i++){
+                            if(i!=0){
+                                nonprefer[i]=nonprefer[i].substring(1);
+                            }
+                            nonPreferBrands.add(nonprefer[i]);
+
+                        }
+                        found = true;
+                        usercallback.finishLogin();
 
                     }
+                    else{
+                        System.out.println("user단 else문 로그인 실패222222222222");
+                        usercallback.failLogin();
+                    }
+
+                }
+                else{//해당 아이디의 유저를 찾지 못한 경우
+
+                    System.out.println("user단 else문 로그인 실패");
+                    usercallback.failLogin();
                 }
             }
         })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void onFailure(@NonNull Exception e) {//디비 접근에 실패한 경우
                         System.out.println("없음");
+                        usercallback.failLogin();//수정예정
+
                     }
                 });
-        return found;
+      return found;
     }
+
+    public ArrayList<String> findPrefer() {//선호 브랜드를 디비에서 검색
+        //ArrayList<String> gotPrefer = new ArrayList<>();
+        db = FirebaseFirestore.getInstance();
+        DocumentReference ref = db.collection("user").document(id);
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task< DocumentSnapshot > task) {//디비 접근에 성공한 경우
+                if (task.isSuccessful()) {//해당 아이디의 유저를 찾은 경우
+                    DocumentSnapshot doc = task.getResult();
+                    if(pw.equals(doc.get("password"))){//해당 아이디, 비밀번호가 일치하는 유저를 찾은 경우
+                        String[] prefer = doc.get("preferbrand").toString().split(",");
+                        prefer[0]=prefer[0].split("\\[")[1];
+                        prefer[prefer.length-1]= prefer[prefer.length-1].split("\\]")[0];
+
+                        for(Integer i=0;i<prefer.length;i++){
+                            if(i!=0){
+                                prefer[i]=prefer[i].substring(1);
+                            }
+                            preferBrands.add(prefer[i]);
+                            myPageCallback.getPrefer(prefer[i]);
+                        }
+
+                    }
+                    else{
+                        System.out.println("user단 else문 로그인 실패222222222222");
+                        myPageCallback.failBrand();
+                    }
+
+                }
+                else{//해당 아이디의 유저를 찾지 못한 경우
+
+                    System.out.println("user단 else문 로그인 실패");
+                    myPageCallback.failBrand();
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {//디비 접근에 실패한 경우
+                        System.out.println("없음");
+                        myPageCallback.failBrand();
+
+                    }
+                });
+        return this.preferBrands;
+    }
+
+
+    public interface UserCallback {
+
+        public void finishLogin();
+        public void failLogin();
+
+
+    }
+    public interface MyPageCallback {
+        public void finishPersonalInfo();
+        public void getPrefer(String brand);
+        public void failBrand();
+    }
+
+
 }

@@ -46,7 +46,8 @@ android:onClick="onClickAdd"/>
             android:layout_width="341dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="비선호 브랜드                                                                                                                                                                        삭제를 원하시면 브랜드를 클릭해주세요" />
+            android:text="비선호 브랜드                                                                                                                                                                        삭제를 원하시면 브랜드를 클릭해주세요"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/nonpreferbrandadd"

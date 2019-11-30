@@ -8,7 +8,8 @@
         android:id="@+id/UserNameText"
         android:layout_width="match_parent"
         android:layout_height="67dp"
-        android:text="사용자이름받아서 띄울것" />
+        android:text="성별과 나이를 수정해주세요"
+        android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -71,7 +72,8 @@
             android:id="@+id/changeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="수정 완료" />
+            android:text="수정 완료"
+            android:onClick="onClickComplete"/>
     </LinearLayout>
 
 </LinearLayout>

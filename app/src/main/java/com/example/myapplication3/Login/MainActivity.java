@@ -14,8 +14,11 @@ import com.example.myapplication3.Entity.User;
 import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements LoginController.LoginControllCallback {
     private User currentUser;
     private Button Login;
     private Button Register;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     public LoginController logincontrol;
     private String userId;
     private String userPw;
+    private ArrayList<String> preferList;
+    private ArrayList<String> nonpreferList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         id = (EditText) findViewById(R.id.idtext);
         pw= (EditText) findViewById(R.id.pwtext);
 
+        preferList= new ArrayList<>();
+        nonpreferList = new ArrayList<>();
 
     }
     public void onClickRegister(View v){
@@ -53,31 +60,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else{//사용자가 아이디와 비밀번호를 모두 입력한 경우
-            logincontrol= new LoginController();
-            if(logincontrol.login(userId,userPw)== true){//로그인 컨트롤러로 아이디, 비밀번호 보내 사용자 존재 여부 체크-> 존재하는 경우, 유저 정보 초기화 완료(지근은 아이디랑 패스워드만 코드상으로 초기화 시켜논 상태)
-                Toast.makeText(this,"로그인되었습니다.",Toast.LENGTH_LONG).show();
-                currentUser = logincontrol.getUserFromLoginControll();
+            logincontrol= new LoginController(this);
 
-                Intent intent = new Intent(// 다음 화면으로 전환
-                        MainActivity.this,
-                        MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
-               intent.putExtra("currentUser", currentUser);
-                startActivity(intent);
-            }
-            else{//해당 사용자가 존재하지 않는 경우-> 토스트 띄우기
-                Toast.makeText(this,"존재하지 않는 회원입니다.",Toast.LENGTH_LONG).show();
-            }
-
-            ///임시
-           Intent intent = new Intent(// 다음 화면으로 전환
-                    MainActivity.this,
-                    MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
-          //  intent.putExtra("currentUser", currentUser);
-            startActivity(intent);
+            logincontrol.login(userId,userPw);
 
         }
 
 
     }
 
+
+    public void finishLogin2(){
+
+        Toast.makeText(this,"로그인되었습니다.",Toast.LENGTH_LONG).show();
+        currentUser = logincontrol.getUserFromLoginControll();
+      //  System.out.println(currentUser.getAge());
+        Intent intent = new Intent(// 다음 화면으로 전환
+                MainActivity.this,
+                MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+       intent .putExtra("id",currentUser.getId());
+       intent.putExtra("pw",currentUser.getPw());
+
+        startActivity(intent);
+
+    }
+
+    public void failLogin2(){
+        Toast.makeText(this,"존재하지 않는 회원입니다.",Toast.LENGTH_LONG).show();
+    }
 }
