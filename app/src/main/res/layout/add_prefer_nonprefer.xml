@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/pntext"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:text="추가하시려면 브랜드를 클릭해주세요."
+        android:textSize="18sp" />
+
+    <ListView
+        android:id="@+id/brand_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
