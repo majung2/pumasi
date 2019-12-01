@@ -4,11 +4,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +41,11 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity implements M
     private String name;
     private String sex;
     private Integer age;
-
+    private boolean decision;
     private MyPageController controller;
+    private ArrayList<String> providersList;
+    private String selectedCategory;
+    private String selectedOnSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,102 +71,92 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity implements M
         controller.setMyPageControlUser(id,pw);
         controller.getPreferbrands();
         System.out.println(preferBrands);
-        //첫번째 리스트뷰 어댑터에 연결
-
-
-        //두 번쨰 리스트 뷰 어댑터에 연결
-        adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,nonPreferBrands);
-        listView2 = (ListView) findViewById(R.id.selected_2);
-
-        listView2.setAdapter(adapter2);
-
-       /* adapter2.add("두번째 리스트");
-        adapter2.add("열심히");
-        adapter2.add("공부합시다.");
-        adapter2.add("홍로이드");
-        adapter2.add("리스트뷰");*/
-
-        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView,
-                                    View view, int position, long id) {
-
-                // select route name or visited date(?)
-                String selectedPath = (String)adapterView.getItemAtPosition(position);
-                deleteHandler();//브랜드 클릭시 alert dialog 띄움
-                adapter2.notifyDataSetChanged();
-            }
-        });
-
-        //선호 브랜드 추가하기 버튼 클릭한 경우
-
-
-
+        controller.getNonPreferbrands();
+        providersList= new ArrayList<>();
+        providersList.add("해외명품");
+        providersList.add("컨템포러리");
+        providersList.add("여성의류");
+        providersList.add("남성의류");
+        providersList.add("컨템포러리");
+        providersList.add("진/캐쥬얼/SPA");
+        providersList.add("슈즈/핸드백");
+        providersList.add("스포츠/골프/아웃도어");
+        providersList.add("잡화");
+        providersList.add("아동");
+        providersList.add("생활");
+        providersList.add("기타");
     }
 
 
 
-    public void onClickAdd(View v) {//사용자가 추가하기 버튼을 눌렀을 경우, alertdialog 창을 띄워 추가할 브랜드를 선택하도록 한다.
-        AlertDialog.Builder builder = new AlertDialog.Builder(PreferNonpreferBrandBoundary.this);
-        // String array for alert dialog multi choice items
-        String[] colors = new String[]{
-                "Red",
-                "Green",
-                "Blue",
-                "Purple",
-                "Olive"
-        };
+    public void onClickAdd(View v) {//사용자가 추가하기 버튼을 눌렀을 경우, alertdialog 창을 띄워 추가할 브랜드를 선택하도록 한다.-선호 브랜드 추가
 
-        ArrayList <String> BrandList = new ArrayList<String>();
-        controller.getAllBrands();
-        // Boolean array for initial selected items
-        final boolean[] checkedColors = new boolean[]{
-                false, // Red
-                true, // Green
-                false, // Blue
-                true, // Purple
-                false // Olive
 
-        };
+        final ArrayAdapter<String> adp = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, providersList);
 
-        // Convert the color array to list
-        final List<String> colorsList = Arrays.asList(colors);
-
-        builder.setMultiChoiceItems(colors, checkedColors, new DialogInterface.OnMultiChoiceClickListener() {
+        final Spinner sp = new Spinner(this);
+        sp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedOnSpinner=adapterView.getItemAtPosition(i).toString();
+                if(selectedOnSpinner.equals("해외명품")){
+                    selectedCategory="c1";
+                }
+                else if( selectedOnSpinner.equals("컨템포러리")){
+                    selectedCategory="c2";
+                }
+                else if( selectedOnSpinner.equals("여성의류")){
+                    selectedCategory="c3";
+                }else if( selectedOnSpinner.equals("남성의류")){
+                    selectedCategory="c4";
+                }
+                else if( selectedOnSpinner.equals("진/캐주얼/SPA")){
+                    selectedCategory="c5";
+                }
+                else if( selectedOnSpinner.equals("슈즈/핸드백")){
+                    selectedCategory="c6";
+                }
+                else if( selectedOnSpinner.equals("스포츠/골프/아웃도어")){
+                    selectedCategory="c7";
+                }
+                else if( selectedOnSpinner.equals("잡화")){
+                    selectedCategory="c8";
+                }
+                else if( selectedOnSpinner.equals("아동")){
+                    selectedCategory="c9";
+                }
+                else if( selectedOnSpinner.equals("생활")){
+                    selectedCategory="c10";
+                } else if( selectedOnSpinner.equals("기타")){
+                    selectedCategory="c11";
+                }
 
-                // Update the current focused item's checked status
-                checkedColors[which] = isChecked;
+            }
 
-                // Get the current focused item
-                String currentItem = colorsList.get(which);
-
-                // Notify the current action
-                Toast.makeText(getApplicationContext(),
-                        currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                selectedCategory="c1";
             }
         });
+        sp.setAdapter(adp);
 
-        // Specify the dialog is not cancelable
-        builder.setCancelable(false);
-
-        // Set a title for alert dialog
-        builder.setTitle("Your preferred colors?");
-
-        // Set the positive/yes button click listener
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("카테고리를 선택해주세요.");
         builder.setPositiveButton("선택 완료", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Do something when click positive button
+                Intent intent = new Intent(// 다음 화면으로 전환
+                        PreferNonpreferBrandBoundary.this,
+                        AddPreferNonPreferBoundary.class); // 개인정보 수정관련 클래스
+                intent.putExtra("id",id);
+                intent.putExtra("pw",pw);
+                intent.putExtra("category",selectedCategory);
+                intent.putExtra("prefernonprefer","preferbrand");
+                startActivity(intent);
 
-                for (int i = 0; i<checkedColors.length; i++){
-                    boolean checked = checkedColors[i];
-                    if (checked) {
 
-                    }
-                }
             }
         });
 
@@ -171,38 +167,90 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity implements M
                 // Do something when click the negative button
             }
         });
-
-
-        AlertDialog dialog = builder.create();
-        // Display the alert dialog on interface
-        dialog.show();
+        builder.setView(sp);
+        builder.create().show();
     }
 
+    public void onClickAdd2(View v) {//사용자가 추가하기 버튼을 눌렀을 경우, alertdialog 창을 띄워 추가할 브랜드를 선택하도록 한다.- 비선호 브랜드 추가
 
 
+        final ArrayAdapter<String> adp = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, providersList);
 
-    public void deleteHandler(){//사용자가 브랜드를 클릭했을 때
+        final Spinner sp = new Spinner(this);
+        sp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedOnSpinner=adapterView.getItemAtPosition(i).toString();
+                if(selectedOnSpinner.equals("해외명품")){
+                    selectedCategory="c1";
+                }
+                else if( selectedOnSpinner.equals("컨템포러리")){
+                    selectedCategory="c2";
+                }
+                else if( selectedOnSpinner.equals("여성의류")){
+                    selectedCategory="c3";
+                }else if( selectedOnSpinner.equals("남성의류")){
+                    selectedCategory="c4";
+                }
+                else if( selectedOnSpinner.equals("진/캐주얼/SPA")){
+                    selectedCategory="c5";
+                }
+                else if( selectedOnSpinner.equals("슈즈/핸드백")){
+                    selectedCategory="c6";
+                }
+                else if( selectedOnSpinner.equals("스포츠/골프/아웃도어")){
+                    selectedCategory="c7";
+                }
+                else if( selectedOnSpinner.equals("잡화")){
+                    selectedCategory="c8";
+                }
+                else if( selectedOnSpinner.equals("아동")){
+                    selectedCategory="c9";
+                }
+                else if( selectedOnSpinner.equals("생활")){
+                    selectedCategory="c10";
+                } else if( selectedOnSpinner.equals("기타")){
+                    selectedCategory="c11";
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                selectedCategory="c1";
+            }
+        });
+        sp.setAdapter(adp);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("브랜드 삭제").setMessage("선택하신 브랜드를 목록에서 삭제하시겠습니까?");
-
-        builder.setPositiveButton("예", new DialogInterface.OnClickListener(){
+        builder.setTitle("카테고리를 선택해주세요.");
+        builder.setPositiveButton("선택 완료", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int id)
-            {
-                Toast.makeText(getApplicationContext(), "OK Click", Toast.LENGTH_SHORT).show();
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(// 다음 화면으로 전환
+                        PreferNonpreferBrandBoundary.this,
+                        AddPreferNonPreferBoundary.class); // 개인정보 수정관련 클래스
+                intent.putExtra("id",id);
+                intent.putExtra("pw",pw);
+                intent.putExtra("category",selectedCategory);
+                intent.putExtra("prefernonprefer","nonpreferbrand");
+                startActivity(intent);
+
+
             }
         });
 
-        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener(){
+        // Set the negative/no button click listener
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int id)
-            {
-                Toast.makeText(getApplicationContext(), "Cancel Click", Toast.LENGTH_SHORT).show();
+            public void onClick(DialogInterface dialog, int which) {
+                // Do something when click the negative button
             }
         });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        builder.setView(sp);
+        builder.create().show();
     }
 
     @Override
@@ -215,34 +263,62 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity implements M
         listView = (ListView) findViewById(R.id.selected_1);
 
         listView.setAdapter(adapter);
-        //listView.setOnItemClickListener(this);
 
-       /* for(int i=0;i<preferBrands.size();i++){
-            adapter.add(preferBrands[i]);
-        }
 
-        adapter.add("안드로이드");
-        adapter.add("열심히");
-        adapter.add("공부합시다.");
-        adapter.add("홍로이드");
-        adapter.add("리스트뷰");*/
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//사용자가 삭제를 위해 브랜드를 클릭했을 때
 
             @Override
             public void onItemClick(AdapterView<?> adapterView,
                                     View view, int position, long id) {
 
-                // select route name or visited date(?)
-                String selectedPath = (String)adapterView.getItemAtPosition(position);
-                deleteHandler();//브랜드 클릭시 alertdialog 띄움
 
+                if((preferBrands.size()-1)<3){
+                    Toast.makeText(getApplicationContext(), "선호 브랜드는 최소 3개 이상이여야 합니다.", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    controller.deletBrand((String)adapterView.getItemAtPosition(position),"preferbrand");
+                    preferBrands.remove(position);
+                }
                 adapter.notifyDataSetChanged();
             }
         });
 
         }
+
+    @Override
+    public void getNonPrefer2(String brand) {//비선호 브랜드 리스트업
+        nonPreferBrands.add(brand);
+        System.out.println(brand);
+        adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,nonPreferBrands);
+        listView2 = (ListView) findViewById(R.id.selected_2);
+
+        listView2.setAdapter(adapter2);
+
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {//삭제를 위해 비선호 브랜드를 클릭했을 때
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view, int position, long id) {
+
+                if((nonPreferBrands.size()-1)<3){
+                    Toast.makeText(getApplicationContext(), "비선호 브랜드는 최소 3개 이상이여야 합니다.", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    controller.deletBrand((String)adapterView.getItemAtPosition(position),"nonpreferbrand");
+                    nonPreferBrands.remove(position);
+                }
+                adapter2.notifyDataSetChanged();
+            }
+        });
+
     }
+
+    @Override
+    public void finishDeleteBrand2() {
+        Toast.makeText(getApplicationContext(), "해당 브랜드가 삭제되었습니다.", Toast.LENGTH_LONG).show();
+    }
+
+}
 
 
 

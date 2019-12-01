@@ -23,6 +23,7 @@
         <activity android:name=".MyPage.PreviousPathBoundary"/>
         <activity android:name=".MyPage.PreviousPathSpecificBoundary"/>
         <activity android:name=".MyPage.BoughtListBoundary"/>
+        <activity android:name=".MyPage.AddPreferNonPreferBoundary"></activity>
         <activity android:name=".Login.LoadingActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
