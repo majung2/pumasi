@@ -377,6 +377,7 @@ public class User implements Serializable {
     }
 
   public void findAddBrand(String itemAtPosition, String preferNon) {
+      db = FirebaseFirestore.getInstance();
         System.out.println(id);
         System.out.println(preferNon);
         System.out.println(itemAtPosition);
