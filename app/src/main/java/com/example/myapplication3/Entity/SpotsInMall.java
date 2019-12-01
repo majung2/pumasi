@@ -36,6 +36,8 @@ public class SpotsInMall {
     public String getSpotName(){
         return this.SpotName;
     }
+    public Integer getSpotFloor() { return this.SpotFloor; }
+    public ArrayList<Integer> getSpotLocation() { return this.SpotLocation; }
 
 
 
