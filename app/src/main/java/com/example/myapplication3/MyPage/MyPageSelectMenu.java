@@ -71,6 +71,11 @@ public class MyPageSelectMenu extends AppCompatActivity  {
         Intent intent = new Intent(// 다음 화면으로 전환
                 MyPageSelectMenu.this,
                 PreviousPathBoundary.class); //
+
+        intent.putExtra("id",id);
+        intent.putExtra("pw",pw);
+
+
         startActivity(intent);
 
     }
@@ -93,6 +98,9 @@ public class MyPageSelectMenu extends AppCompatActivity  {
         Intent intent = new Intent(// 다음 화면으로 전환
                 MyPageSelectMenu.this,
                 BoughtListBoundary.class); // 구매내역 조회 관련 클래스
+
+        intent.putExtra("id",id);
+        intent.putExtra("pw",pw);
 
         startActivity(intent);
 

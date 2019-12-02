@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.Serializable;
 
 
-public class LoginController implements User.UserCallback,Serializable {
+public class LoginController implements User.LoginCallback,Serializable {
     private String name;
     private String id;
     private String pw;

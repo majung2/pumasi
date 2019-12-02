@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.model.value.IntegerValue;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -39,13 +40,15 @@ public class User implements Serializable {
     private String sex;
     private Integer age;
     private Integer currentFloor;
+    private Integer ppSize;
     private ArrayList<String> preferBrands;
     private ArrayList<String> nonPreferBrands;
     private ArrayList<String> totalBrandList;
+    private ArrayList<String> previousPathList;
     private FirebaseFirestore db;
     private boolean found;
 
-    private UserCallback usercallback ;
+    private LoginCallback loginCallback ;
     private MyPageCallback myPageCallback;
    private AddBrandUser addback;
     //유저 초기화
@@ -57,16 +60,18 @@ public class User implements Serializable {
         this.age=null;
         this.currentFloor=null;
         this.currentXY=null;
+        this.ppSize = null;
         this.preferBrands= new ArrayList<>();
         this.nonPreferBrands= new ArrayList<>();
         this.totalBrandList= new ArrayList<>();
+        this.previousPathList = new ArrayList<>();
         this.found=false;
 
     }
 
     //콜백 초기화 (call back initialize)
 
-    public User(UserCallback usercallback){
+    public User(LoginCallback loginCallback){
         this.id=null;
         this.pw=null;
         this.name=null;
@@ -74,11 +79,13 @@ public class User implements Serializable {
         this.age=null;
         this.currentFloor=null;
         this.currentXY=null;
+        this.ppSize = null;
         this.preferBrands= new ArrayList<>();
         this.nonPreferBrands= new ArrayList<>();
         this.totalBrandList= new ArrayList<>();
+        this.previousPathList = new ArrayList<>();
         this.found=false;
-        this.usercallback = usercallback;
+        this.loginCallback = loginCallback;
 
 
 
@@ -91,9 +98,11 @@ public class User implements Serializable {
         this.age=null;
         this.currentFloor=null;
         this.currentXY=null;
+        this.ppSize = null;
         this.preferBrands= new ArrayList<>();
         this.nonPreferBrands= new ArrayList<>();
         this.totalBrandList= new ArrayList<>();
+        this.previousPathList = new ArrayList<>();
         this.found=false;
         this.myPageCallback=myPageCallback;
 
@@ -249,19 +258,19 @@ public class User implements Serializable {
 
                         }
                         found = true;
-                        usercallback.finishLogin();
+                        loginCallback.finishLogin();
 
                     }
                     else{
                         System.out.println("user단 else문 로그인 실패222222222222");
-                        usercallback.failLogin();
+                        loginCallback.failLogin();
                     }
 
                 }
                 else{//해당 아이디의 유저를 찾지 못한 경우
 
                     System.out.println("user단 else문 로그인 실패");
-                    usercallback.failLogin();
+                    loginCallback.failLogin();
                 }
             }
         })
@@ -269,7 +278,7 @@ public class User implements Serializable {
                     @Override
                     public void onFailure(@NonNull Exception e) {//디비 접근에 실패한 경우
                         System.out.println("없음");
-                        usercallback.failLogin();//수정예정
+                        loginCallback.failLogin();//수정예정
 
                     }
                 });
@@ -376,7 +385,7 @@ public class User implements Serializable {
         
     }
 
-  public void findAddBrand(String itemAtPosition, String preferNon) {
+    public void findAddBrand(String itemAtPosition, String preferNon) {
       db = FirebaseFirestore.getInstance();
         System.out.println(id);
         System.out.println(preferNon);
@@ -392,8 +401,57 @@ public class User implements Serializable {
         this.addback=adduser;
     }
 
+    public ArrayList<String> findPreviousPathDB() {
+        previousPathList = new ArrayList<>();
+        db = FirebaseFirestore.getInstance();
+        DocumentReference ref = db.collection("user").document(id);
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {//디비 접근에 성공한 경우
+                if (task.isSuccessful()) {//해당 아이디의 유저를 찾은 경우
+                    DocumentSnapshot doc = task.getResult();
+                    if (pw.equals(doc.get("password"))) {
+                        System.out.println("DB접근 성공");
 
-    public interface UserCallback {
+                        ppSize = Integer.parseInt(doc.get("pathsize").toString());
+                        if (ppSize == 0) {
+                           System.out.println("이전 방문한 패스 없음");
+                        } else {// 방문한 패스가 있다면 pathlist추가
+                            for (Integer i = 1; i < ppSize+1; i++) {
+                                DocumentReference ref2 = db.collection("user").document(id);
+                                ref2.collection("path").document(i.toString())
+                                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) { //해당 패스를 찾은경우
+                                            DocumentSnapshot doc2 = task.getResult();
+
+                                                previousPathList.add(doc2.get("date").toString());
+                                                System.out.println(previousPathList);
+
+                                        } else {//해당 아이디의 유저를 찾지 못한 경우
+
+                                            System.out.println("이전루트조회 실패");
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {//디비 접근에 실패한 경우
+                        System.out.println("DB에 path 없음");
+
+                    }
+                    });
+        return previousPathList;
+    } //find previous method end
+
+    public interface LoginCallback {
 
         public void finishLogin();
         public void failLogin();
@@ -401,18 +459,16 @@ public class User implements Serializable {
 
     }
     public interface MyPageCallback {
-        public void finishPersonalInfo();
-        public void getPrefer(String brand);
-        public void failBrand();
 
+        void finishPersonalInfo();
+        void getPrefer(String brand);
+        void failBrand();
         void getNonPrefer(String brand);
-
-
         void finishDeleteBrand();
 
 
     }
-public interface AddBrandUser{
+    public interface AddBrandUser{
 
     void finishAddBrand();
 }

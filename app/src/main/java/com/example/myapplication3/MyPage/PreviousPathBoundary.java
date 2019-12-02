@@ -8,31 +8,31 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.myapplication3.R;
-
 import java.util.ArrayList;
 
 public class PreviousPathBoundary extends AppCompatActivity {
 
-    public MyPageController Pathcontrol;
-
-    ArrayList<String> list ;
+    public MyPageController controller;
+    private String id;
+    private String pw;
+    ArrayList<String> list2,list ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.previous_path);
 
-        // *need modify entitiy
+        //이전 화면으로부터 넘겨받은 유저에 대한 정보들
+        Intent intent=getIntent();
+        id = intent.getStringExtra("id");
+        pw = intent.getStringExtra("pw");
 
+        MyPageController controller = new MyPageController();
+
+        controller.setMyPageControlUser(id,pw);
         list = new ArrayList<>();
-
-        for (int i = 1; i < 8; i++) {
-            list.add("Path"+ String.valueOf(i));
-
-        }//for end *entitiy
+        list = controller.listUpPreviousPath();
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,list);
@@ -52,8 +52,6 @@ public class PreviousPathBoundary extends AppCompatActivity {
 
 
 
-                Pathcontrol = new MyPageController();
-                Pathcontrol.loadPath(selectedPath);
 
                 Intent intent = new Intent(PreviousPathBoundary.this,
                         PreviousPathSpecificBoundary.class);
