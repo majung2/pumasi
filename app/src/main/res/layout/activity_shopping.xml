@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.user.shopping.MainActivity"
+    tools:context="com.example.myapplication3.Shopping.ShoppingActivity"
     >
 
     <TextView
@@ -53,7 +53,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/common_google_signin_btn_icon_light"
+        android:src="@drawable/path"
         />
 
     <LinearLayout
