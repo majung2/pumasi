@@ -2,13 +2,14 @@ package com.example.myapplication3.Shopping;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.user.shopping.R;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication3.R;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -88,8 +89,8 @@ public class ShoppingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
-                startActivityForResult(intent, 100);
+              //  Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+               // startActivityForResult(intent, 100);
 
             }
         });
@@ -143,7 +144,8 @@ public class ShoppingActivity extends AppCompatActivity {
         // 창구번호 100에서 새 트윗 내용을 얻으러 출발하였으므로 다시 100으로 돌아온다.
         // 한 화면에서 갔다올 수 있는 화면이 여러 개일 때 구분하기 위해 사용
         // (현재는 하나뿐이므로 의미는 없음)
-        if(requestCode == 100) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
 
             // 결과가 성공이라면
             // : 새 트윗 작성 화면에서 트윗 버튼을 누르면 성공
