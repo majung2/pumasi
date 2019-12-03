@@ -1,9 +1,11 @@
 package com.example.myapplication3.Shopping;
+import java.util.Map;
 
 public class Brand {
 
     public String name;
-    public Boolean buy;
+    public String id;
+    public Map<String, Boolean> bought;
     public String category;
     public Integer rating;
 
@@ -12,7 +14,8 @@ public class Brand {
 
     Brand(String name, Boolean buy) {
         this.name = name;
-        this.buy = buy;
+        this.id = id;
+        this.bought = bought;
         this.category = category;
         this.rating = rating;
     }
