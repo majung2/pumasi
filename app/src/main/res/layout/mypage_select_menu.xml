@@ -15,7 +15,7 @@
         android:id="@+id/selectPreviousPath"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="이전 쇼핑 루트 조회"
+        android:text="이전 쇼핑 루트 조회 및 구매내역"
         android:onClick="onClickPreviousPath"
        />
 
@@ -26,11 +26,4 @@
         android:text="선호/비선호 브랜드 조회 및 수정"
         android:onClick="onClickPreferNonPreferInfo"/>
 
-    <Button
-        android:id="@+id/selectBought"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="구매내역"
-        android:onClick="onClickBought"
-        />
 </LinearLayout>

@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/empty_profile"
+        android:src="@drawable/common_google_signin_btn_icon_light"
         android:layout_marginRight="8dp"
         />
 

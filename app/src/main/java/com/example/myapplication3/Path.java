@@ -42,16 +42,16 @@ public class Path { //linked list (Path)
     }
 
     public void addBrandLast(Object input){
-            Node newNode = new Node(input);
-            if(pathsize == 0){
-                addFirst(input);
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-                pathsize++;
-            }
+        Node newNode = new Node(input);
+        if(pathsize == 0){
+            addFirst(input);
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+            pathsize++;
         }
-//print
+    }
+    //print
     public String toString() {
         if(head == null){
             return "[]";

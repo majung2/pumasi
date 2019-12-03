@@ -6,12 +6,13 @@ import android.widget.AdapterView;
 
 import com.example.myapplication3.Entity.Category;
 import com.example.myapplication3.Entity.User;
-import com.example.myapplication3.Data;
+import com.example.myapplication3.PreviousPathBrand;
 
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyPageController implements User.MyPageCallback, Category.catCallback,User.AddBrandUser{//마이페이지 컨트롤러 클래스
     private String id;
@@ -24,17 +25,22 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
     //path controll
     private String path;
     private ArrayList<String> previousPathList;
-    //bought list
-    private ArrayList<Data> bought;
+    private ArrayList<PreviousPathBrand> ppBrandList;
+
+    private ArrayList<PreviousPathBrand> boughtList;
+
     private boolean changed=false;
     private MyPageControlCallback myPageControlCallback;
     private MyPageControlBrandCallback brandCallback;
     private AddBrandCallback addBrandCallback;
+    private PreviousCallback previousCallback;
+    private PPBrandCallback ppBrandCallback;
     private Category controlCategory;
-   private userBrancCallback addBrandUser;
+    private userBrancCallback addBrandUser;
 
 
-   public MyPageController() {
+
+    public MyPageController() {
         this.id=null;
         this.sex=null;
         this.age=null;
@@ -42,6 +48,7 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
         this.nonpreferbrands = new ArrayList<String>();
         this.path = null;
     }
+
     public void MyPageController(ChangePersonalInfo changePersonalInfo){//개인정보 수정 위한 것
 
         this.id=null;
@@ -51,6 +58,7 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
         this.nonpreferbrands = new ArrayList<String>();
         this.path = null;
         this.previousPathList = new ArrayList<String>();
+        this.ppBrandList = new ArrayList<PreviousPathBrand>();
         this.myPageControlCallback = changePersonalInfo;
 
     }
@@ -63,10 +71,12 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
         this.nonpreferbrands = new ArrayList<String>();
         this.path = null;
         this.previousPathList = new ArrayList<String>();
+        this.ppBrandList = new ArrayList<PreviousPathBrand>();
         this.brandCallback = brandBoundary;
 
 
-    }public void MyPageControllerBrand(AddPreferNonPreferBoundary addbrand){//선호 비선호 추가를 위한 조회시 사용
+    }
+    public void MyPageControllerBrand(AddPreferNonPreferBoundary addbrand){//선호 비선호 추가를 위한 조회시 사용
 
         this.id=null;
         this.sex=null;
@@ -75,7 +85,8 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
         this.nonpreferbrands = new ArrayList<String>();
         this.path = null;
         this.previousPathList = new ArrayList<String>();
-       this.addBrandCallback = addbrand;
+        this.ppBrandList = new ArrayList<PreviousPathBrand>();
+        this.addBrandCallback = addbrand;
         //this.addBrandUser=addbrand;
 
     }
@@ -87,30 +98,54 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
         this.nonpreferbrands = new ArrayList<String>();
         this.path = null;
         this.previousPathList = new ArrayList<String>();
-       // this.addBrandCallback = addbrand;
+        this.ppBrandList = new ArrayList<PreviousPathBrand>();
+        // this.addBrandCallback = addbrand;
         this.addBrandUser=addbrand;
     }
 
-    //컨트롤러 초기화
+    public void PreviousPathController (PreviousPathBoundary previousPathBoundary){
+        this.id=null;
+        this.sex=null;
+        this.age=null;
+        this.preferbrands= new ArrayList<String>();
+        this.nonpreferbrands = new ArrayList<String>();
+        this.path = null;
+        this.previousPathList = new ArrayList<String>();
+        this.ppBrandList = new ArrayList<PreviousPathBrand>();
+        this.previousCallback = previousPathBoundary;
+
+
+    }
+    public void PPBrandController (PreviousPathSpecificBoundary previousPathSpecificBoundary){
+        this.id=null;
+        this.sex=null;
+        this.age=null;
+        this.preferbrands= new ArrayList<String>();
+        this.nonpreferbrands = new ArrayList<String>();
+        this.path = null;
+        this.previousPathList = new ArrayList<String>();
+        this.ppBrandList = new ArrayList<PreviousPathBrand>();
+        this.ppBrandCallback =  previousPathSpecificBoundary;
+    }
+
+
 
 
     public void setMyPageControlUser(String id, String pw){// 마이페이지 컨트롤러에서 접근할 유저 초기화
-       myPageControlUser = new User(this);
+        myPageControlUser = new User(this);
         myPageControlUser.setId(id);
         myPageControlUser.setPw(pw);
 
         System.out.println("mypage control finished");
     }
-
-
     public void setAddControlUser(String id, String pw){
-    myPageControlUser = new User( this);
-    myPageControlUser.setId(id);
-    myPageControlUser.setPw(pw);
+        myPageControlUser = new User( this);
+        myPageControlUser.setId(id);
+        myPageControlUser.setPw(pw);
 
-    System.out.println("mypage control finished");
+        System.out.println("mypage control finished");
 
-}
+    }
 
     //유저 초기화
 
@@ -139,44 +174,36 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
         myPageControlUser.setPw(user.getPw());
     }*/
 
-   //path controller function
-
+    //path controller function
     public ArrayList<String>  listUpPreviousPath(){
 
         previousPathList = myPageControlUser.findPreviousPathDB();
 
         return previousPathList;
     }
+    public ArrayList<PreviousPathBrand> listUpPPBrand(String pathnum){
 
-    public void loadPath(String selectedPath){
-        path = selectedPath;
-    }//선택한 패스 구분
-    public String getPath() {
-        return path;
+        ppBrandList = myPageControlUser.findppBrandDB(pathnum);
+        return ppBrandList;
     }
     //path controller function end
 
 
-    //boughtlist controller function
-    public ArrayList<Data> getBought() {
+    /*boughtlist controller function
+
+
+
+    public ArrayList<PreviousPathBrand> listUpBought() {
 
         //entity modify
 
-        this.bought = new ArrayList<Data>();
-        Data data1,data2,data3;
-        data1= new Data("나이키","2019.11.25","슈즈");
-        data2= new Data("아디다스","2019.11.25","슈즈");
-        data3= new Data("ABC마트","2019.11.25","슈즈");
+        this.boughtList = new ArrayList<PreviousPathBrand>();
+        boughtList = myPageControlUser.findBoughtDB();
 
+        return boughtList;
 
-        bought.add(data1);
-        bought.add(data2);
-        bought.add(data3);
-
-        return bought;
-        //entity modify
-
-        }
+    }
+    */
     //boughtlist controller function end
 
     @Override
@@ -207,10 +234,10 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
         myPageControlUser.deleterSelectedUser(itemAtPosition,nonpreferbrand);
     }
     public void getCatBrands(String selectedCategory) {//해당 카테고리에 있는 브랜드들을 디비에서 가져오기
-         controlCategory = new Category();
-         controlCategory.setCategory(this);
-         controlCategory.setCNr(selectedCategory);
-         controlCategory.findBrands();
+        controlCategory = new Category();
+        controlCategory.setCategory(this);
+        controlCategory.setCNr(selectedCategory);
+        controlCategory.findBrands();
     }
     @Override
     public void finishFindBrands(String bName) {
@@ -226,6 +253,16 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
         addBrandUser.finishAddBrand2();
     }
 
+    public void finishPreviousPath(ArrayList<String> list){
+
+        System.out.println("콜백: Path 디비에서 찾음");
+        previousCallback.finishPreviousPath2(list);
+
+    }
+    public void finishPPBrand(ArrayList<PreviousPathBrand> brandlist){
+        System.out.println("콜백: PPBrand 디비에서 찾음");
+        ppBrandCallback.finishPPBrand2(brandlist);
+    }
 
 
 
@@ -249,13 +286,18 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
     public interface AddBrandCallback extends  Serializable{//선택된 카테고리에 해당되는 브랜드 조회 관련 콜백
 
         void finishFindBrands2(String brand);
-      
+
     }
     public interface userBrancCallback {
 
 
         void finishAddBrand2();
     }
+    public interface PreviousCallback extends Serializable {
 
-
+        void finishPreviousPath2(ArrayList<String> list);
+    }
+    public interface PPBrandCallback extends Serializable{
+        void finishPPBrand2(ArrayList<PreviousPathBrand> brandlist);
+    }
 }

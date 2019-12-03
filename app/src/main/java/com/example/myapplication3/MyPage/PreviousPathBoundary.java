@@ -11,12 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication3.R;
 import java.util.ArrayList;
 
-public class PreviousPathBoundary extends AppCompatActivity {
+public class PreviousPathBoundary extends AppCompatActivity implements MyPageController.PreviousCallback {
 
     public MyPageController controller;
     private String id;
     private String pw;
-    ArrayList<String> list2,list ;
+    ArrayList<String> list ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +29,22 @@ public class PreviousPathBoundary extends AppCompatActivity {
         pw = intent.getStringExtra("pw");
 
         MyPageController controller = new MyPageController();
-
+        controller.PreviousPathController(this);
         controller.setMyPageControlUser(id,pw);
         list = new ArrayList<>();
         list = controller.listUpPreviousPath();
 
+
+
+    }
+
+
+    public void finishPreviousPath2(ArrayList<String> list){
+        System.out.println("previous path 바운더리 콜백 성공");
+        System.out.println(list);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,list);
         ListView listview = (ListView) findViewById(R.id.lv);
-
 
         listview.setAdapter(adapter);
 
@@ -45,16 +52,26 @@ public class PreviousPathBoundary extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView,
-                                    View view, int position, long id) {
+                                    View view, int position, long id2) {
 
                 // select route name or visited date(?)
-                String selectedPath = (String)adapterView.getItemAtPosition(position);
+                String selectedPath = adapterView.getItemAtPosition(position).toString();
+                System.out.println(selectedPath); //선택한 패스 이름
 
+                String[] pathname = selectedPath.split("path");
+                String[] pathnumdate = pathname[1].split(" "); // [0]= num [1]= date
 
+                System.out.println(pathnumdate[0]);
 
 
                 Intent intent = new Intent(PreviousPathBoundary.this,
                         PreviousPathSpecificBoundary.class);
+                //
+                intent.putExtra("id",id);
+                intent.putExtra("pw",pw);
+                intent.putExtra("pathnum",pathnumdate[0]);
+                intent.putExtra("pathdate",pathnumdate[1]);
+                //
                 startActivity(intent);
 
 
@@ -63,6 +80,6 @@ public class PreviousPathBoundary extends AppCompatActivity {
         });
 
 
-
     }
-}
+
+}//end class

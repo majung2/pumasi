@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.user.shopping.R;
+import com.example.myapplication3.R;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package com.example.myapplication3.MyPage;
 
 import android.widget.ArrayAdapter;
-import com.example.myapplication3.Data;
+import com.example.myapplication3.PreviousPathBrand;
 import android.content.Context;
 import java.util.List;
 import android.util.Log;
@@ -12,10 +12,11 @@ import android.widget.ArrayAdapter;
 import android.annotation.*;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.example.myapplication3.R;
 
 
-public class PreviousPathAdapter extends ArrayAdapter<Data> {
+public class PreviousPathAdapter extends ArrayAdapter<PreviousPathBrand> {
 
     private Context context;
     private List mList;
@@ -24,12 +25,14 @@ public class PreviousPathAdapter extends ArrayAdapter<Data> {
 
     class UserViewHolder {
         public TextView brandname;
+        public TextView star;
+        public TextView category_specific;
     }
 
     public PreviousPathAdapter(Context context, // 레이아웃 XML 파일을 뷰(view) 객체로 바꾸는데 사용할 컨택스트(Context)
-                       List<Data> list, // ListView에 보여줄 데이터인 data객체 리스트
-                       // TextView에 Path 객체의 데이터를 넣어서 ListVIew의 row view로 사용되도록 리턴합니다.
-                       ListView listview
+                               List<PreviousPathBrand> list, // ListView에 보여줄 데이터인 data객체 리스트
+                               // TextView에 Path 객체의 데이터를 넣어서 ListVIew의 row view로 사용되도록 리턴합니다.
+                               ListView listview
     ) {
         super(context, 0, list);
         this.context = context;
@@ -71,7 +74,18 @@ public class PreviousPathAdapter extends ArrayAdapter<Data> {
             viewHolder.brandname = (TextView) rowView.findViewById(
                     R.id.BrandName // 한 줄에 대한 레이아웃 파일(R.layout.list_item)의 구성요소,
             );
+
+            viewHolder.star = (TextView) rowView.findViewById(
+                    R.id.Star // 한 줄에 대한 레이아웃 파일(R.layout.list_item)의 구성요소,
+            );
+
+            viewHolder.category_specific = (TextView) rowView.findViewById(
+                    R.id.CategorySpecific // 한 줄에 대한 레이아웃 파일(R.layout.list_item)의 구성요소,
+            );
+
             viewHolder.brandname = (TextView) rowView.findViewById(R.id.BrandName);
+            viewHolder.star = (TextView) rowView.findViewById(R.id.Star);
+            viewHolder.category_specific = (TextView) rowView.findViewById(R.id.CategorySpecific);
 
             rowView.setTag(viewHolder);
 
@@ -91,11 +105,13 @@ public class PreviousPathAdapter extends ArrayAdapter<Data> {
 
 
         //data 객체 리스트의 position 위치에 있는 data객체를 가져옵니다.
-        Data data1 = (Data) mList.get(position);
+        PreviousPathBrand data1 = (PreviousPathBrand) mList.get(position);
 
 
         //현재 선택된 data 객체를 화면에 보여주기 위해서 앞에서 미리 찾아 놓은 뷰에 데이터를 집어넣습니다.
         viewHolder.brandname.setText(data1.getBrand_name());
+        viewHolder.star.setText("만족도: "+ data1.getGrade().toString());
+        viewHolder.category_specific.setText(data1.getBought_Category());
         // 화면에 보여질 뷰를 리턴하여 ListView의 특정 줄로 보여지게 합니다.
         return rowView;
     }

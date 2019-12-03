@@ -36,7 +36,6 @@ public class MyPageSelectMenu extends AppCompatActivity  {
         personalInfo = (Button)findViewById(R.id.selectChangeInfo);
         previousPath = (Button)findViewById(R.id.selectPreviousPath);
         preferNonPrefer = (Button)findViewById(R.id.selectPrefer);
-        bought = (Button)findViewById(R.id.selectBought);
         preferList= new ArrayList<>();
         nonpreferList = new ArrayList<>();
 
@@ -89,18 +88,6 @@ public class MyPageSelectMenu extends AppCompatActivity  {
         intent.putExtra("id",id);
         intent.putExtra("pw",pw);
 
-
-        startActivity(intent);
-
-    }
-    public void onClickBought(View v){// 이전 구매 목록 조회를 클릭했을 때
-
-        Intent intent = new Intent(// 다음 화면으로 전환
-                MyPageSelectMenu.this,
-                BoughtListBoundary.class); // 구매내역 조회 관련 클래스
-
-        intent.putExtra("id",id);
-        intent.putExtra("pw",pw);
 
         startActivity(intent);
 
