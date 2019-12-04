@@ -32,24 +32,22 @@ public class PreferBrandSelectBoundary extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.brandrecommend);
+        setContentView(R.layout.prefer_hate_brand_select);
 
         // tab_button_widget
-        bt_tab1 = (ImageButton)findViewById(R.id.simpleImageButton1);
-        bt_tab2 = (ImageButton)findViewById(R.id.simpleImageButton2);
-        bt_tab3 = (ImageButton)findViewById(R.id.simpleImageButton3);
-        bt_tab4 = (ImageButton)findViewById(R.id.simpleImageButton4);
-        bt_tab5 = (ImageButton)findViewById(R.id.simpleImageButton5);
-        bt_tab6 = (ImageButton)findViewById(R.id.simpleImageButton6);
-        /*
-        bt_tab7 = (ImageButton)findViewById(R.id.simpleImageButton7);
+        bt_tab1 = (ImageButton)findViewById(R.id.ImageButton1);
+        bt_tab2 = (ImageButton)findViewById(R.id.ImageButton2);
+        bt_tab3 = (ImageButton)findViewById(R.id.ImageButton3);
+        bt_tab4 = (ImageButton)findViewById(R.id.ImageButton4);
+        bt_tab5 = (ImageButton)findViewById(R.id.ImageButton5);
+        bt_tab6 = (ImageButton)findViewById(R.id.ImageButton6);
+        bt_tab7 = (ImageButton)findViewById(R.id.ImageButton7);
+        bt_tab8 = (ImageButton)findViewById(R.id.ImageButton8);
+        bt_tab9 = (ImageButton)findViewById(R.id.ImageButton9);
+        bt_tab10 = (ImageButton)findViewById(R.id.ImageButton10);
+        bt_tab11 = (ImageButton)findViewById(R.id.ImageButton11);
 
-        bt_tab8 = (ImageButton)findViewById(R.id.simpleImageButton8);
-        bt_tab9 = (ImageButton)findViewById(R.id.simpleImageButton9);
-        bt_tab10 = (ImageButton)findViewById(R.id.simpleImageButton10);
-        bt_tab11 = (ImageButton)findViewById(R.id.simpleImageButton11);
 
-         */
 
         // tab button click listenr connect
         bt_tab1.setOnClickListener(this);
@@ -58,14 +56,11 @@ public class PreferBrandSelectBoundary extends AppCompatActivity implements View
         bt_tab4.setOnClickListener(this);
         bt_tab5.setOnClickListener(this);
         bt_tab6.setOnClickListener(this);
-        /*
         bt_tab7.setOnClickListener(this);
-
         bt_tab8.setOnClickListener(this);
         bt_tab9.setOnClickListener(this);
         bt_tab10.setOnClickListener(this);
         bt_tab11.setOnClickListener(this);
-        */
 
         // first view
         callFragment(FRAGMENT1);
@@ -76,65 +71,65 @@ public class PreferBrandSelectBoundary extends AppCompatActivity implements View
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.simpleImageButton1 :
+            case R.id.ImageButton1 :
                 // 'button1' click => call 'fragment1'
                 //이 카테고리 선택됨으로 변경
                 callFragment(FRAGMENT1);
                 break;
 
-            case R.id.simpleImageButton2 :
+            case R.id.ImageButton2 :
                 //이 카테고리 선택됨으로 변경
                 // 'button2' click => call 'fragment2'
                 callFragment(FRAGMENT1);
                 break;
 
-            case R.id.simpleImageButton3 :
+            case R.id.ImageButton3 :
                 //이 카테고리 선택됨으로 변경
                 // 'button3' click => call 'fragment3'
                 callFragment(FRAGMENT1);
                 break;
-            case R.id.simpleImageButton4 :
+            case R.id.ImageButton4 :
                 //이 카테고리 선택됨으로 변경
                 // 'button4' click => call 'fragment4'
                 callFragment(FRAGMENT1);
                 break;
-            case R.id.simpleImageButton5 :
+            case R.id.ImageButton5 :
                 //이 카테고리 선택됨으로 변경
                 // 'button5' click => call 'fragment5'
                 callFragment(FRAGMENT1);
                 break;
-            case R.id.simpleImageButton6 :
+            case R.id.ImageButton6 :
                 //이 카테고리 선택됨으로 변경
                 // 'button6' click => call 'fragment6'
                 callFragment(FRAGMENT1);
                 break;
-/*
-            case R.id.simpleImageButton7 :
+
+            case R.id.ImageButton7 :
                 // 'button7' click => call 'fragment7'
                 callFragment(FRAGMENT7);
                 break;
 
-            case R.id.simpleImageButton8 :
+            case R.id.ImageButton8 :
                 // 'button8' click => call 'fragment8'
                 callFragment(FRAGMENT8);
                 break;
 
-            case R.id.simpleImageButton9 :
+            case R.id.ImageButton9 :
                 // 'button9' click => call 'fragment9'
                 callFragment(FRAGMENT9);
                 break;
 
-            case R.id.simpleImageButton10 :
+            case R.id.ImageButton10 :
                 // 'button10' click => call 'fragment10'
                 callFragment(FRAGMENT10);
                 break;
 
-            case R.id.simpleImageButton11 :
+            case R.id.ImageButton11 :
                 // 'button11' click => call 'fragment11'
                 callFragment(FRAGMENT11);
                 break;
 
-  */
+
 
         }
     }
@@ -151,7 +146,7 @@ public class PreferBrandSelectBoundary extends AppCompatActivity implements View
                 transaction.replace(R.id.fragment_container, fragment1);
                 transaction.commit();
                 break;
-            /*
+
             case 2:
                 // '?꾨옒洹몃㉫??' ?몄텧
                 Fragment2 fragment2 = new Fragment2();
@@ -185,7 +180,7 @@ public class PreferBrandSelectBoundary extends AppCompatActivity implements View
                 transaction.replace(R.id.fragment_container, fragment6);
                 transaction.commit();
                 break;
-                /*
+
             case 7:
                 // '?꾨옒洹몃㉫??' ?몄텧
                 Fragment7 fragment7 = new Fragment7();
@@ -219,7 +214,7 @@ public class PreferBrandSelectBoundary extends AppCompatActivity implements View
                 transaction.commit();
                 break;
 
-                 */
+
         }
 
     }
