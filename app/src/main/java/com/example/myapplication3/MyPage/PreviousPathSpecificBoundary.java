@@ -9,9 +9,7 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.example.myapplication3.PreviousPathBrand;
 import com.example.myapplication3.R;
 
 public class PreviousPathSpecificBoundary extends AppCompatActivity implements MyPageController.PPBrandCallback  {

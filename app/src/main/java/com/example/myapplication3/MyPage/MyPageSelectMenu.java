@@ -4,16 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication3.Recommend.CategorySelectBoundary;
 import com.example.myapplication3.Entity.User;
-import com.example.myapplication3.Login.LoginController;
 import com.example.myapplication3.R;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MyPageSelectMenu extends AppCompatActivity  {
@@ -57,7 +55,7 @@ public class MyPageSelectMenu extends AppCompatActivity  {
 
         Intent intent = new Intent(// 다음 화면으로 전환
                 MyPageSelectMenu.this,
-                ChangePersonalInfo.class); // 개인정보 수정관련 클래스
+                CategorySelectBoundary.class); // 개인정보 수정관련 클래스
         intent.putExtra("id",id);
         intent.putExtra("pw",pw);
 

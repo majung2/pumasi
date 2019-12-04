@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/logo1"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         app:srcCompat="@drawable/pajuoutlet_logo" />
@@ -38,13 +38,13 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/empty1"
         android:layout_width="match_parent"
         android:layout_height="43dp"
         app:srcCompat="@drawable/empty" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/logo2"
         android:layout_width="match_parent"
         android:layout_height="69dp"
         app:srcCompat="@drawable/hyundaioutlet_logo" />
@@ -70,13 +70,13 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/empty2"
         android:layout_width="match_parent"
         android:layout_height="43dp"
         app:srcCompat="@drawable/empty" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/logo3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/mariomall_logo" />

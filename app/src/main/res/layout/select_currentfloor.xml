@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
@@ -16,7 +16,7 @@
         android:textSize="30sp" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/empty1"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         app:srcCompat="@drawable/empty" />
@@ -30,7 +30,7 @@
         android:textSize="36sp" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/empty2"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         app:srcCompat="@drawable/empty" />
@@ -45,7 +45,7 @@
         android:textSize="36sp" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/empty3"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         app:srcCompat="@drawable/empty" />

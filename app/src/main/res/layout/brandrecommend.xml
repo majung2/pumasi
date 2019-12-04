@@ -14,17 +14,29 @@
                 +<![CDATA[]]>
             </RelativeLayout>
 
-            <ImageButton android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/luxury" android:layout_centerHorizontal="true" android:id="@+id/simpleImageButton1"/>
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category1" android:layout_centerHorizontal="true" android:id="@+id/ImageView1"/>
 
-            <ImageButton android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/contemporary" android:layout_centerHorizontal="true" android:id="@+id/simpleImageButton2"/>
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category2" android:layout_centerHorizontal="true" android:id="@+id/ImageView2"/>
 
-            <ImageButton android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/female" android:layout_centerHorizontal="true" android:id="@+id/simpleImageButton3"/>
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category3" android:layout_centerHorizontal="true" android:id="@+id/ImageView3"/>
 
-            <ImageButton android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/male" android:layout_centerHorizontal="true" android:id="@+id/simpleImageButton4"/>
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category4" android:layout_centerHorizontal="true" android:id="@+id/ImageView4"/>
 
-            <ImageButton android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/shhandbag" android:layout_centerHorizontal="true" android:id="@+id/simpleImageButton5"/>
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category5" android:layout_centerHorizontal="true" android:id="@+id/ImageView5"/>
 
-            <ImageButton android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/sports" android:layout_centerHorizontal="true" android:id="@+id/simpleImageButton6"/>
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category6" android:layout_centerHorizontal="true" android:id="@+id/ImageView6"/>
+
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category7" android:layout_centerHorizontal="true" android:id="@+id/ImageView7"/>
+
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category8" android:layout_centerHorizontal="true" android:id="@+id/ImageView8"/>
+
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category9" android:layout_centerHorizontal="true" android:id="@+id/ImageView9"/>
+
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category10" android:layout_centerHorizontal="true" android:id="@+id/ImageView10"/>
+
+            <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category11" android:layout_centerHorizontal="true" android:id="@+id/ImageView11"/>
+
+
 
         </LinearLayout>
 

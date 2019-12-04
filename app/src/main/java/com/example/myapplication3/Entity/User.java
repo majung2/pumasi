@@ -1,31 +1,20 @@
 package com.example.myapplication3.Entity;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.util.Log;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import com.example.myapplication3.Login.LoadingActivity;
-import com.example.myapplication3.MyPage.MyPageController;
-import com.example.myapplication3.PreviousPathBrand;
+
+import com.example.myapplication3.MyPage.PreviousPathBrand;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.model.value.IntegerValue;
+
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import static android.content.ContentValues.TAG;
 

@@ -9,12 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.myapplication3.CategorySelectBoundary;
 import com.example.myapplication3.Entity.User;
 import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements LoginController.L
     public void onClickRegister(View v){
         Intent intent = new Intent(
                 MainActivity.this,
-                com.example.myapplication3.Login.Register.class); // 다음 넘어갈 클래스 지정
+                com.example.myapplication3.Register.Register.class); // 다음 넘어갈 클래스 지정
         startActivity(intent);
 
     }
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements LoginController.L
         Intent intent = new Intent(// 다음 화면으로 전환
                 MainActivity.this,
                 MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
-       intent .putExtra("id",currentUser.getId());
+       intent.putExtra("id",currentUser.getId());
        intent.putExtra("pw",currentUser.getPw());
 
         startActivity(intent);

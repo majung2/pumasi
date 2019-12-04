@@ -2,17 +2,12 @@ package com.example.myapplication3.MyPage;
 
 
 
-import android.widget.AdapterView;
-
 import com.example.myapplication3.Entity.Category;
 import com.example.myapplication3.Entity.User;
-import com.example.myapplication3.PreviousPathBrand;
 
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MyPageController implements User.MyPageCallback, Category.catCallback,User.AddBrandUser{//마이페이지 컨트롤러 클래스
     private String id;

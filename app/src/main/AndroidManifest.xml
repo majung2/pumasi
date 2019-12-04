@@ -15,8 +15,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.Register"/>
-        <activity android:name=".CategorySelectBoundary"/>
+        <activity android:name=".Register.Register"/>
+        <activity android:name=".Recommend.CategorySelectBoundary"/>
         <activity android:name=".MyPage.MyPageSelectMenu"/>
         <activity android:name=".MyPage.ChangePersonalInfo"/>
         <activity android:name=".MyPage.PreferNonpreferBrandBoundary"/>
