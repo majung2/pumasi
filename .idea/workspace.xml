@@ -11,23 +11,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7de9cc6d-70ad-471f-af03-b1d29bc8da71" name="Default Changelist" comment="shopping feedback 수정">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_19_3_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_19_3_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_components_16_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_components_16_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_firestore_21_3_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_firestore_21_3_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/AddPreferNonPreferBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/AddPreferNonPreferBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/MyPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/MyPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/PreferNonPreferBrandSelect/PreferBrandSelectBoundary.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Recommend/CategorySelectBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Recommend/CategorySelectBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Register/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Register/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/prefer_hate_brand_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/Brand.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/Brand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/brand.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/brand.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +42,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5X_API_29" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -49,123 +53,60 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Register/Register.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1125">
-              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2854#3168#0" expanded="true" />
-                <element signature="e#3167#3168#0" expanded="true" />
-                <element signature="e#3218#3622#0" expanded="true" />
-                <element signature="e#3621#3622#0" expanded="true" />
-                <element signature="e#3665#4330#0" expanded="true" />
-                <element signature="e#4329#4330#0" expanded="true" />
-                <element signature="e#4337#6427#0" expanded="true" />
-                <element signature="e#4866#5397#0" />
-                <element signature="e#5554#6556#0" />
-                <element signature="e#6426#6427#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="931">
+              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/PreferNonPreferBrandSelect/PreferNonpreferBrandSelectBoundary.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/BrandAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="143" column="27" lean-forward="true" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
-              <folding>
-                <element signature="e#3101#3109#0" expanded="true" />
-                <element signature="e#5057#5058#0" expanded="true" />
-                <element signature="e#5110#5111#0" expanded="true" />
-                <element signature="e#5308#5907#0" expanded="true" />
-                <element signature="e#5906#5907#0" expanded="true" />
-                <element signature="e#6004#6221#0" expanded="true" />
-                <element signature="e#6220#6221#0" expanded="true" />
-                <element signature="method#onClickAdd2#0;class#PreferNonpreferBrandSelectBoundary#0" />
-                <element signature="e#6462#6470#0" expanded="true" />
-                <element signature="e#8418#8419#0" expanded="true" />
-                <element signature="e#8471#8472#0" expanded="true" />
-                <element signature="e#8669#9271#0" expanded="true" />
-                <element signature="e#9270#9271#0" expanded="true" />
-                <element signature="e#9368#9585#0" expanded="true" />
-                <element signature="e#9584#9585#0" expanded="true" />
-                <element signature="method#getPrefer2#0;class#PreferNonpreferBrandSelectBoundary#0" />
-                <element signature="e#10048#10722#0" expanded="true" />
-                <element signature="e#10721#10722#0" expanded="true" />
-                <element signature="method#getNonPrefer2#0;class#PreferNonpreferBrandSelectBoundary#0" />
-                <element signature="e#11146#11829#0" expanded="true" />
-                <element signature="e#11828#11829#0" expanded="true" />
-                <element signature="method#finishDeleteBrand2#0;class#PreferNonpreferBrandSelectBoundary#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/MyPageController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3471">
-              <caret line="60" column="49" lean-forward="true" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
+            <state relative-caret-position="409">
+              <caret line="105" column="5" lean-forward="true" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/change_personal_info.xml">
-          <provider selected="true" editor-type-id="android-designer2" />
-          <provider editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/prefer_nonprefer_brand_info.xml">
-          <provider selected="true" editor-type-id="android-designer2" />
-          <provider editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/prefer_nonprefer_brand_select.xml">
-          <provider selected="true" editor-type-id="android-designer2" />
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="49">
-              <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="779">
+              <caret line="61" column="56" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/PreferNonpreferBrandBoundary.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="554">
+              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/PreviousPathAdapter.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/ShoppingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="266">
+              <caret line="90" column="11" lean-forward="true" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/AddPreferNonPreferBoundary.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/brand.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
-              <folding>
-                <element signature="method#finishAddBrand2#0;class#AddPreferNonPreferBoundary#0" />
-              </folding>
+            <state relative-caret-position="1254">
+              <caret line="66" selection-start-line="66" selection-end-line="66" />
             </state>
           </provider>
         </entry>
@@ -211,6 +152,7 @@
       <find>finishadd</find>
       <find>userid</find>
       <find>mypagecontrollerBrand</find>
+      <find>additem</find>
     </findStrings>
   </component>
   <component name="Git.Rebase.Settings">
@@ -224,12 +166,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Login/Register.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/select_currentlocation.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/brand.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/Brand.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/BrandAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_shopping.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/ShoppingActivity.java" />
@@ -275,14 +212,19 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Register/Register.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/PreferNonPreferBrandSelect/PreferNonpreferBrandSelectBoundary.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/MyPageController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/brand.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/Brand.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackActivity.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-20" />
-    <option name="y" value="36" />
+    <option name="y" value="35" />
     <option name="width" value="1280" />
-    <option name="height" value="736" />
+    <option name="height" value="737" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -290,6 +232,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -301,7 +244,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
@@ -331,42 +273,7 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="myapplication3" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="My Application3" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="myapplication3" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="Login" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="My Application3" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="myapplication3" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="MyPage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="My Application3" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="myapplication3" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="Pathfinding" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="My Application3" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="myapplication3" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="PreferNonPreferBrandSelect" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="My Application3" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="myapplication3" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="Register" type="462c0819:PsiDirectoryNode" />
+              <item name="Shopping" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="My Application3" type="1abcf292:AndroidViewProjectNode" />
@@ -391,12 +298,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_26" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2019-11-09T08:17:57.961Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_29" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2019-12-05T10:39:51.857Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$PROJECT_DIR$/../AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
@@ -673,11 +580,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-20" y="36" width="1280" height="736" extended-state="0" />
+    <frame x="-7" y="-7" width="1484" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2673667" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.18469101" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -689,10 +596,10 @@
       <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.6954766" weight="0.29968944" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49757674" weight="0.32763976" />
       <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.4983845" weight="0.32919255" />
-      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.3583062" side_tool="true" weight="0.22961956" />
-      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.64208245" weight="0.22826087" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" sideWeight="0.49919224" weight="0.32919255" />
-      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.6534733" visible="true" weight="0.35093167" />
+      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.3483146" side_tool="true" visible="true" weight="0.13557047" />
+      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.64208245" weight="0.13959731" />
+      <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" sideWeight="0.49919224" weight="0.32919255" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.6516854" visible="true" weight="0.13557047" />
       <window_info anchor="bottom" id="Debug" order="8" />
       <window_info anchor="bottom" id="Inspection Results" order="9" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Find" order="10" sideWeight="0.49946696" weight="0.32763976" />
@@ -701,40 +608,10 @@
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="right" id="Preview" order="4" weight="0.43422914" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.2872191" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Assistant" order="6" visible="true" weight="0.32995737" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" weight="0.17221828" />
-      <window_info id="Structure" order="2" side_tool="true" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info id="Build Variants" order="4" side_tool="true" />
-      <window_info id="Image Layers" order="5" />
-      <window_info id="Designer" order="6" />
-      <window_info id="Resources Explorer" order="7" />
-      <window_info id="Capture Tool" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="0" sideWeight="0.4951535" weight="0.20031056" />
-      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.6954766" weight="0.29968944" />
-      <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49757674" weight="0.32763976" />
-      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.4983845" weight="0.32919255" />
-      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.3583062" side_tool="true" weight="0.22961956" />
-      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.64208245" weight="0.22961956" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" sideWeight="0.49919224" weight="0.32919255" />
-      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.6534733" weight="0.35167786" />
-      <window_info anchor="bottom" id="Debug" order="8" />
-      <window_info anchor="bottom" id="Inspection Results" order="9" visible="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Find" order="10" sideWeight="0.49946696" weight="0.32763976" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.4965326" visible="true" weight="0.35436243" />
-      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="right" id="Gradle" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="right" id="Preview" order="4" weight="0.43422914" />
-      <window_info anchor="right" id="Palette&#9;" order="5" />
-      <window_info anchor="right" id="Assistant" order="6" visible="true" weight="0.32995737" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -789,45 +666,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="shopping feedback 수정" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recommend_fragment.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/ShoppingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="69" column="42" lean-forward="true" selection-start-line="69" selection-start-column="42" selection-end-line="69" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Path.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-771">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/SelectMallFloorLocation/F1CurrentLocationSelectBoundary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/SelectMallFloorLocation/F3CurrentLocationSelectBoundary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/BrandAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -839,13 +681,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/Brand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -889,13 +724,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1032,10 +860,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-149" />
       </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Login/LoadingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1065,32 +893,54 @@
       <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/prefer_hate_brand_select.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/PreferNonPreferBrandSelect/PreferBrandSelectBoundary.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/prefer_nonprefer_brand_info.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/change_personal_info.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/prefer_hate_brand_select.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="20" column="227" selection-start-line="20" selection-start-column="227" selection-end-line="20" selection-end-column="238" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/PreviousPathAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/MyPageController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/AddPreferNonPreferBoundary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+        <state relative-caret-position="19">
+          <caret line="60" column="49" lean-forward="true" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
           <folding>
-            <element signature="method#finishAddBrand2#0;class#AddPreferNonPreferBoundary#0" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/PreferNonPreferBrandSelect/PreferNonpreferBrandSelectBoundary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="143" column="27" lean-forward="true" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
+          <folding>
+            <element signature="method#onClickAdd2#0;class#PreferNonpreferBrandSelectBoundary#0" />
+            <element signature="method#getPrefer2#0;class#PreferNonpreferBrandSelectBoundary#0" />
+            <element signature="method#getNonPrefer2#0;class#PreferNonpreferBrandSelectBoundary#0" />
+            <element signature="method#finishDeleteBrand2#0;class#PreferNonpreferBrandSelectBoundary#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Register/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/prefer_nonprefer_brand_select.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -1104,88 +954,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/PreferNonPreferBrandSelect/PreferBrandSelectBoundary.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/PreviousPathAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="38" column="22" lean-forward="true" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+        <state relative-caret-position="75">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/AddPreferNonPreferBoundary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+          <folding>
+            <element signature="method#finishAddBrand2#0;class#AddPreferNonPreferBoundary#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/Brand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="28" selection-start-column="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/brand.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="931">
+          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/BrandAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="105" column="5" lean-forward="true" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/MyPage/MyPageController.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/ShoppingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3471">
-          <caret line="60" column="49" lean-forward="true" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="266">
+          <caret line="90" column="11" lean-forward="true" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/PreferNonPreferBrandSelect/PreferNonpreferBrandSelectBoundary.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Shopping/FeedbackActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="143" column="27" lean-forward="true" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
-          <folding>
-            <element signature="e#3101#3109#0" expanded="true" />
-            <element signature="e#5057#5058#0" expanded="true" />
-            <element signature="e#5110#5111#0" expanded="true" />
-            <element signature="e#5308#5907#0" expanded="true" />
-            <element signature="e#5906#5907#0" expanded="true" />
-            <element signature="e#6004#6221#0" expanded="true" />
-            <element signature="e#6220#6221#0" expanded="true" />
-            <element signature="method#onClickAdd2#0;class#PreferNonpreferBrandSelectBoundary#0" />
-            <element signature="e#6462#6470#0" expanded="true" />
-            <element signature="e#8418#8419#0" expanded="true" />
-            <element signature="e#8471#8472#0" expanded="true" />
-            <element signature="e#8669#9271#0" expanded="true" />
-            <element signature="e#9270#9271#0" expanded="true" />
-            <element signature="e#9368#9585#0" expanded="true" />
-            <element signature="e#9584#9585#0" expanded="true" />
-            <element signature="method#getPrefer2#0;class#PreferNonpreferBrandSelectBoundary#0" />
-            <element signature="e#10048#10722#0" expanded="true" />
-            <element signature="e#10721#10722#0" expanded="true" />
-            <element signature="method#getNonPrefer2#0;class#PreferNonpreferBrandSelectBoundary#0" />
-            <element signature="e#11146#11829#0" expanded="true" />
-            <element signature="e#11828#11829#0" expanded="true" />
-            <element signature="method#finishDeleteBrand2#0;class#PreferNonpreferBrandSelectBoundary#0" />
-          </folding>
+        <state relative-caret-position="779">
+          <caret line="61" column="56" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication3/Register/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2854#3168#0" expanded="true" />
-            <element signature="e#3167#3168#0" expanded="true" />
-            <element signature="e#3218#3622#0" expanded="true" />
-            <element signature="e#3621#3622#0" expanded="true" />
-            <element signature="e#3665#4330#0" expanded="true" />
-            <element signature="e#4329#4330#0" expanded="true" />
-            <element signature="e#4337#6427#0" expanded="true" />
-            <element signature="e#4866#5397#0" />
-            <element signature="e#5554#6556#0" />
-            <element signature="e#6426#6427#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/prefer_nonprefer_brand_select.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/prefer_nonprefer_brand_info.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
