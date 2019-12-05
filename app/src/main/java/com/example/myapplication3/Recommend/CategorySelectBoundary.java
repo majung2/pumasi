@@ -63,6 +63,7 @@ public class CategorySelectBoundary extends AppCompatActivity  {
             public void onClick(View v) {
                 String result = "";  // 결과를 출력할 문자열 초기화
                 String selectedCategoryNum = "";
+
                 if(category1.isChecked() == true)
                 {result += category1.getText().toString() + " ";selectedCategoryNum +="1,";  selectedCategory[1]= true ;}
                 if(category2.isChecked() == true)

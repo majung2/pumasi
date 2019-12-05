@@ -1,5 +1,6 @@
 package com.example.myapplication3.Register;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,10 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication3.Login.LoginController;
+import com.example.myapplication3.MyPage.PreferNonpreferBrandBoundary;
+import com.example.myapplication3.PreferNonPreferBrandSelect.PreferNonpreferBrandSelectBoundary;
 import com.example.myapplication3.R;
 
 public class Register extends AppCompatActivity {// 회원가입을 위한 기본적 정보를 입력하는 창
@@ -31,9 +35,9 @@ public class Register extends AppCompatActivity {// 회원가입을 위한 기�
     private RadioButton checkedSex;//체크된 성별 버튼
     private RadioButton checkedAge;//체므된 연령 버튼
     //실질적으로 저장될 유저의 정보들에 해당하는 attributes
-    private String name;
-    private String id;
-    private String pw;
+    private String userName;
+    private String userId;
+    private String userPw;
     private String sex;
     private Integer age;
 
@@ -62,35 +66,49 @@ public class Register extends AppCompatActivity {// 회원가입을 위한 기�
         //LoginController 클래스 생성
         lgController = new LoginController();
 
+
         radiogroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {//성별 라디오 그룹 리스너
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {//성별
                 checkedSex =(RadioButton) findViewById(checkedId);
                 if(checkedSex==null){
 
-                }
 
+                }
 
             }
         });
         radiogroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {//연령 라디오 그룹 리스너
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {//연령
                 checkedAge =(RadioButton) findViewById(checkedId);
                 if(checkedAge==null){
-
+                    //Toast.makeText(Register.this,"연령을 선택해주세요.",Toast.LENGTH_LONG).show();
                 }
 
             }
         });
         registerNext.setOnClickListener(new View.OnClickListener() {//다음 버튼을 눌렀을 시, 사용자의 정보를 저장하여 회원가입시킨(추후에는 이 버튼을 누르면 선호/비선호 브랜드 선택후 회원가입되도록 수정하기)
+                                            @Override
+                                            public void onClick(View view) {
+                                                final String TAG = "레지스터: ";
+                                                Log.d(TAG,"할로할로");
+
+
+
+                                                final String TTAG = "레지스터: ";
+                                                Log.d(TTAG,"완성");
+                                            }
+                                        }
+
+        );
+
+        registerNext.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                final String TAG = "레지스터: ";
-                Log.d(TAG,"할로할로");
-                name = textName.getText().toString();
-                id = textId.getText().toString();
-                pw = textPass.getText().toString();
+            public void onClick(View v) {
+                userName = textName.getText().toString();
+                userId = textId.getText().toString();
+                userPw = textPass.getText().toString();
                 int rb1 = radiogroup1.getCheckedRadioButtonId();
                 switch(rb1){//성별 처리
                     case R.id.buttonMale:
@@ -103,7 +121,7 @@ public class Register extends AppCompatActivity {// 회원가입을 위한 기�
                     default:
 
                 }
-                int rb2 = radiogroup1.getCheckedRadioButtonId();
+                int rb2 = radiogroup2.getCheckedRadioButtonId();
                 switch(rb2){//연령 처리
                     case R.id.buttonAge10:
                         age= 10;break;
@@ -126,13 +144,29 @@ public class Register extends AppCompatActivity {// 회원가입을 위한 기�
                     default:
 
                 }
-                lgController.register(name,id,pw,sex,age);
-                final String TTAG = "레지스터: ";
-                Log.d(TTAG,"완성");
-            }
-        }
+                System.out.println(userName +" "+ userId+" " + userPw +" "+ age +" "+ sex);
 
-        );
+                if ( userName==null || userPw==null || userId==null || age ==null || sex == null)
+                {
+                    Toast.makeText(Register.this,"입력하지 않은 정보가 있습니다.",Toast.LENGTH_LONG).show();
+                }
+
+                else {
+                    Intent intent = new Intent(// 다음 화면으로 전환
+                            Register.this,
+                            PreferNonpreferBrandBoundary.class);
+
+                    intent.putExtra("name", userName);
+                    intent.putExtra("id", userId);
+                    intent.putExtra("pw", userPw);
+                    intent.putExtra("age", age);
+                    intent.putExtra("sex", sex);
+
+                    startActivity(intent);
+                }
+
+            }
+        });
     }
 
 

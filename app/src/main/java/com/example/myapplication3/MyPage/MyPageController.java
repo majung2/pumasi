@@ -4,6 +4,7 @@ package com.example.myapplication3.MyPage;
 
 import com.example.myapplication3.Entity.Category;
 import com.example.myapplication3.Entity.User;
+import com.example.myapplication3.PreferNonPreferBrandSelect.PreferNonpreferBrandSelectBoundary;
 
 
 import java.io.Serializable;
@@ -58,6 +59,20 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
 
     }
     public void MyPageControllerBrand(PreferNonpreferBrandBoundary brandBoundary){//선호비선호 바운더리 위한 것
+
+        this.id=null;
+        this.sex=null;
+        this.age=null;
+        this.preferbrands= new ArrayList<String>();
+        this.nonpreferbrands = new ArrayList<String>();
+        this.path = null;
+        this.previousPathList = new ArrayList<String>();
+        this.ppBrandList = new ArrayList<PreviousPathBrand>();
+        this.brandCallback = brandBoundary;
+
+
+    }
+    public void MyPageControllerBrand(PreferNonpreferBrandSelectBoundary brandBoundary){//선호비선호 바운더리 위한 것
 
         this.id=null;
         this.sex=null;

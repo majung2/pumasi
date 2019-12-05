@@ -35,6 +35,7 @@ public class AddPreferNonPreferBoundary extends AppCompatActivity implements MyP
         pw = intent.getStringExtra("pw");
         selectedCategory = intent.getStringExtra("category");
         preferNon = intent.getStringExtra("prefernonprefer");
+
         controller = new MyPageController();
         controller.MyPageControllerBrand(this);
         controller.setAddControlUser(id,pw);

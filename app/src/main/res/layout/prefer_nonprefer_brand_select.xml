@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/preferbrand"
+            android:layout_width="341dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="선호브랜드                                                                                                          삭제를 원하시면 브랜드를 클릭해주세요"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/preferbrandadd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추가하기"
+android:onClick="onClickAdd"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/selected_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/nonpreferbrand"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="비선호 브랜드                                                                                                                                                                        삭제를 원하시면 브랜드를 클릭해주세요"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/nonpreferbrandadd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClickAdd2"
+            android:text="추가하기" /></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="456dp"
+        android:layout_height="247dp"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/selected_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/finishButton"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="가입하기" />
+
+</LinearLayout>
