@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RatingBar;
 
 import androidx.annotation.Nullable;
@@ -22,36 +23,42 @@ import java.util.Map;
 
 public class FeedbackActivity extends AppCompatActivity {
 
-
+    //---------------------- 레이아웃 관련 변수 ---------------------------------
     Button enter;
     Button close;
-    RatingBar rating;
+    ListView feedbackListView;
+    FeedbackAdapter feedbackAdapter;
+
+
     // ---------------------- Firebase 관련 변수 -------------------------------
-    // Firebase를 JAVA 코드로 컨트롤하기 위해 변수를 만들어둔다.
-    // Firebase Firestore의 컨트롤 권한을 할당하여 사용하기 위한 변수
     FirebaseFirestore db;
     CollectionReference brandRateRef;
     CollectionReference pathRef;
-    // ----------
+
+    //---------------------- 변수 ----------------------------
+    Float rate;
+    String id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_feedback);
 
-        // 레이아웃에 정의한 버튼과 텍스트 편집창 id를 변수에 연결
+        // --------------------- 화면 요소 세팅 ----------------------------
         enter = findViewById(R.id.enter);
         close = findViewById(R.id.close);
-        rating = findViewById(R.id.rating);
-        // -------------------------------------------------------------------------
+        feedbackListView = findViewById(R.id.brandList);
+        feedbackAdapter = new FeedbackAdapter();
+        feedbackListView.setAdapter(feedbackAdapter);
 
+        // --------------------- Firebase 변수 세팅 ----------------------------------------
         db = FirebaseFirestore.getInstance();
         pathRef = db.collection("path");
         brandRateRef = db.collection("brandRate");
 
-
         // ------------------------- 작동 기능 정의 --------------------------------
+
 
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,9 +66,8 @@ public class FeedbackActivity extends AppCompatActivity {
 
                 Intent intent = new Intent();
 
-                Float rate = rating.getRating(); // 바꿔야함
-
-                intent.putExtra("rate", rate);
+                /*Float rate = rating.getRating();
+                intent.putExtra("rate", rate);*/
 
                 // 결과를 성공 (내용을 정상적으로 담았음)으로 설정하고 소포를 부친다.
                 setResult(RESULT_OK, intent);
@@ -114,7 +120,9 @@ public class FeedbackActivity extends AppCompatActivity {
     // =========================================================================
 
     public void checkRating(String brandId,Float rating){
+        id = brandId;
+        rate = rating;
 
-        brandRateRef.document("brandRate").update("rate", rating); //id별로 올리기
+        //brandRateRef.document("brandRate").update("rate", rating); //id별로 올리기
     }
 }
