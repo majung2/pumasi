@@ -337,6 +337,13 @@ public class PreferNonpreferBrandSelectBoundary extends AppCompatActivity implem
             nonPreferBrandslist = nonPreferBrands;
             controller.register(name,id,pw,sex,age,preferBrandslist,nonPreferBrandslist);
 
+            Intent intent = new Intent(// 다음 화면으로 전환
+                    PreferNonpreferBrandSelectBoundary.this,
+                    MainActivity.class);
+
+            startActivity(intent);
+
+            Toast.makeText(getApplicationContext(), "가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
         }
         System.out.println("name:" + name);
         System.out.println("id:" + id);
@@ -345,6 +352,7 @@ public class PreferNonpreferBrandSelectBoundary extends AppCompatActivity implem
         System.out.println("sex:" + sex);
         System.out.println("prefer:" + preferBrandslist);
         System.out.println("nonPrefer:" + nonPreferBrandslist);
+
 
     }
 
