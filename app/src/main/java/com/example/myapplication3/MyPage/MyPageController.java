@@ -72,20 +72,7 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
 
 
     }
-    public void MyPageControllerBrand(PreferNonpreferBrandSelectBoundary brandBoundary){//선호비선호 바운더리 위한 것
 
-        this.id=null;
-        this.sex=null;
-        this.age=null;
-        this.preferbrands= new ArrayList<String>();
-        this.nonpreferbrands = new ArrayList<String>();
-        this.path = null;
-        this.previousPathList = new ArrayList<String>();
-        this.ppBrandList = new ArrayList<PreviousPathBrand>();
-        this.brandCallback = brandBoundary;
-
-
-    }
     public void MyPageControllerBrand(AddPreferNonPreferBoundary addbrand){//선호 비선호 추가를 위한 조회시 사용
 
         this.id=null;
@@ -199,22 +186,6 @@ public class MyPageController implements User.MyPageCallback, Category.catCallba
     //path controller function end
 
 
-    /*boughtlist controller function
-
-
-
-    public ArrayList<PreviousPathBrand> listUpBought() {
-
-        //entity modify
-
-        this.boughtList = new ArrayList<PreviousPathBrand>();
-        boughtList = myPageControlUser.findBoughtDB();
-
-        return boughtList;
-
-    }
-    */
-    //boughtlist controller function end
 
     @Override
     public void finishPersonalInfo() {//개인 정보 수정

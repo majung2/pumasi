@@ -3,14 +3,11 @@ package com.example.myapplication3.Recommend;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.myapplication3.PreferNonPreferBrandSelect.Fragment1;
 import com.example.myapplication3.R;
 
 

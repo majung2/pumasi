@@ -22,6 +22,8 @@
         <activity android:name=".MyPage.PreferNonpreferBrandBoundary"/>
         <activity android:name=".MyPage.PreviousPathBoundary"/>
         <activity android:name=".MyPage.PreviousPathSpecificBoundary"/>
+        <activity android:name=".PreferNonPreferBrandSelect.PreferNonpreferBrandSelectBoundary"/>
+        <activity android:name=".PreferNonPreferBrandSelect.RegisterAddPreferNonPreferBoundary"/>
         <activity android:name=".MyPage.AddPreferNonPreferBoundary"></activity>
         <activity android:name=".Login.LoadingActivity"
             android:theme="@style/SplashTheme"
