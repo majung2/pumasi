@@ -25,6 +25,10 @@ import java.util.ArrayList;
 public class PreferNonpreferBrandSelectBoundary extends AppCompatActivity implements LoginController.LoginControlBrandCallback{//선호,비선호 브랜드 리스트 보는 화면
     public static ArrayList<String> preferBrands=new ArrayList<>();//선호 브랜드 리스트
     public static ArrayList<String> nonPreferBrands=new ArrayList<>();// 비선호 브랜드 리스트
+
+    private ArrayList<String> preferBrandslist = new ArrayList<>();
+    private ArrayList<String> nonPreferBrandslist = new ArrayList<>();
+
     private Button changePrefer;
     private Button changeNonPrefer;
     private Button finishRegister;
@@ -55,6 +59,7 @@ public class PreferNonpreferBrandSelectBoundary extends AppCompatActivity implem
         Intent intent=getIntent();
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
+        sex= intent.getStringExtra("sex");
         name = intent.getStringExtra("name");
         age = intent.getIntExtra("age",0);
         if(intent.getStringArrayListExtra("preferlist")!=null){
@@ -326,10 +331,11 @@ public class PreferNonpreferBrandSelectBoundary extends AppCompatActivity implem
         }
 
         else{
-
             // Login Controller => User (DB) 새로운 유저 추가하기
-            controller.register(name,id,pw,sex,age,preferBrands,nonPreferBrands);
-
+            System.out.println("새로운 유저 추가하기 - boundary");
+            preferBrandslist = preferBrands;
+            nonPreferBrandslist = nonPreferBrands;
+            controller.register(name,id,pw,sex,age,preferBrandslist,nonPreferBrandslist);
 
         }
         System.out.println("name:" + name);
@@ -337,8 +343,8 @@ public class PreferNonpreferBrandSelectBoundary extends AppCompatActivity implem
         System.out.println("pw:" + pw);
         System.out.println("age:" + age);
         System.out.println("sex:" + sex);
-        System.out.println("prefer:" + preferBrands);
-        System.out.println("nonPrefer:" + nonPreferBrands);
+        System.out.println("prefer:" + preferBrandslist);
+        System.out.println("nonPrefer:" + nonPreferBrandslist);
 
     }
 

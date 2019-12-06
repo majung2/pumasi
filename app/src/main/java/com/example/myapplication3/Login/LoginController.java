@@ -25,7 +25,7 @@ public class LoginController implements User.LoginCallback, Serializable, Catego
     private Category controlCategory;
 
     public User controlRegisterUser;
-    public  User controlUser;//로그인 후에 유저 정보를 담는 객체
+    public User controlUser;//로그인 후에 유저 정보를 담는 객체
 
     private FirebaseFirestore db;
     private boolean exists;
@@ -112,7 +112,7 @@ public class LoginController implements User.LoginCallback, Serializable, Catego
 
 
     //회원가입 method
-    public void register(String UserName, String UserId, String UserPW,  String UserSex, Integer UserAge, ArrayList<String>preferbrands, ArrayList<String>nonpreferbrands) {//회원가입시 입력된 정보를 유저 클래스로 넘김(유저 클래스에서 최종 데이터 저장)
+    public void register(String UserName, String UserId, String UserPW,  String UserSex, Integer UserAge, ArrayList<String> preferbrands, ArrayList<String> nonpreferbrands) {//회원가입시 입력된 정보를 유저 클래스로 넘김(유저 클래스에서 최종 데이터 저장)
         this.name=UserName;
         this.id=UserId;
         this.pw = UserPW;
@@ -124,7 +124,11 @@ public class LoginController implements User.LoginCallback, Serializable, Catego
 
         final String TAG = "컨트롤러: ";
         Log.d(TAG,"완성");
-        controlUser.register(name,id,pw,sex,age,preferbrands,nonpreferbrands);
+        System.out.println("새로운 유저 추가하기 - LoginController");
+
+
+        controlRegisterUser.register(name,id,pw,sex,age,preferbrands,nonpreferbrands);
+
 
 
     }

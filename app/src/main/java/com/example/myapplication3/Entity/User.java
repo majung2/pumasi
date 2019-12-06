@@ -15,6 +15,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.io.Serializable;
 import java.util.ArrayList;
 import static android.content.ContentValues.TAG;
@@ -106,7 +109,9 @@ public class User implements Serializable {
 
 
     //회원가입- 사용자가 입력한 정보 디비에 저장하는 함수
-    public void register(String name, String id, String pw, String sex, Integer age,ArrayList<String>preferbrands, ArrayList<String>nonpreferbrands){
+    public void register(String name, String id, String pw, String sex, Integer age,ArrayList<String> preferbrands, ArrayList<String> nonpreferbrands){
+
+        db = FirebaseFirestore.getInstance();
         this.name=name;
         this.id=id;
         this.pw=pw;
@@ -115,15 +120,47 @@ public class User implements Serializable {
         this.preferBrands =preferbrands;
         this.nonPreferBrands = nonpreferbrands;
 
+        System.out.println("새로운 유저 추가하기 - User");
+
+        Map<String, Object> newUser = new HashMap<>();
+        newUser.put("name", name);
+        newUser.put("age", age);
+        newUser.put("sex",sex);
+        newUser.put("password",pw);
+        newUser.put("nonpreferbrand",nonPreferBrands);
+        newUser.put("preferbrand",preferBrands);
+        newUser.put("pathsize",0);
+
+        Map<String, Object> newUserPreferBrandrate = new HashMap<>();
+        newUserPreferBrandrate.put("rate",2);
+        Map<String, Object> newUserNPreferBrandrate = new HashMap<>();
+        newUserNPreferBrandrate.put("rate",-2);
+
+        db.collection("user").document(id).set(newUser)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+        for(int i =0; i<preferBrands.size(); i++){
+        db.collection("user").document(id).collection("brandRate").document(preferBrands.get(i)).set(newUserNPreferBrandrate);}
+
+        for(int j=0; j<nonPreferBrands.size() ; j++){
+            db.collection("user").document(id).collection("brandRate").document(nonPreferBrands.get(j)).set(newUserNPreferBrandrate);
+        }
+
+
+
+
     }
 
-    public void Idregister(String id){
-
-        db = FirebaseFirestore.getInstance();
-
-
-
-    }
 
     public void login(String name, String id, String pw, String sex, Integer age){//로그인이 제대로 되었을 때, 사용자 정보를 해당 객체에 저장- 컨트롤러에서 디비 접근 후, 여기서 객체에 저장하는 방식인데 유저 클래스에서 디비 접근 자체를 하는게 나을까요?
         this.name=name;
