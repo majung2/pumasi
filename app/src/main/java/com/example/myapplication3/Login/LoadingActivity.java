@@ -43,7 +43,7 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         System.out.println("스플레시 화면 클래스 접근");
-        mallList = new ArrayList<>();//리스트 초기화
+       mallList = new ArrayList<>();//리스트 초기화
         catList= new ArrayList<>();
         spotList = new ArrayList<>();
         brandList = new ArrayList<>();
@@ -53,7 +53,7 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
             check=1;
 
             //쇼핑몰 클래스 생성
-            mall = new ShoppingMall();
+          /*  mall = new ShoppingMall();
             mall.setMName("pajuPremiumOutlet");
             mall.setMNumber("M1");
 
@@ -146,7 +146,7 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
                }
            });
 
-
+*/
 
         Thread.sleep(2000);
             System.out.println("로딩 화면 띄워지는 시간");
@@ -161,7 +161,7 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
     }
 
 
-   public void readMall(final MyCallback mycall) {//쇼핑몰 찾아서 클래스 생성 후, 쇼핑몰 리스트에 추가
+ /*  public void readMall(final MyCallback mycall) {//쇼핑몰 찾아서 클래스 생성 후, 쇼핑몰 리스트에 추가
        for (Integer i = 0; i < mall.getCategoryList().size(); i++) {
            final Integer finalI = i;
 
@@ -206,7 +206,7 @@ public class LoadingActivity extends Activity {//앱을 실행했을 때의 로�
                        }
                    });;
        }
-   }
+   }*/
   public interface MyCallback {
       void onCallback(ArrayList<SpotsInMall> spotList,ArrayList<Brand> brandList);
   }
