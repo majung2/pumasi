@@ -32,6 +32,8 @@ public class ShoppingActivity extends AppCompatActivity {
     Button refresh;
     Button end;
     ListView brandListView;
+    DrawView drawView;
+
 
     // 리스트뷰에 들어갈 내용을 만들어서 전달할 어댑터를 담을 변수
     BrandAdapter brandAdapter;
@@ -71,6 +73,9 @@ public class ShoppingActivity extends AppCompatActivity {
         refresh = findViewById(R.id.refresh);
         end = findViewById(R.id.end);
         brandListView = findViewById(R.id.brandList);
+        drawView = findViewById(R.id.draw);
+        drawView.draw();
+
 
         // 어댑터를 생성하여 준비해둔 변수에 연결한다.
         brandAdapter = new BrandAdapter();
@@ -84,8 +89,8 @@ public class ShoppingActivity extends AppCompatActivity {
         end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(ShoppingActivity.this, FeedbackActivity.class);
-              startActivityForResult(intent, 100);
+                Intent intent = new Intent(ShoppingActivity.this, FeedbackActivity.class);
+                startActivityForResult(intent, 100);
 
             }
         });
