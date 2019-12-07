@@ -38,14 +38,7 @@ public class BrandAdapter extends BaseAdapter {
 
 
     // =========================================================================
-    // getView
-    // 특정 위치에 들어가야 하는 뷰를 생성하여 리스트뷰에 집어넣어주는 함수
 
-    // 매개변수
-    // position : 현재 그려서 반환해야 할 뷰의 위치 (리스트에서 몇 번째인지)
-    // convertView : 뷰가 담기는 변수. 이미 생성되었던 뷰라면 (ex. 새 트윗이 생겼을 때 기존에 있던 트윗 뷰)
-    // 비어있지 않다.
-    // parent : 뷰가 생성되어 들어갈 부모 뷰
     // -------------------------------------------------------------------------
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
