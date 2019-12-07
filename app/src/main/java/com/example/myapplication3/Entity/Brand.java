@@ -13,4 +13,6 @@ public class Brand extends SpotsInMall {
     public String getPriceLevel(){
         return this.priceLevel;
     }
+    public boolean getSale(){return this.sale;}
 }
+
