@@ -2,22 +2,31 @@ package com.example.myapplication3.Shopping;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.myapplication3.R;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,7 +41,8 @@ public class ShoppingActivity extends AppCompatActivity {
     Button refresh;
     Button end;
     ListView brandListView;
-    DrawView drawView;
+    private String id;
+    private String pw;
 
 
     // 리스트뷰에 들어갈 내용을 만들어서 전달할 어댑터를 담을 변수
@@ -48,6 +58,7 @@ public class ShoppingActivity extends AppCompatActivity {
     FirebaseFirestore db;
     CollectionReference brandRateRef;
     CollectionReference pathRef;
+    DocumentReference brandRef;
     // -------------------------------------------------------------------------
 
 
@@ -58,13 +69,19 @@ public class ShoppingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent=getIntent();
+        id = intent.getStringExtra("id");
+        pw = intent.getStringExtra("pw");
 
         // --------------------- Firebase 변수 세팅 --------------------------------
         // Firestore와 컬렉션을 준비해둔 변수에 연결한다.
         // Firebase Firestore 컨트롤 권한을 db에 할당
         db = FirebaseFirestore.getInstance();
-        pathRef = db.collection("path");
+        pathRef = db.collection("user").document("abc123")
+                .collection("path").document("1").collection("brand");
         brandRateRef = db.collection("brandRate");
+        brandRef = db.collection("user").document("abc123")
+                .collection("path").document("1").collection("brand").document("1");
         // -------------------------------------------------------------------------
 
 
@@ -73,8 +90,6 @@ public class ShoppingActivity extends AppCompatActivity {
         refresh = findViewById(R.id.refresh);
         end = findViewById(R.id.end);
         brandListView = findViewById(R.id.brandList);
-        drawView = findViewById(R.id.draw);
-        drawView.draw();
 
 
         // 어댑터를 생성하여 준비해둔 변수에 연결한다.
@@ -95,7 +110,34 @@ public class ShoppingActivity extends AppCompatActivity {
             }
         });
 
-        pathRef.orderBy("timestamp").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        /*pathRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    Map<String, Object> visited = new HashMap<>();
+                                                    visited.put("visited", true);
+
+                                                    for (QueryDocumentSnapshot doc : task.getResult()) {
+                                                        System.out.println(doc.getId());
+                                                        System.out.println(doc.getData().get("brandname").toString());
+                                                    }
+                                                }
+                                            });*/
+
+       brandRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Brand brand = documentSnapshot.toObject(Brand.class);
+                brandAdapter.addItem(brand);
+
+            }
+        });
+
+
+
+
+
+       /* pathRef.orderBy("timestamp").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
@@ -114,7 +156,7 @@ public class ShoppingActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
     }
     // -------------------------------------------------------------------------
     // onCreate 함수 종료
