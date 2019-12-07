@@ -10,10 +10,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.List;
@@ -109,7 +112,7 @@ public class User implements Serializable {
 
 
     //회원가입- 사용자가 입력한 정보 디비에 저장하는 함수
-    public void register(String name, String id, String pw, String sex, Integer age,ArrayList<String> preferbrands, ArrayList<String> nonpreferbrands){
+    public void register(String name, final String id, String pw, String sex, Integer age, ArrayList<String> preferbrands, ArrayList<String> nonpreferbrands){
 
         db = FirebaseFirestore.getInstance();
         this.name=name;
@@ -131,9 +134,9 @@ public class User implements Serializable {
         newUser.put("preferbrand",preferBrands);
         newUser.put("pathsize",0);
 
-        Map<String, Object> newUserPreferBrandrate = new HashMap<>();
-        newUserPreferBrandrate.put("rate",2);
-        Map<String, Object> newUserNPreferBrandrate = new HashMap<>();
+        final Map<String, Object> newUserPreferBrandrate = new HashMap<>();
+        newUserPreferBrandrate.put("rate",+2);
+        final Map<String, Object> newUserNPreferBrandrate = new HashMap<>();
         newUserNPreferBrandrate.put("rate",-2);
 
         db.collection("user").document(id).set(newUser)
@@ -149,14 +152,41 @@ public class User implements Serializable {
                         Log.w(TAG, "Error writing document", e);
                     }
                 });
-        for(int i =0; i<preferBrands.size(); i++){
-        db.collection("user").document(id).collection("brandRate").document(preferBrands.get(i)).set(newUserNPreferBrandrate);}
 
-        for(int j=0; j<nonPreferBrands.size() ; j++){
-            db.collection("user").document(id).collection("brandRate").document(nonPreferBrands.get(j)).set(newUserNPreferBrandrate);
+
+
+
+        for(int CNr=1; CNr<12; CNr++) {
+            CollectionReference ref = db.collection("shoppingMall").document("M1").collection("category").document("c"+String.valueOf(CNr)).collection("brand");
+            ref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    Map<String, Object> newUserBrandrate = new HashMap<>();
+                    newUserBrandrate.put("rate", 0);
+
+                    for (QueryDocumentSnapshot doc : task.getResult()) {
+                        System.out.println(doc.getId());
+                        System.out.println(doc.getData().get("bName").toString());
+                        db.collection("user").document(id).collection("brandRate").document(doc.getData().get("bName").toString()).set(newUserBrandrate);
+
+
+                    }//for doc end
+
+
+
+
+                    for (int i = 0; i < preferBrands.size(); i++) {
+                        db.collection("user").document(id).collection("brandRate").document(preferBrands.get(i)).set(newUserPreferBrandrate);
+                    }
+
+                    for (int j = 0; j < nonPreferBrands.size(); j++) {
+                        db.collection("user").document(id).collection("brandRate").document(nonPreferBrands.get(j)).set(newUserNPreferBrandrate);
+                    }
+                }
+            });
+
         }
-
-
 
 
     }
