@@ -32,7 +32,8 @@ public class ShoppingActivity extends AppCompatActivity {
     Button refresh;
     Button end;
     ListView brandListView;
-    DrawView drawView;
+    private String id;
+    private String pw;
 
 
     // 리스트뷰에 들어갈 내용을 만들어서 전달할 어댑터를 담을 변수
@@ -58,6 +59,9 @@ public class ShoppingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent=getIntent();
+        id = intent.getStringExtra("id");
+        pw = intent.getStringExtra("pw");
 
         // --------------------- Firebase 변수 세팅 --------------------------------
         // Firestore와 컬렉션을 준비해둔 변수에 연결한다.
@@ -73,8 +77,6 @@ public class ShoppingActivity extends AppCompatActivity {
         refresh = findViewById(R.id.refresh);
         end = findViewById(R.id.end);
         brandListView = findViewById(R.id.brandList);
-        drawView = findViewById(R.id.draw);
-        drawView.draw();
 
 
         // 어댑터를 생성하여 준비해둔 변수에 연결한다.
