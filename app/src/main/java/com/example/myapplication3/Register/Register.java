@@ -154,7 +154,7 @@ public class Register extends AppCompatActivity {// 회원가입을 위한 기�
                 else {
                     Intent intent = new Intent(// 다음 화면으로 전환
                             Register.this,
-                            PreferNonpreferBrandBoundary.class);
+                            PreferNonpreferBrandSelectBoundary.class);
 
                     intent.putExtra("name", userName);
                     intent.putExtra("id", userId);

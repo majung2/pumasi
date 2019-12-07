@@ -38,7 +38,7 @@ public class MyPageSelectMenu extends AppCompatActivity  {
         nonpreferList = new ArrayList<>();
 
         //받아온 유저 클래스--> 계속 오류 뜨는 상태
-      Intent intent=getIntent();
+        Intent intent=getIntent();
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
 
@@ -55,7 +55,7 @@ public class MyPageSelectMenu extends AppCompatActivity  {
 
         Intent intent = new Intent(// 다음 화면으로 전환
                 MyPageSelectMenu.this,
-                CategorySelectBoundary.class); // 개인정보 수정관련 클래스
+                ChangePersonalInfo.class); // 개인정보 수정관련 클래스
         intent.putExtra("id",id);
         intent.putExtra("pw",pw);
 
@@ -81,7 +81,7 @@ public class MyPageSelectMenu extends AppCompatActivity  {
 
         Intent intent = new Intent(// 다음 화면으로 전환
                 MyPageSelectMenu.this,
-               PreferNonpreferBrandBoundary.class); // 선호비선호 브랜드 조회 관련 클래스
+                PreferNonpreferBrandBoundary.class); // 선호비선호 브랜드 조회 관련 클래스
 
         intent.putExtra("id",id);
         intent.putExtra("pw",pw);

@@ -20,46 +20,79 @@
         android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:text="현재 위치를 클릭해주세요"
-        android:textSize="30sp" />
+        android:textSize="18sp" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="59dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#8BC34A"
+                android:text="5번"
+                android:textSize="18sp"
+                android:onClick="onClick5"/>
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#9C27B0"
+                android:text="4번"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:onClick="onClick4"/>
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#F44336"
+                android:text="3번"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:onClick="onClick3"/>
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#2196F3"
+                android:text="2번"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:onClick="onClick2"/>
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#FFEB3B"
+                android:text="1번"
+                android:textSize="18sp"
+                android:onClick="onClick1"/>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="match_parent"
-            android:layout_height="645dp"
+            android:layout_width="273dp"
+            android:layout_height="526dp"
             app:srcCompat="@drawable/paju_1floor" />
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <FrameLayout
-                android:layout_width="107dp"
-                android:layout_height="match_parent">
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="83dp"
-                android:layout_height="match_parent"/>
-
-            <FrameLayout
-                android:layout_width="61dp"
-                android:layout_height="match_parent">
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="80dp"
-                android:layout_height="match_parent">
-
-            </FrameLayout>
-        </LinearLayout>
-
-
-    </RelativeLayout>
 </LinearLayout>

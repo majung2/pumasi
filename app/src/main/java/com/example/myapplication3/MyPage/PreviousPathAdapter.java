@@ -104,10 +104,17 @@ public class PreviousPathAdapter extends ArrayAdapter<PreviousPathBrand> {
         //data 객체 리스트의 position 위치에 있는 data객체를 가져옵니다.
         PreviousPathBrand data1 = (PreviousPathBrand) mList.get(position);
 
+        int starsize = Integer.valueOf(data1.getGrade().toString());
+
+        String star ="";
+        for(int i=0; i<starsize; i++)
+        {
+            star += "★";
+        }
 
         //현재 선택된 data 객체를 화면에 보여주기 위해서 앞에서 미리 찾아 놓은 뷰에 데이터를 집어넣습니다.
         viewHolder.brandname.setText(data1.getBrand_name());
-        viewHolder.star.setText("만족도: "+ data1.getGrade().toString());
+        viewHolder.star.setText("만족도: "+ star);
         viewHolder.category_specific.setText(data1.getBought_Category());
         // 화면에 보여질 뷰를 리턴하여 ListView의 특정 줄로 보여지게 합니다.
         return rowView;

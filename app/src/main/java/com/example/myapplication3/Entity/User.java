@@ -4,16 +4,23 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.myapplication3.Login.LoginController;
 import com.example.myapplication3.MyPage.PreviousPathBrand;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.io.Serializable;
 import java.util.ArrayList;
 import static android.content.ContentValues.TAG;
@@ -35,7 +42,6 @@ public class User implements Serializable {
     private ArrayList<String> totalBrandList;
     private ArrayList<String> previousPathList;
     private ArrayList<PreviousPathBrand> ppBrandList;
-    //private ArrayList<PreviousPathBrand> boughtList;
 
 
     private FirebaseFirestore db;
@@ -44,6 +50,7 @@ public class User implements Serializable {
     private LoginCallback loginCallback ;
     private MyPageCallback myPageCallback;
     private AddBrandUser addback;
+
     //유저 초기화
     public User(){
         this.id=null;
@@ -105,16 +112,86 @@ public class User implements Serializable {
 
 
     //회원가입- 사용자가 입력한 정보 디비에 저장하는 함수
-    public void register(String name, String id, String pw, String sex, Integer age){
+    public void register(String name, final String id, String pw, String sex, Integer age, ArrayList<String> preferbrands, ArrayList<String> nonpreferbrands){
+
+        db = FirebaseFirestore.getInstance();
         this.name=name;
         this.id=id;
         this.pw=pw;
         this.age=age;
         this.sex=sex;
-        this.preferBrands =null;
-        this.nonPreferBrands = null;
-        //디비에 저장하는 함수 호출(파이어베이스 이용해 추가할 예정)
+        this.preferBrands =preferbrands;
+        this.nonPreferBrands = nonpreferbrands;
+
+        System.out.println("새로운 유저 추가하기 - User");
+
+        Map<String, Object> newUser = new HashMap<>();
+        newUser.put("name", name);
+        newUser.put("age", age);
+        newUser.put("sex",sex);
+        newUser.put("password",pw);
+        newUser.put("nonpreferbrand",nonPreferBrands);
+        newUser.put("preferbrand",preferBrands);
+        newUser.put("pathsize",0);
+
+        final Map<String, Object> newUserPreferBrandrate = new HashMap<>();
+        newUserPreferBrandrate.put("rate",+2);
+        final Map<String, Object> newUserNPreferBrandrate = new HashMap<>();
+        newUserNPreferBrandrate.put("rate",-2);
+
+        db.collection("user").document(id).set(newUser)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+
+
+
+
+        for(int CNr=1; CNr<12; CNr++) {
+            CollectionReference ref = db.collection("shoppingMall").document("M1").collection("category").document("c"+String.valueOf(CNr)).collection("brand");
+            ref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    Map<String, Object> newUserBrandrate = new HashMap<>();
+                    newUserBrandrate.put("rate", 0);
+
+                    for (QueryDocumentSnapshot doc : task.getResult()) {
+                        System.out.println(doc.getId());
+                        System.out.println(doc.getData().get("bName").toString());
+                        db.collection("user").document(id).collection("brandRate").document(doc.getData().get("bName").toString()).set(newUserBrandrate);
+
+
+                    }//for doc end
+
+
+
+
+                    for (int i = 0; i < preferBrands.size(); i++) {
+                        db.collection("user").document(id).collection("brandRate").document(preferBrands.get(i)).set(newUserPreferBrandrate);
+                    }
+
+                    for (int j = 0; j < nonPreferBrands.size(); j++) {
+                        db.collection("user").document(id).collection("brandRate").document(nonPreferBrands.get(j)).set(newUserNPreferBrandrate);
+                    }
+                }
+            });
+
+        }
+
+
     }
+
+
     public void login(String name, String id, String pw, String sex, Integer age){//로그인이 제대로 되었을 때, 사용자 정보를 해당 객체에 저장- 컨트롤러에서 디비 접근 후, 여기서 객체에 저장하는 방식인데 유저 클래스에서 디비 접근 자체를 하는게 나을까요?
         this.name=name;
         this.id=id;
@@ -211,7 +288,7 @@ public class User implements Serializable {
         return found;
     }
 
-    public boolean verifyLogin(String inputId, String InputPw){
+    public boolean verifyLogin(String inputId, String InputPw) {
         this.id = inputId;
         this.pw = InputPw;
         db = FirebaseFirestore.getInstance();
@@ -387,25 +464,25 @@ public class User implements Serializable {
                     {
                         if (task.isSuccessful()) {//brandRate 문서 찾음
 
-                                                                      DocumentSnapshot document = task.getResult();
-                                                                      if(document.get("rate") != null) {//
-                                                                          if(brandType.equals("preferbrand")){
-                                                                          System.out.println("추가전 brandrate : " + document.get("rate"));
-                                                                          Ref_Brandrate.update("rate", Integer.valueOf(document.get("rate").toString()) - 2); //선호 rate -2
-                                                                          }
-                                                                          else if (brandType.equals("nonpreferbrand")){ //비선호에 추가할경우
-                                                                              System.out.println("추가전 brandrate : " + document.get("rate"));
-                                                                              Ref_Brandrate.update("rate", Integer.valueOf(document.get("rate").toString()) + 2); //비선호 rate +2
-                                                                              }
-                                                                          }
-                                                                      else{
-                                                                          System.out.println("해당 브랜드가 DB에 존재하지 않습니다.");
-                                                                      }
-                                                                      }
+                            DocumentSnapshot document = task.getResult();
+                            if(document.get("rate") != null) {//
+                                if(brandType.equals("preferbrand")){
+                                    System.out.println("추가전 brandrate : " + document.get("rate"));
+                                    Ref_Brandrate.update("rate", Integer.valueOf(document.get("rate").toString()) - 2); //선호 rate -2
+                                }
+                                else if (brandType.equals("nonpreferbrand")){ //비선호에 추가할경우
+                                    System.out.println("추가전 brandrate : " + document.get("rate"));
+                                    Ref_Brandrate.update("rate", Integer.valueOf(document.get("rate").toString()) + 2); //비선호 rate +2
+                                }
+                            }
+                            else{
+                                System.out.println("해당 브랜드가 DB에 존재하지 않습니다.");
+                            }
+                        }
                         else {//문서 못찾음
-                                                                      //DB에 userId - brandRate - 브랜드명 - rate 추가하기
-                                                                      System.out.println("해당 브랜드가 DB에 존재하지 않습니다.");
-                                                                       }
+                            //DB에 userId - brandRate - 브랜드명 - rate 추가하기
+                            System.out.println("해당 브랜드가 DB에 존재하지 않습니다.");
+                        }
                     }
 
                 })
@@ -428,10 +505,13 @@ public class User implements Serializable {
         System.out.println(id);
         System.out.println(preferNon);
         System.out.println(itemAtPosition);
+
         DocumentReference Ref = db.collection("user").document(this.id);
-        final DocumentReference Ref_Brandrate = Ref.collection("brandRate").document(itemAtPosition);
+
         Ref.update(preferNon, FieldValue.arrayUnion(itemAtPosition));
+
         System.out.println("brandrate값 변경");
+        final DocumentReference Ref_Brandrate = Ref.collection("brandRate").document(itemAtPosition);
         Ref_Brandrate.get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -439,25 +519,25 @@ public class User implements Serializable {
                     {
                         if (task.isSuccessful()) {//brandRate 문서 찾음
 
-                                                                      DocumentSnapshot document = task.getResult();
-                                                                      if(document.get("rate") != null) {//
-                                                                          if(preferNon.equals("preferbrand")){
-                                                                          System.out.println("추가전 brandrate : " + document.get("rate"));
-                                                                          Ref_Brandrate.update("rate", Integer.valueOf(document.get("rate").toString()) + 2); //선호 rate +2
-                                                                          System.out.println("추가후 brandrate : " + document.get("rate"));}
-                                                                          else if (preferNon.equals("nonpreferbrand")){ //비선호에 추가할경우
-                                                                              System.out.println("추가전 brandrate : " + document.get("rate"));
-                                                                              Ref_Brandrate.update("rate", Integer.valueOf(document.get("rate").toString()) - 2); //비선호 rate -2
-                                                                              System.out.println("추가후 brandrate : " + document.get("rate"));}
-                                                                          }
-                                                                      else{
-                                                                          System.out.println("해당 브랜드가 DB에 존재하지 않습니다.");
-                                                                      }
-                                                                      }
+                            DocumentSnapshot document = task.getResult();
+                            if(document.get("rate") != null) {//
+                                if(preferNon.equals("preferbrand")){
+                                    System.out.println("추가전 brandrate : " + document.get("rate"));
+                                    Ref_Brandrate.update("rate", Integer.valueOf(document.get("rate").toString()) + 2); //선호 rate +2
+                                    System.out.println("추가후 brandrate : " + document.get("rate"));}
+                                else if (preferNon.equals("nonpreferbrand")){ //비선호에 추가할경우
+                                    System.out.println("추가전 brandrate : " + document.get("rate"));
+                                    Ref_Brandrate.update("rate", Integer.valueOf(document.get("rate").toString()) - 2); //비선호 rate -2
+                                    System.out.println("추가후 brandrate : " + document.get("rate"));}
+                            }
+                            else{
+                                System.out.println("해당 브랜드가 DB에 존재하지 않습니다.");
+                            }
+                        }
                         else {//문서 못찾음
-                                                                      //DB에 userId - brandRate - 브랜드명 - rate 추가하기
-                                                                      System.out.println("해당 브랜드가 DB에 존재하지 않습니다.");
-                                                                       }
+                            //DB에 userId - brandRate - 브랜드명 - rate 추가하기
+                            System.out.println("해당 브랜드가 DB에 존재하지 않습니다.");
+                        }
                     }
 
                 })
@@ -473,9 +553,67 @@ public class User implements Serializable {
 
     }
 
+    public void findAddBrandRegister(String itemAtPosition, final String preferNon) {
+        db = FirebaseFirestore.getInstance();
+
+        System.out.println(id);
+        System.out.println(preferNon);
+        System.out.println(itemAtPosition);
+
+
+        /*
+        //브랜드 이름 DB에 배열로 저장
+        DocumentReference Ref = db.collection("user").document(this.id);
+        Ref.update(preferNon, FieldValue.arrayUnion(itemAtPosition));
+         */
+
+        /*final DocumentReference Ref_Brandrate = Ref.collection("brandRate").document(itemAtPosition);
+        System.out.println("brandrate값 변경");
+        Ref_Brandrate.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task)
+                    {
+                        if (task.isSuccessful()) {//brandRate 문서 찾음
+
+                            DocumentSnapshot document = task.getResult();
+                            if(document.get("rate") != null) {//
+                                if(preferNon.equals("preferbrand")){
+                                    System.out.println("추가전 brandrate : " + document.get("rate"));
+                                    Ref_Brandrate.update("rate", Integer.valueOf(document.get("rate").toString()) + 2); //선호 rate +2
+                                    System.out.println("추가후 brandrate : " + document.get("rate"));}
+                                else if (preferNon.equals("nonpreferbrand")){ //비선호에 추가할경우
+                                    System.out.println("추가전 brandrate : " + document.get("rate"));
+                                    Ref_Brandrate.update("rate", Integer.valueOf(document.get("rate").toString()) - 2); //비선호 rate -2
+                                    System.out.println("추가후 brandrate : " + document.get("rate"));}
+                            }
+                            else{
+                                System.out.println("해당 브랜드가 DB에 존재하지 않습니다.");
+                            }
+                        }
+                        else {//문서 못찾음
+                            //DB에 userId - brandRate - 브랜드명 - rate 추가하기
+                            System.out.println("해당 브랜드가 DB에 존재하지 않습니다.");
+                        }
+                    }
+
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("brandRate DB접근 실패");
+                    }
+                });
+
+*/
+
+        addback.finishAddBrand();
+
+    }
     public void setUserAddBrand(AddBrandUser adduser) {
         this.addback=adduser;
     }
+
 
     public ArrayList<String> findPreviousPathDB() {
         previousPathList = new ArrayList<>();
@@ -592,121 +730,6 @@ public class User implements Serializable {
         return ppBrandList;
     }//end findppBrandDB
 
-    /*
-    public ArrayList<PreviousPathBrand> findBoughtDB() {
-
-        boughtList = new ArrayList<PreviousPathBrand>();
-        ppSize=0;
-        ppBrandSize = 0;
-        final int[] passingpathnum = {0} ;
-
-        db = FirebaseFirestore.getInstance();
-        System.out.println("current id : " + id);
-
-        DocumentReference ref = db.collection("user").document(id);
-        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {//디비 접근에 성공한 경우
-                if (task.isSuccessful()) {//해당 아이디의 유저를 찾은 경우
-                    DocumentSnapshot doc = task.getResult();
-                    if (pw.equals(doc.get("password"))) {
-                        System.out.println("DB접근 성공");
-                        ppSize = Integer.parseInt(doc.get("pathsize").toString());
-                        if (ppSize == 0) {
-                            System.out.println("이전 방문한 패스 없음");
-                        }
-                        else {// 방문한 패스가 있다면
-
-                            for (Integer i = 1; i < ppSize+1; i++) {
-                                passingpathnum[0]=i;
-                                final int[] ppn_index = {0};
-                                System.out.println("passingpathnum"+passingpathnum[0]);
-                                DocumentReference ref2 = db.collection("user").document(id);
-
-                                ref2.collection("path").document(i.toString())
-                                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if (task.isSuccessful()) { //해당 패스를 찾은경우
-                                            DocumentSnapshot doc2 = task.getResult();
-                                            final String boughtdate = doc2.get("date").toString(); //path i 의 date 긁어옴
-                                            ppBrandSize = Integer.valueOf(doc2.get("brandsize").toString());
-                                            //
-                                            System.out.println("passingpathnum"+passingpathnum[0]);
-                                            DocumentReference ref3 = db.collection("user").document(id).collection("path").document(String.valueOf(passingpathnum[0]));
-
-                                            for(int j=1; j<ppBrandSize+1; j++) {
-                                                ref3.collection("brand").document(String.valueOf(j))
-                                                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                        //해당 넘버의 브랜드 존재함
-                                                        if(task.isSuccessful()){
-                                                            DocumentSnapshot doc3 = task.getResult();
-                                                            if(doc3.get("bought") != null){
-                                                                String boughtbol = doc3.get("bought").toString();
-                                                                System.out.println(boughtbol);
-                                                                if(Boolean.valueOf(boughtbol)==true) {//샀을경우만
-                                                                    PreviousPathBrand brand = new PreviousPathBrand();
-                                                                    brand.setBrand_name(doc3.get("brandname").toString());
-                                                                    brand.setBought_Category(doc3.get("category").toString());
-                                                                    brand.setBought_date(boughtdate);
-                                                                    System.out.println(brand.getBrand_name());
-                                                                    boughtList.add(brand);
-
-                                                                    System.out.println(boughtList);
-                                                                }
-                                                            }
-                                                            else{
-                                                                System.out.println("break null");
-                                                            }
-                                                        }
-
-                                                    }
-                                                })   .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        System.out.println("해당 넘버의 브랜드 존재 안함");
-                                                    }
-                                                });
-                                            }//브랜드 하나씩 불러오기
-                                            ppBrandSize = 0;
-                                            //
-                                        } else {
-                                            System.out.println("해당 패스를 찾지못함");
-                                        }
-
-                                    }
-                                })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                System.out.println("실패");
-                                            }
-                                        })
-                                ;
-
-
-                            }//ref2 end
-
-
-                        }
-                    }
-
-
-                }
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        System.out.println("실패");
-                    }
-                });
-        return boughtList;
-
-    } //end findBought method
-*/
 
     public interface LoginCallback {
 

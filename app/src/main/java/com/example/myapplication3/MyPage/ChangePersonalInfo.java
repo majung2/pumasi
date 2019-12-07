@@ -2,6 +2,9 @@ package com.example.myapplication3.MyPage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication3.Entity.User;
+import com.example.myapplication3.Login.MainActivity;
 import com.example.myapplication3.R;
 
 import java.util.ArrayList;
@@ -33,7 +37,52 @@ public class ChangePersonalInfo  extends AppCompatActivity implements  MyPageCon
     private ArrayList<String> preferBrands;
     private ArrayList<String> nonPreferBrands;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)//옵션 메뉴바
+    {
+        MenuInflater inflater = getMenuInflater();
 
+        inflater.inflate(R.menu.mainmenu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item)//메뉴 선택
+    {
+        //   Toast toast = Toast.makeText(getApplicationContext(),"", Toast.LENGTH_LONG);
+        int state=3;
+        switch(item.getItemId())
+        {
+            case R.id.menu1:
+                state=0;
+                break;
+            case R.id.menu2:
+                state=1;
+                break;
+
+        }
+        if(state==0){
+            /*Intent intent = new Intent(// 다음 화면으로 전환
+                    MainActivity.this,
+                    MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+            intent.putExtra("id",currentUser.getId());
+            intent.putExtra("pw",currentUser.getPw());
+
+            startActivity(intent);*/
+            Toast toast = Toast.makeText(getApplicationContext(),"현재 기능이 마이페이지입니다", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else if(state==1){
+            Intent intent = new Intent(// 다음 화면으로 전환
+                    ChangePersonalInfo.this,
+                    MainActivity.class);
+            startActivity(intent);
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

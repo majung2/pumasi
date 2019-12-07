@@ -22,18 +22,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="추가하기"
-android:onClick="onClickAdd"/>
+            android:onClick="onClickAdd"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="203dp"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/selected_1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="220dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -59,7 +59,7 @@ android:onClick="onClickAdd"/>
 
     <LinearLayout
         android:layout_width="456dp"
-        android:layout_height="247dp"
+        android:layout_height="212dp"
         android:orientation="vertical">
 
         <ListView
@@ -73,6 +73,8 @@ android:onClick="onClickAdd"/>
         android:id="@+id/finishButton"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:text="가입하기" />
+        android:text="가입하기"
+        android:onClick="onClickFinishRegister"
+        />
 
 </LinearLayout>
