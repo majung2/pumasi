@@ -1,4 +1,5 @@
 package com.example.myapplication3.Recommend;
 
-public class OnButttonClick {
+public interface OnButttonClick {
+    void onClick(String brname);
 }
