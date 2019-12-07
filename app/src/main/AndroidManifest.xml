@@ -17,17 +17,22 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Register.Register" />
-        <activity android:name=".Recommend.CategorySelectBoundary" />
-        <activity android:name=".MyPage.MyPageSelectMenu" />
-        <activity android:name=".MyPage.ChangePersonalInfo" />
-        <activity android:name=".MyPage.PreferNonpreferBrandBoundary" />
-        <activity android:name=".MyPage.PreviousPathBoundary" />
-        <activity android:name=".MyPage.PreviousPathSpecificBoundary" />
-        <activity android:name=".MyPage.AddPreferNonPreferBoundary" />
-        <activity android:name=".SelectMallFloorLocation.MallSelectBoundary" />
-        <activity
-            android:name=".Login.LoadingActivity"
+        <activity android:name=".Register.Register"/>
+        <activity android:name=".MyPage.MyPageSelectMenu"/>
+        <activity android:name=".MyPage.ChangePersonalInfo"/>
+        <activity android:name=".MyPage.PreferNonpreferBrandBoundary"/>
+        <activity android:name=".MyPage.PreviousPathBoundary"/>
+        <activity android:name=".MyPage.PreviousPathSpecificBoundary"/>
+        <activity android:name=".PreferNonPreferBrandSelect.PreferNonpreferBrandSelectBoundary"/>
+        <activity android:name=".PreferNonPreferBrandSelect.RegisterAddPreferNonPreferBoundary"/>
+        <activity android:name=".SelectMallFloorLocation.F1CurrentLocationSelectBoundary"/>
+        <activity android:name=".SelectMallFloorLocation.MallSelectBoundary"/>
+        <activity android:name=".Recommend.CategorySelectBoundary"/>
+        <activity android:name=".Recommend.RecommendBrand"/>
+        <activity android:name=".Shopping.ShoppingActivity"/>
+        <activity android:name=".Shopping.FeedbackActivity"/>
+        <activity android:name=".MyPage.AddPreferNonPreferBoundary"></activity>
+        <activity android:name=".Login.LoadingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
