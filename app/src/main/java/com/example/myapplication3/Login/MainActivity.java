@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.myapplication3.Entity.User;
 import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
+import com.example.myapplication3.SelectMallFloorLocation.MallSelectBoundary;
 
 import java.util.ArrayList;
 
@@ -104,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements LoginController.L
 
         else{//사용자가 아이디와 비밀번호를 모두 입력한 경우
             logincontrol= new LoginController(this);
-
             logincontrol.login(userId,userPw);
 
         }
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements LoginController.L
       //  System.out.println(currentUser.getAge());
         Intent intent = new Intent(// 다음 화면으로 전환
                 MainActivity.this,
-                MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+                MallSelectBoundary.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
        intent.putExtra("id",currentUser.getId());
        intent.putExtra("pw",currentUser.getPw());
 

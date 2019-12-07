@@ -28,6 +28,7 @@ public class RecommendFragment extends Fragment {
         //추천로직 컨트롤러 작동 메소드 => 엔티티클래스에서 디비 불러옴 => 컨트롤러에서 로직 결과 => 엔티티클래스에서 디비 작성
         // => 추천로직 컨트롤러는 리스트뷰에 해당 브랜드들을 추가 => 바운더리에서 화면 보여줌
 
+
         return inflater.inflate(R.layout.recommend_fragment, container, false);
 
 

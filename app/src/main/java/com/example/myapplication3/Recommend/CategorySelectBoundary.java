@@ -4,17 +4,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
 
 
 public class CategorySelectBoundary extends AppCompatActivity  {
 
 //유저정보 넘겨 받는 기능 추가 필요
+
+    private String id;
+    private String pw;
+    private Integer currentX;
+    private Integer currentY;
 
     private TextView text1;
 
@@ -36,10 +46,60 @@ public class CategorySelectBoundary extends AppCompatActivity  {
 
     private boolean[] selectedCategory = new boolean[12]; //category 11개 + selectedCategory[0]
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)//옵션 메뉴바
+    {
+        MenuInflater inflater = getMenuInflater();
 
+        inflater.inflate(R.menu.mainmenu, menu);
+
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item)//메뉴 선택
+    {
+        //   Toast toast = Toast.makeText(getApplicationContext(),"", Toast.LENGTH_LONG);
+        int state=3;
+        switch(item.getItemId())
+        {
+            case R.id.menu1:
+                state=0;
+                break;
+            case R.id.menu2:
+                state=1;
+                break;
+
+        }
+        if(state==0){
+            Intent intent = new Intent(// 다음 화면으로 전환
+                    CategorySelectBoundary.this,
+                    MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+            intent.putExtra("id",id);
+            intent.putExtra("pw",pw);
+
+            startActivity(intent);
+        }
+        else if(state==1){
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }//옵션메뉴
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_selecting);
+
+
+        //이전화면에서 유저정보 받아오기
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+        pw = intent.getStringExtra("pw");
+        currentX = intent.getIntExtra("X",0);
+        currentY = intent.getIntExtra("Y",0);
+
 
         text1 = (TextView) findViewById(R.id.textView1);
 
@@ -93,8 +153,16 @@ public class CategorySelectBoundary extends AppCompatActivity  {
                 Intent intent = new Intent(
                         CategorySelectBoundary.this,
                         com.example.myapplication3.Recommend.RecommendBrand.class); // 다음 넘어갈 클래스 지정
-                startActivity(intent);
+
+                intent.putExtra("id",id);
+                intent.putExtra("pw",pw);
+                intent.putExtra("X",currentX);
+                intent.putExtra("Y",currentY);
                 intent.putExtra("selected",selectedCategory);
+
+
+                startActivity(intent);
+
 
 
 

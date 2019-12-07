@@ -9,14 +9,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Recommend.AllBrandListFragment"></activity>
+        <activity android:name=".Recommend.AllBrandList" />
         <activity android:name=".Login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
+        <activity android:name=".Register.Register" />
+        <activity android:name=".Recommend.CategorySelectBoundary" />
+        <activity android:name=".MyPage.MyPageSelectMenu" />
+        <activity android:name=".MyPage.ChangePersonalInfo" />
+        <activity android:name=".MyPage.PreferNonpreferBrandBoundary" />
+        <activity android:name=".MyPage.PreviousPathBoundary" />
+        <activity android:name=".MyPage.PreviousPathSpecificBoundary" />
+        <activity android:name=".MyPage.AddPreferNonPreferBoundary" />
+        <activity
+            android:name=".Login.LoadingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
+=======
         <activity android:name=".Register.Register"/>
-        <activity android:name=".Recommend.CategorySelectBoundary"/>
         <activity android:name=".MyPage.MyPageSelectMenu"/>
         <activity android:name=".MyPage.ChangePersonalInfo"/>
         <activity android:name=".MyPage.PreferNonpreferBrandBoundary"/>
@@ -24,18 +40,23 @@
         <activity android:name=".MyPage.PreviousPathSpecificBoundary"/>
         <activity android:name=".PreferNonPreferBrandSelect.PreferNonpreferBrandSelectBoundary"/>
         <activity android:name=".PreferNonPreferBrandSelect.RegisterAddPreferNonPreferBoundary"/>
+        <activity android:name=".SelectMallFloorLocation.F1CurrentLocationSelectBoundary"/>
+        <activity android:name=".SelectMallFloorLocation.MallSelectBoundary"/>
+        <activity android:name=".Recommend.CategorySelectBoundary"/>
+        <activity android:name=".Recommend.RecommendBrand"/>
+        <activity android:name=".Shopping.ShoppingActivity"/>
+        <activity android:name=".Shopping.FeedbackActivity"/>
         <activity android:name=".MyPage.AddPreferNonPreferBoundary"></activity>
         <activity android:name=".Login.LoadingActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
+>>>>>>> b4b3267c5ef26583d9bbe7462b61eca39e7d4053
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
     </application>
 
 </manifest>

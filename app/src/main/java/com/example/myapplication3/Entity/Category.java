@@ -20,7 +20,7 @@ public class Category {
     private String CNr;//카테고리 번호
     private ShoppingMall inMall;//카테고리가 속하는 쇼핑몰
     private FirebaseFirestore db;
-   private catCallback catcallback;
+    private catCallback catcallback;
     private ArrayList<String> catBrand;
 
     public Category() {
@@ -51,7 +51,7 @@ public class Category {
     public ShoppingMall getInMall(){return this.inMall;}
 
     public void findBrands() {//해당 카테고리의 브랜드 검색
-System.out.println(CNr);
+        System.out.println(CNr);
         db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("shoppingMall").document("M1").collection("category").document(CNr).collection("brand");
         ref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -69,8 +69,10 @@ System.out.println(CNr);
         });
 
     }
-public interface catCallback{
 
-    void finishFindBrands(String bName);
-}
+
+    public interface catCallback{
+
+        void finishFindBrands(String bName);
+    }
 }
