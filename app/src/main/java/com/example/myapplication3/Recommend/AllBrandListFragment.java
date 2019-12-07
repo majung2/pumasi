@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Context;
+import android.widget.Button;
 
 import com.example.myapplication3.Entity.Brand;
 import com.example.myapplication3.R;
@@ -30,8 +31,15 @@ public class AllBrandListFragment extends Fragment implements OnButttonClick {
     public AllBrandListFragment(){
 
     }
-    public void onClick(String brname){
-        brNameList.add(brname);
+    public void onClick(String brname, Button btn){
+        if(btn.getText().equals("선택")){
+            brNameList.add(brname);
+            btn.setText("취소");
+        }
+        else{
+            brNameList.remove(brname);
+            btn.setText("선택");
+        }
     }
     public interface brNameListListener{
         void brNameListSet(ArrayList<String> list);

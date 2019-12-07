@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -228,7 +229,6 @@ public class User implements Serializable {
     public void setName(String name){
         this.name=name;
     }
-
     public String getId(){
         return this.id;
     }
@@ -243,6 +243,48 @@ public class User implements Serializable {
     }
     public String getName(){
         return this.name;
+    }
+    public HashMap<String, HashMap<String, Object>> getAllUserMap(){
+            final HashMap<String, HashMap<String, Object>> AllUserMap = new HashMap<>();
+            db = FirebaseFirestore.getInstance();
+            CollectionReference dRef = db.collection("user");
+            dRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                       for(DocumentSnapshot doc : task.getResult()){
+                           if (doc.exists()) {
+                                final String userId = doc.getId();
+                                final HashMap<String, Object> tmpHshMap = new HashMap<>();
+                                AllUserMap.put(userId, tmpHshMap);
+                                db.collection("user").document(userId).collection("brandrate")
+                                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                                        if (task.isSuccessful()) {
+                                            for (DocumentSnapshot doc : task.getResult()) {
+                                                String brName = doc.getId();
+                                                int rate = Integer.parseInt(doc.get("rate").toString());
+                                                AllUserMap.get(userId).put(brName, rate);
+                                            }
+                                        } else {
+                                            Log.d(TAG, "get failed with ", task.getException());
+                                        }
+                                    }
+                                });
+                           }
+                           else {
+                               Log.d(TAG, "No such document");
+                           }
+                       }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+
+                }
+            });
+        return AllUserMap;
     }
     public ArrayList<String> getAllBrands(){
         db = FirebaseFirestore.getInstance();

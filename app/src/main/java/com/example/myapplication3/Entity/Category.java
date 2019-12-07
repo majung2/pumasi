@@ -50,6 +50,10 @@ public class Category {
     }
     public ShoppingMall getInMall(){return this.inMall;}
 
+    public ArrayList<String> getCatBrand() {
+        return catBrand;
+    }
+
     public void findBrands() {//해당 카테고리의 브랜드 검색
         System.out.println(CNr);
         db = FirebaseFirestore.getInstance();

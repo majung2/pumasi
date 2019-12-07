@@ -34,7 +34,7 @@ public class AllBrListAdapter extends RecyclerView.Adapter<AllBrListAdapter.View
         vh.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallback.onClick((String)vh.brName.getText());
+                mCallback.onClick((String)vh.brName.getText(), vh.button);
 
             }
         });
@@ -75,3 +75,5 @@ public class AllBrListAdapter extends RecyclerView.Adapter<AllBrListAdapter.View
         }
     }
 }
+
+

@@ -3,6 +3,7 @@ package com.example.myapplication3.Recommend;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 
 import com.example.myapplication3.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AllBrandList extends AppCompatActivity
@@ -17,10 +19,16 @@ implements AllBrandListFragment.brNameListListener{
     private ImageView bt_tab1, bt_tab2, bt_tab3, bt_tab4, bt_tab5,
             bt_tab6, bt_tab7, bt_tab8, bt_tab9, bt_tab10, bt_tab11;
     ArrayList<String> brNameList = new ArrayList<>();
+    Button submit = (Button) findViewById(R.id.button2);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_brand_list);
+        Intent intent = getIntent();
+        ArrayList<String> tmpList = intent.getStringArrayListExtra("brNameList");
+        for(int i = 0; i<tmpList.size(); i++){
+            brNameList.add(tmpList.get(i));
+        }
         bt_tab1 = (ImageView) findViewById(R.id.ImageView1);
         bt_tab2 = (ImageView) findViewById(R.id.ImageView2);
         bt_tab3 = (ImageView) findViewById(R.id.ImageView3);
@@ -37,7 +45,14 @@ implements AllBrandListFragment.brNameListListener{
         btnOnClick(bt_tab1, 1); btnOnClick(bt_tab2, 2); btnOnClick(bt_tab3, 3); btnOnClick(bt_tab4, 4); btnOnClick(bt_tab5, 5);
         btnOnClick(bt_tab6, 6); btnOnClick(bt_tab7, 7); btnOnClick(bt_tab8, 8); btnOnClick(bt_tab9, 9);
         btnOnClick(bt_tab10, 10); btnOnClick(bt_tab11, 11);
-
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newintent = new Intent(AllBrandList.this, PathSelectBoundary.class);
+                newintent.putStringArrayListExtra("selectedBrList", brNameList);
+                startActivity(newintent);
+            }
+        });
     }
 
     public void changeTab(int num){
@@ -63,7 +78,5 @@ implements AllBrandListFragment.brNameListListener{
             brNameList.add(list.get(i));
         }
     }
-    public void findBrand(String str){
 
-    }
 }
