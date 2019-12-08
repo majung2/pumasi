@@ -59,7 +59,7 @@ public class FeedbackAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     String grade = viewHolder.rating.getText().toString();
-                    ((FeedbackActivity)context).checkRating(b.id, grade);
+                    ((FeedbackActivity)context).checkRating(b.id, grade, b.name);
                 }
             });
 
