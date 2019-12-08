@@ -1,4 +1,4 @@
-package com.example.myapplication3;
+package com.example.myapplication3.Entity;
 
 public class Path { //linked list (Path)
     private int pathNum = 0; // 선택시만 DB에서 마지막 넘버 가져와서 +1로 설정
