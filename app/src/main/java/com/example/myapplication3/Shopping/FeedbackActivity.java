@@ -2,14 +2,20 @@ package com.example.myapplication3.Shopping;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication3.Login.MainActivity;
+import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
@@ -38,8 +44,53 @@ public class FeedbackActivity extends AppCompatActivity {
     //---------------------- 변수 ----------------------------
     Float rate;
     String id;
+    String pw;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)//옵션 메뉴바
+    {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.mainmenu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item)//메뉴 선택
+    {
+        //   Toast toast = Toast.makeText(getApplicationContext(),"", Toast.LENGTH_LONG);
+        int state=3;
+        switch(item.getItemId())
+        {
+            case R.id.menu1:
+                state=0;
+                break;
+            case R.id.menu2:
+                state=1;
+                break;
+
+        }
+        if(state==0){
+            Intent intent = new Intent(// 다음 화면으로 전환
+                    FeedbackActivity.this,
+                    MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+            intent.putExtra("id",id);
+            intent.putExtra("pw",pw);
+
+            startActivity(intent);
+        }
+        else if(state==1){
+            Toast.makeText(FeedbackActivity.this,"로그아웃되었습니다.",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(// 다음 화면으로 전환
+                    FeedbackActivity.this,
+                    MainActivity.class);
+
+            startActivity(intent);
+        }
 
 
+        return super.onOptionsItemSelected(item);
+    }//옵션메뉴
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

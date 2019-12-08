@@ -11,7 +11,7 @@
 
             <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
 
-                +<![CDATA[]]>
+
             </RelativeLayout>
 
             <ImageView android:layout_height="118dp" android:layout_width="118dp" android:scaleType="centerCrop" android:padding="0sp" android:src="@drawable/category1" android:layout_centerHorizontal="true" android:id="@+id/ImageView1"/>

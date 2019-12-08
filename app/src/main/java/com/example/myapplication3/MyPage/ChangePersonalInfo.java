@@ -74,6 +74,7 @@ public class ChangePersonalInfo  extends AppCompatActivity implements  MyPageCon
             toast.show();
         }
         else if(state==1){
+            Toast.makeText(ChangePersonalInfo.this,"로그아웃되었습니다.",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(// 다음 화면으로 전환
                     ChangePersonalInfo.this,
                     MainActivity.class);

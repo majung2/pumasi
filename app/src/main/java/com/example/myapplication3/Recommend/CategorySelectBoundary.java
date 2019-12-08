@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication3.Login.MainActivity;
 import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
 
@@ -82,6 +83,12 @@ public class CategorySelectBoundary extends AppCompatActivity  {
             startActivity(intent);
         }
         else if(state==1){
+            Toast.makeText(CategorySelectBoundary.this,"로그아웃되었습니다.",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(// 다음 화면으로 전환
+                    CategorySelectBoundary.this,
+                    MainActivity.class);
+
+            startActivity(intent);
 
         }
 
@@ -152,7 +159,7 @@ public class CategorySelectBoundary extends AppCompatActivity  {
 
                 Intent intent = new Intent(
                         CategorySelectBoundary.this,
-                        com.example.myapplication3.Recommend.RecommendBrand.class); // 다음 넘어갈 클래스 지정
+                        RecommendBrand.class); // 다음 넘어갈 클래스 지정
 
                 intent.putExtra("id",id);
                 intent.putExtra("pw",pw);
