@@ -187,7 +187,7 @@ public class RecommendBrand extends AppCompatActivity implements RecommendFragme
     }
     public void changeTab(int num, String id, String pw, boolean[] selectedCategory){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        AllBrandListFragment fragment = new AllBrandListFragment();
+        RecommendFragment fragment = new RecommendFragment();
         Bundle bundle = new Bundle(3);
         bundle.putString("id", id);
         bundle.putString("pw", pw);
