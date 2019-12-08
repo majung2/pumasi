@@ -59,7 +59,7 @@ public class BrandAdapter extends BaseAdapter {
             viewHolder.bought.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((ShoppingActivity)context).checkBought(b.id);
+                    ((ShoppingActivity)context).checkBought(b.id, b.name);
                 }
             });
             viewHolder.notBought = convertView.findViewById(R.id.no_buy);
