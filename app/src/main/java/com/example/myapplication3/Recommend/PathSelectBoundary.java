@@ -13,15 +13,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication3.Login.MainActivity;
 import com.example.myapplication3.MyPage.MyPageSelectMenu;
+import com.example.myapplication3.Pathfinding.PathfindingController;
 import com.example.myapplication3.R;
 import com.example.myapplication3.Shopping.ShoppingActivity;
+
+import java.util.ArrayList;
 
 public class PathSelectBoundary extends AppCompatActivity {
     private String id;
     private String pw;
+    private Integer currentX;
+    private Integer currentY;
+    private ArrayList<String> selectedBrands;
 
-    private Button path1;
-    private Button path2;
+
+    private String path1;
+    private String path2;
+
+
+    private Button select;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)//옵션 메뉴바
@@ -71,17 +81,26 @@ public class PathSelectBoundary extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }//옵션메뉴
 
+    @Override
     protected void onCreate(Bundle saveInstanceState){
-
         super.onCreate(saveInstanceState);
-        //setContentView(R.layout.select_path);
+        setContentView(R.layout.path_select);
 
+        //이전화면에서 유저정보 받아오기
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
+        currentX = intent.getIntExtra("X",0);
+        currentY = intent.getIntExtra("Y",0);
+        selectedBrands = intent.getStringArrayListExtra("selectedBrands"); //선택된 브랜드 정보
 
-        path1 = (Button) findViewById(R.id.sin_yeoju);
-        path2 = (Button) findViewById(R.id.sin_busan);
+
+        //경로 1, 4 추출
+        PathfindingController controller = new PathfindingController();
+        path1 = controller.getPath1().toString();
+        path2 = controller.getPath4().toString();
+
+
 
     }
 

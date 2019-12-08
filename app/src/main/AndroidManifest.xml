@@ -27,6 +27,7 @@
         <activity android:name=".SelectMallFloorLocation.MallSelectBoundary"/>
         <activity android:name=".Recommend.CategorySelectBoundary"/>
         <activity android:name=".Recommend.RecommendBrand"/>
+        <activity android:name=".Recommend.PathSelectBoundary"/>
         <activity android:name=".Recommend.AllBrandList" />
         <activity android:name=".Shopping.ShoppingActivity"/>
         <activity android:name=".Shopping.FeedbackActivity"/>

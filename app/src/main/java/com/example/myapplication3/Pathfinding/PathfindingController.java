@@ -4,7 +4,9 @@ import com.example.myapplication3.Entity.SpotsInMall;
 import com.example.myapplication3.Entity.Path;
 import com.example.myapplication3.Entity.Brand;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class PathfindingController { //finding path logic
@@ -14,7 +16,8 @@ public class PathfindingController { //finding path logic
     private Path path2;
     private Path path3;
     private Path path4;
-    private ArrayList<Brand> brandsList;
+    private ArrayList<String> selectedBrandsNameList; //넘겨받은 브랜드명 정보
+    private ArrayList<Brand> brandsList = new ArrayList<>(); //선택된 Brand 위치(좌표, 층수)정보
     private ArrayList<Brand> brands1 = new ArrayList<>(); //사용자가 선택한 매장들 중 1층에 있는 매장
     private ArrayList<Brand> brands2 = new ArrayList<>(); //사용자가 선택한 매장들 중 2층에 있는 매장
     private ArrayList<Brand> brands3 = new ArrayList<>(); //사용자가 선택한 매장들 중 3층에 있는 매장
@@ -23,13 +26,16 @@ public class PathfindingController { //finding path logic
     private ArrayList<SpotsInMall> move3 = new ArrayList<>(); //3층 에스컬레이터및엘리베이터 정보
 
 
-    PathfindingController(){}
-    PathfindingController(String recdate, ArrayList<Brand> selectedBrands){ //날짜, 사용자가 선택한 매장들, 시작점 넘겨받음
+    public PathfindingController(){}
+    PathfindingController(ArrayList<String> selectedBrands){ //날짜, 사용자가 선택한 매장들, 시작점 넘겨받음
+        String recdate = getToDay();
         path1 = new Path(recdate);
         path2 = new Path(recdate);
         path3 = new Path(recdate);
         path4 = new Path(recdate);
-        this.brandsList = selectedBrands;
+        this.selectedBrandsNameList = selectedBrands;
+
+        brandInfo();
 
         brandFloor(); //브랜드 층별로 분리
 
@@ -37,6 +43,14 @@ public class PathfindingController { //finding path logic
         FourthPathFinder();
 
     }
+
+    private void brandInfo(){ //DB에서 Brand정보 가져오기
+        for(String x:selectedBrandsNameList){
+            brandsList.add(Brand.findBrandInfoByBrandName(x));
+        }
+
+    }
+
 
     private void brandFloor(){ //브랜드 층별로 분리
         for(Brand x : brandsList){
@@ -147,54 +161,8 @@ public class PathfindingController { //finding path logic
         return path4;
     }
 
-
-
-
-
-
-
-
-
-
-/*
-    private void disCal(){ //선택된 브랜드 간 거리계산
-        maps1 = new double[brands1.size()][brands1.size()];
-        maps2 = new double[brands2.size()][brands2.size()];
-        maps3 = new double[brands3.size()][brands3.size()];
-        int m,n; //두 매장 사이 거리 (m:x값 차, n:y값 차)
-        Brand point1, point2; //선택된 두 매장
-
-        for(int i=0; i<brands1.size();i++){
-            for(int j=i;j<brands1.size();j++){
-                point1 = brands1.get(i);
-                point2 = brands1.get(j);
-                m = point1.getSpotLocation().get(0) - point2.getSpotLocation().get(0);
-                n = point1.getSpotLocation().get(1) - point2.getSpotLocation().get(1);
-                maps1[i][j]= Math.sqrt((m*m)+(n*n));
-            }
-        }
-        for(int i=0; i<brands2.size();i++){
-            for(int j=i;j<brands2.size();j++){
-                point1 = brands2.get(i);
-                point2 = brands2.get(j);
-                m = point1.getSpotLocation().get(0) - point2.getSpotLocation().get(0);
-                n = point1.getSpotLocation().get(1) - point2.getSpotLocation().get(1);
-                maps1[i][j]= Math.sqrt((m*m)+(n*n));
-            }
-        }
-        for(int i=0; i<brands3.size();i++){
-            for(int j=i;j<brands3.size();j++){
-                point1 = brands3.get(i);
-                point2 = brands3.get(j);
-                m = point1.getSpotLocation().get(0) - point2.getSpotLocation().get(0);
-                n = point1.getSpotLocation().get(1) - point2.getSpotLocation().get(1);
-                maps1[i][j]= Math.sqrt((m*m)+(n*n));
-            }
-        }
+    public static String getToDay(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(new Date());
     }
-*/
-
-
-
 }
-

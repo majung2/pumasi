@@ -17,7 +17,7 @@ public class Brand extends SpotsInMall {
     private Integer brTotalRate;// 유저가 이 브랜드에 매기는 총 점수
     public Brand(){}
 
-    private FirebaseFirestore db; //db 변수
+    private static FirebaseFirestore db; //db 변수
     public void setPriceLevel(String pl){
         this.priceLevel=pl;
     }
@@ -26,7 +26,8 @@ public class Brand extends SpotsInMall {
         return this.priceLevel;
     }
     public boolean getSale(){return this.sale;}
-    public ArrayList<ArrayList<Brand>> getAllBrand(){
+
+    public static ArrayList<ArrayList<Brand>> getAllBrand(){
         ArrayList<ArrayList<Brand>> allBrList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
         for(int i = 1; i<=11; i++){
@@ -60,4 +61,27 @@ public class Brand extends SpotsInMall {
 
         return allBrList;
     }
+
+    //브랜드명으로 브랜드 속성 모두 출력
+    public static Brand findBrandInfoByBrandName(String BrandName){
+        Brand BrandInfo = new Brand();
+        BrandInfo.setSpotName(BrandName);
+        ArrayList<ArrayList<Brand>> allBrands = getAllBrand();
+
+        for(ArrayList<Brand> X:allBrands){
+            for(Brand Y:X){
+                if(BrandName.equals(Y.getSpotName())){
+                    BrandInfo.setSpotLocation(Y.getSpotLocation().get(0),Y.getSpotLocation().get(1));
+                    BrandInfo.setSpotFloor(Y.getSpotFloor());
+                }
+            }
+        }
+
+
+
+        return BrandInfo;
+    }
+
+
+
 }
