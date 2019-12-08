@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -113,6 +114,7 @@ public class ShoppingActivity extends AppCompatActivity {
         });
 
 
+
         pathRef
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -121,6 +123,7 @@ public class ShoppingActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Brand brand = new Brand();
+                                brand.id = document.getId();
                                 brand.name = document.getString("brandname");
                                 brand.bought = document.getBoolean("bought");
                                 brandAdapter.addItem(brand);
@@ -134,12 +137,12 @@ public class ShoppingActivity extends AppCompatActivity {
     // -------------------------------------------------------------------------
     // onCreate 함수 종료
     // =========================================================================
-    public void checkBought(String brandId, Boolean bought){
-        pathRef.document("brand").update("bought", bought);
+    public void checkBought(String brandId){
+        pathRef.document(brandId).update("bought", true);
     }
 
-    public void checkNotBought(String brandId, Boolean bought){
-        pathRef.document("brand").update("bought", bought);
+    public void checkNotBought(String brandId){
+        pathRef.document(brandId).update("bought", false);
     }
 
 
@@ -157,18 +160,15 @@ public class ShoppingActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        // 창구번호 100에서 새 트윗 내용을 얻으러 출발하였으므로 다시 100으로 돌아온다.
-        // 한 화면에서 갔다올 수 있는 화면이 여러 개일 때 구분하기 위해 사용
-        // (현재는 하나뿐이므로 의미는 없음)
+
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
 
             if (resultCode == RESULT_OK) {
+                Intent intent = new Intent(ShoppingActivity.this, MyPageSelectMenu.class);
+                startActivityForResult(intent, 200);
 
-                Float rate = data.getFloatExtra("rate", 0);
-                brandRateRef.document("brandRate").update("rate", rate); //id별 따로 저장해야함.
 
-                // --------------------------------------------------------------------------
             }
         }
     }
@@ -176,4 +176,3 @@ public class ShoppingActivity extends AppCompatActivity {
     // onActivityResult 함수 종료
     // =========================================================================
 }
-// MainActivity 종료
