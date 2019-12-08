@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication3.R;
@@ -33,7 +34,10 @@ public class PreviousPathBoundary extends AppCompatActivity implements MyPageCon
         controller.setMyPageControlUser(id,pw);
         list = new ArrayList<>();
         list = controller.listUpPreviousPath();
-
+        if(list.isEmpty()){
+            Toast toast = Toast.makeText(getApplicationContext(),"이전 루트 방문 기록이 없습니다.", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
 
     }

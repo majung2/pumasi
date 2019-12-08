@@ -51,7 +51,7 @@ public class BrandAdapter extends BaseAdapter {
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.brand_shopping, parent, false);
+         //   convertView = inflater.inflate(R.layout.brand_shopping, parent, false);
 
             viewHolder = new BrandViewHolder();
             viewHolder.name = convertView.findViewById(R.id.name);

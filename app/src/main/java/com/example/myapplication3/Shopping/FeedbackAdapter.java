@@ -49,7 +49,7 @@ public class FeedbackAdapter extends BaseAdapter {
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.brand_feedback, parent, false);
+           // convertView = inflater.inflate(R.layout.brand_feedback, parent, false);
 
             viewHolder = new BrandViewHolder();
             viewHolder.name = convertView.findViewById(R.id.name);
