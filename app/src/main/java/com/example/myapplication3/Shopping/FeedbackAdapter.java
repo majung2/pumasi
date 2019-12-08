@@ -5,8 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.RatingBar;
+import android.widget.Button;
+import android.widget.EditText;
+;
 import android.widget.TextView;
 
 import com.example.myapplication3.R;
@@ -38,35 +39,27 @@ public class FeedbackAdapter extends BaseAdapter {
     }
 
 
-    // =========================================================================
-    // getView
-    // 특정 위치에 들어가야 하는 뷰를 생성하여 리스트뷰에 집어넣어주는 함수
-
-    // 매개변수
-    // position : 현재 그려서 반환해야 할 뷰의 위치 (리스트에서 몇 번째인지)
-    // convertView : 뷰가 담기는 변수. 이미 생성되었던 뷰라면 (ex. 새 트윗이 생겼을 때 기존에 있던 트윗 뷰)
-    // 비어있지 않다.
-    // parent : 뷰가 생성되어 들어갈 부모 뷰
-    // -------------------------------------------------------------------------
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         final Context context = parent.getContext();
         final Brand b = brandList.get(position);
 
-        BrandViewHolder viewHolder;
+        final BrandViewHolder viewHolder;
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.brand, parent, false);
+            convertView = inflater.inflate(R.layout.brand_feedback, parent, false);
 
             viewHolder = new BrandViewHolder();
             viewHolder.name = convertView.findViewById(R.id.name);
             viewHolder.rating = convertView.findViewById(R.id.rating);
-            viewHolder.rating.setOnClickListener(new View.OnClickListener() {
+            viewHolder.ratingButton = convertView.findViewById(R.id.ratingButton);
+            viewHolder.ratingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((FeedbackActivity)context).checkRating(b.id, b.rating);
+                    String grade = viewHolder.rating.getText().toString();
+                    ((FeedbackActivity)context).checkRating(b.id, grade);
                 }
             });
 
@@ -86,7 +79,8 @@ public class FeedbackAdapter extends BaseAdapter {
 
     public class BrandViewHolder{
         public TextView name;
-        public RatingBar rating;
+        public EditText rating;
+        public Button ratingButton;
     }
 
     void addItem(Brand brand) {

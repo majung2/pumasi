@@ -7,7 +7,7 @@ public class Brand {
     public String id;
     public boolean bought;
     public String category;
-    public String rating;
+    public Number rating;
 
     // Firestore에 연동하려면 빈 생성자가 필수이다.
     Brand() {}

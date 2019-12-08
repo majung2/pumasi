@@ -51,7 +51,7 @@ public class BrandAdapter extends BaseAdapter {
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.brand, parent, false);
+            convertView = inflater.inflate(R.layout.brand_shopping, parent, false);
 
             viewHolder = new BrandViewHolder();
             viewHolder.name = convertView.findViewById(R.id.name);
@@ -59,14 +59,14 @@ public class BrandAdapter extends BaseAdapter {
             viewHolder.bought.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((ShoppingActivity)context).checkBought(b.id, b.bought);
+                    ((ShoppingActivity)context).checkBought(b.id);
                 }
             });
             viewHolder.notBought = convertView.findViewById(R.id.no_buy);
             viewHolder.notBought.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((ShoppingActivity)context).checkNotBought(b.id, b.bought);
+                    ((ShoppingActivity)context).checkNotBought(b.id);
                 }
             });
 
