@@ -51,7 +51,7 @@ public class User implements Serializable {
     private LoginCallback loginCallback ;
     private MyPageCallback myPageCallback;
     private AddBrandUser addback;
-
+    private BrandRateCallback brRateCalback;
     //유저 초기화
     public User(){
         this.id=null;
@@ -244,7 +244,7 @@ public class User implements Serializable {
     public String getName(){
         return this.name;
     }
-    public HashMap<String, HashMap<String, Object>> getAllUserMap(){
+    public void getAllUserMap(){
             final HashMap<String, HashMap<String, Object>> AllUserMap = new HashMap<>();
             db = FirebaseFirestore.getInstance();
             CollectionReference dRef = db.collection("user");
@@ -257,7 +257,7 @@ public class User implements Serializable {
                                 final String userId = doc.getId();
                                 final HashMap<String, Object> tmpHshMap = new HashMap<>();
                                 AllUserMap.put(userId, tmpHshMap);
-                                db.collection("user").document(userId).collection("brandrate")
+                                db.collection("user").document(userId).collection("brandRate")
                                         .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -267,6 +267,7 @@ public class User implements Serializable {
                                                 String brName = doc.getId();
                                                 int rate = Integer.parseInt(doc.get("rate").toString());
                                                 AllUserMap.get(userId).put(brName, rate);
+                                                brRateCalback.addAllUserMap(AllUserMap);
                                             }
                                         } else {
                                             Log.d(TAG, "get failed with ", task.getException());
@@ -284,7 +285,6 @@ public class User implements Serializable {
 
                 }
             });
-        return AllUserMap;
     }
     public ArrayList<String> getAllBrands(){
         db = FirebaseFirestore.getInstance();
@@ -792,6 +792,10 @@ public class User implements Serializable {
         void finishPPBrand(ArrayList<PreviousPathBrand> brandlist);
 
 
+    }
+
+    public interface BrandRateCallback{
+        void addAllUserMap(HashMap<String, HashMap<String, Object>> map);
     }
     public interface AddBrandUser{
 

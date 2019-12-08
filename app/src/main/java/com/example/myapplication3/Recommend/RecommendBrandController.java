@@ -13,9 +13,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RecommendBrandController {
+public class RecommendBrandController implements User.BrandRateCallback {
     private ArrayList<ArrayList<Brand>> brList;
-    private HashMap<String, HashMap<String, Object>> AllUserMap;
+    private brandRateController brRateController;
     public ArrayList<ArrayList<Brand>> getBrList(){
         return this.brList;
     }
@@ -23,17 +23,8 @@ public class RecommendBrandController {
         Brand b = new Brand();
         brList=b.getAllBrand();
     }
-    public void getAllUserRate(){
-        User user = new User();
-
-
-
-
-
-        AllUserMap = user.getAllUserMap();
-    }
-    public HashMap pearsonCheck(String id, boolean[] selectedCategory){
-        HashMap<String, Object> UserRate =  AllUserMap.get(id);
+    public HashMap pearsonCheck(String id, boolean[] selectedCategory, HashMap<String, HashMap<String, Object>> map){
+        HashMap<String, Object> UserRate =  map.get(id);
         HashMap<String, String> recommendBrand = new HashMap<>();
         for(int i = 1; i<selectedCategory.length; i++){
             if(selectedCategory[i]==true)recommendBrand.put("", "c"+i);
@@ -46,7 +37,7 @@ public class RecommendBrandController {
             catList.add(tmp);
         }
         HashMap<String, Double> list= new HashMap<>();
-        for(String userid : AllUserMap.keySet()){
+        for(String userid : map.keySet()){
             double score = 0;
             double tmp = 0;
             int sum1 = 0;        int sum2 = 0;        int sumPow1 = 0;        int sumPow2 = 0;        int sum12 = 0;
@@ -55,7 +46,7 @@ public class RecommendBrandController {
                 continue;
             }
             else{
-                HashMap<String, Object> tmpHshMap =  AllUserMap.get(userid);
+                HashMap<String, Object> tmpHshMap =  map.get(userid);
                 for(String ratedBrandByUser : UserRate.keySet()){
                     for(String ratedBrandByTmp : tmpHshMap.keySet()){
                         if(ratedBrandByUser.equals(ratedBrandByTmp)){
@@ -84,12 +75,12 @@ public class RecommendBrandController {
             int max = 0;
             for(String userid:pearsonList.keySet() ){
                 int fornum = 0;
-                for(String brand: AllUserMap.get(userid).keySet()){
+                for(String brand: map.get(userid).keySet()){
                     for(int j = 0; j<catList.get(i).getCatBrand().size(); j++){
                         fornum++;
                         if(catList.get(i).getCatBrand().get(j).equals(brand)){
-                            if(max<Integer.parseInt(AllUserMap.get(userid).get(brand).toString())){
-                                max=Integer.parseInt(AllUserMap.get(userid).get(brand).toString());
+                            if(max<Integer.parseInt(map.get(userid).get(brand).toString())){
+                                max=Integer.parseInt(map.get(userid).get(brand).toString());
                                 topBr = brand;
                             }
                         }
@@ -120,7 +111,12 @@ public class RecommendBrandController {
         Collections.reverse(list); // 주석시 오름차순
         return list;
     }
-
+    public void addAllUserMap(HashMap<String, HashMap<String, Object>> map){
+        brRateController.addAllUserMap2(map);
+    }
+    public interface brandRateController{
+        void addAllUserMap2(HashMap<String, HashMap<String, Object>> map);
+    }
 
 //
   //  public Map<Integer,  >

@@ -19,7 +19,7 @@ import java.util.HashMap;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RecommendFragment extends Fragment implements OnButttonClick {
+public class RecommendFragment extends Fragment implements OnButttonClick, RecommendBrandController.brandRateController {
     RecyclerView mRecyclerView = null;
     RecyclerView.LayoutManager layoutManager;
     RecommendAdapter mAdapter = null;
@@ -29,6 +29,7 @@ public class RecommendFragment extends Fragment implements OnButttonClick {
     private RecommendFragment.brNameListListener brListnr;
     private ArrayList<String> brList = new ArrayList();
     private ArrayList<RecommendItem> mList = new ArrayList<>();
+    private HashMap<String, HashMap<String, Object>> AllUserMap = new HashMap<>();
     public RecommendFragment() {
         // Required empty public constructor
     }
@@ -74,9 +75,8 @@ public class RecommendFragment extends Fragment implements OnButttonClick {
         pw = getArguments().getString("pw");
         selectedCategory=getArguments().getBooleanArray("selectedCategory");
         RecommendBrandController mController = new RecommendBrandController();
-        mController.getAllUserRate();
         int tabNumber = getArguments().getInt("tabNumber");
-        HashMap<String, String> map = mController.pearsonCheck(id, selectedCategory);
+        HashMap<String, String> map = mController.pearsonCheck(id, selectedCategory, AllUserMap);
         callRecommendedItems(tabNumber, map);
         // Inflate the layout for this fragment
         //추천로직 컨트롤러로 추천 리스트생성 => 받아온만큼 체크박스 형식으로 출력.(방법) =>사용자는 원하는 브랜드를 선택 (이부분 어디서 조작할지 모르겠음) =>
@@ -88,6 +88,14 @@ public class RecommendFragment extends Fragment implements OnButttonClick {
 
 
     }
+
+    @Override
+    public void addAllUserMap2(HashMap<String, HashMap<String, Object>> map) {
+        for(String key : map.keySet()) {
+            AllUserMap.put(key, map.get(key));
+        }
+    }
+
     public void callRecommendedItems(int num, HashMap<String, String> map){
         mList.clear();
         String tmp = "c"+num;
