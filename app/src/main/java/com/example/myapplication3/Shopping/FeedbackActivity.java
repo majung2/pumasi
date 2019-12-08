@@ -36,7 +36,7 @@ public class FeedbackActivity extends AppCompatActivity {
     CollectionReference pathRef;
 
     //---------------------- 변수 ----------------------------
-    Float rate;
+    String rate;
     String id;
 
 
@@ -119,7 +119,7 @@ public class FeedbackActivity extends AppCompatActivity {
     // onCreate 함수 종료
     // =========================================================================
 
-    public void checkRating(String brandId,Float rating){
+    public void checkRating(String brandId,String rating){
         id = brandId;
         rate = rating;
 
