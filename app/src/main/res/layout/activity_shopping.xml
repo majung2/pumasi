@@ -100,8 +100,6 @@
             />
 
     </LinearLayout>
-
-
     <ListView
         android:id="@+id/brandList"
         android:layout_width="match_parent"

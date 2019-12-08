@@ -84,7 +84,10 @@ public class PreviousPathBoundary extends AppCompatActivity implements MyPageCon
         controller.setMyPageControlUser(id,pw);
         list = new ArrayList<>();
         list = controller.listUpPreviousPath();
-
+        if(list.isEmpty()){
+            Toast toast = Toast.makeText(getApplicationContext(),"이전 루트 방문 기록이 없습니다.", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
 
     }

@@ -1,10 +1,9 @@
 package com.example.myapplication3.Pathfinding;
 
 import com.example.myapplication3.Entity.SpotsInMall;
-import com.example.myapplication3.Path;
+import com.example.myapplication3.Entity.Path;
 import com.example.myapplication3.Entity.Brand;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 

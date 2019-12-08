@@ -8,7 +8,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Recommend.AllBrandList" />
         <activity android:name=".Login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +27,7 @@
         <activity android:name=".SelectMallFloorLocation.MallSelectBoundary"/>
         <activity android:name=".Recommend.CategorySelectBoundary"/>
         <activity android:name=".Recommend.RecommendBrand"/>
+        <activity android:name=".Recommend.AllBrandList" />
         <activity android:name=".Shopping.ShoppingActivity"/>
         <activity android:name=".Shopping.FeedbackActivity"/>
         <activity android:name=".MyPage.AddPreferNonPreferBoundary"></activity>

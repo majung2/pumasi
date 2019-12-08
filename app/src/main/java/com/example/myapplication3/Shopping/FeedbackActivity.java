@@ -2,30 +2,39 @@ package com.example.myapplication3.Shopping;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication3.Login.MainActivity;
 import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 public class FeedbackActivity extends AppCompatActivity {
 
@@ -34,6 +43,7 @@ public class FeedbackActivity extends AppCompatActivity {
     Button close;
     ListView feedbackListView;
     FeedbackAdapter feedbackAdapter;
+    BrandAdapter brandAdapter;
 
 
     // ---------------------- Firebase 관련 변수 -------------------------------
@@ -42,7 +52,7 @@ public class FeedbackActivity extends AppCompatActivity {
     CollectionReference pathRef;
 
     //---------------------- 변수 ----------------------------
-    Float rate;
+    String rate;
     String id;
     String pw;
     @Override
@@ -100,13 +110,15 @@ public class FeedbackActivity extends AppCompatActivity {
         enter = findViewById(R.id.enter);
         close = findViewById(R.id.close);
         feedbackListView = findViewById(R.id.brandList);
+        brandAdapter = new BrandAdapter();
         feedbackAdapter = new FeedbackAdapter();
         feedbackListView.setAdapter(feedbackAdapter);
 
         // --------------------- Firebase 변수 세팅 ----------------------------------------
         db = FirebaseFirestore.getInstance();
-        pathRef = db.collection("path");
-        brandRateRef = db.collection("brandRate");
+        pathRef = db.collection("user").document("abc123")
+                .collection("path").document("1").collection("brand");
+        brandRateRef = db.collection("user").document("abc123").collection("brandRate");
 
         // ------------------------- 작동 기능 정의 --------------------------------
 
@@ -117,9 +129,6 @@ public class FeedbackActivity extends AppCompatActivity {
 
                 Intent intent = new Intent();
 
-                /*Float rate = rating.getRating();
-                intent.putExtra("rate", rate);*/
-
                 // 결과를 성공 (내용을 정상적으로 담았음)으로 설정하고 소포를 부친다.
                 setResult(RESULT_OK, intent);
 
@@ -128,26 +137,25 @@ public class FeedbackActivity extends AppCompatActivity {
             }
         });
 
-        pathRef.orderBy("timestamp").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
-                // 컬렉션의 모든 Document(문서)를 반복한다.
-                // 이 때 queryDocumentSnapshots를 그대로 사용하면 새로 추가된 게 아닌 트윗도 계속 반복 추가되므로
-                // .getDocumentChanges를 호출하여 변경된 내역이 있는 데이터만 뽑아내 반복한다.
-                for(DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()){
-
-                    // 변경 내역이 ADDED(새로 추가됨) 라면
-                    if(doc.getType() == DocumentChange.Type.ADDED){
-
-                        Brand brand = doc.getDocument().toObject(Brand.class);
-
-                        //FeedbackAdapter.addItem(brand);
-
+        pathRef
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Brand brand = new Brand();
+                                brand.id = document.getId();
+                                brand.name = document.getString("brandname");
+                                brand.bought = document.getBoolean("bought");
+                                feedbackAdapter.addItem(brand);
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
                     }
-                }
-            }
-        });
+                });
+
 
         // close (X 버튼)를 눌렀을 때 실행될 기능 정의
         close.setOnClickListener(new View.OnClickListener() {
@@ -170,10 +178,8 @@ public class FeedbackActivity extends AppCompatActivity {
     // onCreate 함수 종료
     // =========================================================================
 
-    public void checkRating(String brandId,Float rating){
-        id = brandId;
-        rate = rating;
+    public void checkRating(String brandId, String grade){
 
-        //brandRateRef.document("brandRate").update("rate", rating); //id별로 올리기
+        pathRef.document(brandId).update("grade", grade);
     }
 }
