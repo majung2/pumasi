@@ -74,7 +74,7 @@ public class PathSelectBoundary extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState){
 
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.select_path);
+        //setContentView(R.layout.select_path);
 
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
