@@ -6,16 +6,28 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication3.Entity.Brand;
+import com.example.myapplication3.Entity.Path;
 import com.example.myapplication3.Login.MainActivity;
 import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.Pathfinding.PathfindingController;
 import com.example.myapplication3.R;
 import com.example.myapplication3.Shopping.ShoppingActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -25,13 +37,19 @@ public class PathSelectBoundary extends AppCompatActivity {
     private Integer currentX;
     private Integer currentY;
     private ArrayList<String> selectedBrands;
-
-
-    private String path1;
-    private String path2;
-
+    PathfindingController controller;
+    private ArrayList<String> selectedCat;
+    private Path path1;
+    private Path path2;
+    private Brand tmpbrand;
 
     private Button select;
+    private FirebaseFirestore db;
+    private CollectionReference BrandRef;
+    private ArrayList<Brand> brandList;
+    private ArrayList<String > pathrecom= new ArrayList<>();
+    private ArrayAdapter<String> adapter;
+    private ListView listView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)//옵션 메뉴바
@@ -85,20 +103,96 @@ public class PathSelectBoundary extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.path_select);
-
+        selectedCat = new ArrayList<>();
+        brandList = new ArrayList<>();
         //이전화면에서 유저정보 받아오기
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
-        currentX = intent.getIntExtra("X",0);
-        currentY = intent.getIntExtra("Y",0);
+        currentX = intent.getIntExtra("x",0);
+        currentY = intent.getIntExtra("y",0);
         selectedBrands = intent.getStringArrayListExtra("selectedBrands"); //선택된 브랜드 정보
-
+        System.out.println(selectedBrands.get(0));
+        System.out.println(selectedBrands.get(1));
+        //임시로 카테고리 설정
+        selectedCat.add("해외명품");
+        System.out.println(currentX);
 
         //경로 1, 4 추출
-        PathfindingController controller = new PathfindingController();
-        path1 = controller.getPath1().toString();
-        path2 = controller.getPath4().toString();
+       // controller = new PathfindingController(selectedBrands,currentX,currentY,selectedCat);
+
+        db = FirebaseFirestore.getInstance();
+
+        //선택된 카테고리 만큼
+        BrandRef = db.collection("shoppingMall").document("M1").collection("category").document("c1").collection("brand");
+
+        pathrecom.add("추천된 루트입니다.");
+
+        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,pathrecom);
+        listView = (ListView) findViewById(R.id.brandList);
+
+        listView.setAdapter(adapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//사용자가 삭제를 위해 브랜드를 클릭했을 때
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view, int position, long id) {
+
+                Toast.makeText(getApplicationContext(), "선호 브랜드는 최소 3개 이상이여야 합니다.", Toast.LENGTH_LONG).show();
+
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        int i=0;
+        BrandRef
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //  selectedUser.add(document.getId());
+                                String checked = document.getId();
+                                // adapter.notifyDataSetChanged();
+                              //  System.out.println(document.get("bName"));
+                                final Integer index=0;
+                                for(String brand: selectedBrands){
+                                    if(brand.equals(document.get("bName"))){
+                                        tmpbrand = new Brand();
+                                        tmpbrand.setSpotName(document.get("bName").toString());
+                                        tmpbrand.setSpotLocation(Integer.parseInt( document.getData().get("x").toString()),Integer.parseInt(document.getData().get("y").toString()));
+                                        tmpbrand.setSpotFloor(Integer.parseInt(document.getData().get("floor").toString()));
+                                        brandList.add(tmpbrand);
+                                        System.out.println("찾았다 일치");
+                                        System.out.println(tmpbrand.getSpotName());
+                                    }
+                                }
+
+
+                            }
+                           // System.out.println(brandList.get(0).getSpotName());
+                            controller = new PathfindingController(brandList,currentX,currentY,selectedCat);
+                            path1 = controller.getPath1();
+                            path2 = controller.getPath2();
+                            pathrecom.add(path1.toString());
+
+                            adapter.notifyDataSetChanged();
+
+
+
+                        } else {
+                            //  Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+
+//        path1 = controller.getPath1().toString();
+ //       path2 = controller.getPath4().toString();
 
 
 

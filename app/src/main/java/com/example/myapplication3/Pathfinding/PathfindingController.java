@@ -1,8 +1,16 @@
 package com.example.myapplication3.Pathfinding;
 
+import androidx.annotation.NonNull;
+
 import com.example.myapplication3.Entity.SpotsInMall;
 import com.example.myapplication3.Entity.Path;
 import com.example.myapplication3.Entity.Brand;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,7 +24,7 @@ public class PathfindingController { //finding path logic
     private Path path2;
     private Path path3;
     private Path path4;
-    private ArrayList<String> selectedBrandsNameList; //넘겨받은 브랜드명 정보
+    private ArrayList<Brand> selectedBrandsNameList; //넘겨받은 브랜드명 정보
     private ArrayList<Brand> brandsList = new ArrayList<>(); //선택된 Brand 위치(좌표, 층수)정보
     private ArrayList<Brand> brands1 = new ArrayList<>(); //사용자가 선택한 매장들 중 1층에 있는 매장
     private ArrayList<Brand> brands2 = new ArrayList<>(); //사용자가 선택한 매장들 중 2층에 있는 매장
@@ -24,44 +32,85 @@ public class PathfindingController { //finding path logic
     private ArrayList<SpotsInMall> move1 = new ArrayList<>(); // 1층 에스컬레이터및엘리베이터 정보
     private ArrayList<SpotsInMall> move2 = new ArrayList<>(); //2층 에스컬레이터및엘리베이터 정보
     private ArrayList<SpotsInMall> move3 = new ArrayList<>(); //3층 에스컬레이터및엘리베이터 정보
+    private FirebaseFirestore db;
+    private CollectionReference BrandRef;
+    private ArrayList<String> cat= new ArrayList<>();
 
 
     public PathfindingController(){}
-    PathfindingController(ArrayList<String> selectedBrands){ //날짜, 사용자가 선택한 매장들, 시작점 넘겨받음
+    public PathfindingController(ArrayList<Brand> selectedBrands,Integer currentX, Integer currentY,ArrayList<String> selectedCat){ //날짜, 사용자가 선택한 매장들, 시작점 넘겨받음
         String recdate = getToDay();
         path1 = new Path(recdate);
         path2 = new Path(recdate);
         path3 = new Path(recdate);
         path4 = new Path(recdate);
         this.selectedBrandsNameList = selectedBrands;
-
-        brandInfo();
+        this.cat = selectedCat;
+        this.nowX = currentX;
+        this.nowY = currentY;
+        System.out.println("selected brand");
+        System.out.println(selectedBrands.get(0));
+   //     brandInfo();
 
         brandFloor(); //브랜드 층별로 분리
 
-        firstPathFinder();
-        FourthPathFinder();
+       firstPathFinder();
+       FourthPathFinder();
 
     }
 
-    private void brandInfo(){ //DB에서 Brand정보 가져오기
+//    private String cat ="c1";
+  /*  private void brandInfo(){ //DB에서 Brand정보 가져오기
+
         for(String x:selectedBrandsNameList){
-            brandsList.add(Brand.findBrandInfoByBrandName(x));
+            db = FirebaseFirestore.getInstance();
+            BrandRef = db.collection("shoppingMall").document("M1").collection("category").document("c1").collection("brand");
+
+            int i=0;
+            BrandRef
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                  //  selectedUser.add(document.getId());
+                                    String checked = document.getId();
+                                    // adapter.notifyDataSetChanged();
+                                    System.out.println(document.get("bName"));
+                                    final Integer index=0;
+                                        if(selectedBrandsNameList.get(0).equals(document.get("bName"))){
+                                            System.out.println("찾았다 일치");
+                                        }
+
+                                }
+                            } else {
+                                //  Log.d(TAG, "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+
+           // brandsList.add(Brand.findBrandInfoByBrandName(x));
         }
 
-    }
+    }*/
 
 
     private void brandFloor(){ //브랜드 층별로 분리
-        for(Brand x : brandsList){
+        for(Brand x : selectedBrandsNameList){
+            System.out.println(x.getSpotFloor());
+            System.out.println("층층");
             if(x.getSpotFloor()==1){
                 brands1.add(x);
+                System.out.println("1층");
             }
             else if(x.getSpotFloor()==2) {
                 brands2.add(x);
+                System.out.println("2층");
             }
             else {
                 brands3.add(x);
+                System.out.println("3층");
             }
         }
 
