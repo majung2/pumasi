@@ -67,6 +67,7 @@
                 android:background="@color/cardview_dark_background"
                 android:text="선택완료"
                 android:textColor="@android:color/white" />
+
         </LinearLayout>
 
         <FrameLayout
