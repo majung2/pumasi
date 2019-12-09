@@ -37,7 +37,7 @@ import java.util.Queue;
 public class RecommendBrand extends AppCompatActivity {
     private ImageView bt_tab1, bt_tab2, bt_tab3, bt_tab4, bt_tab5,
             bt_tab6, bt_tab7, bt_tab8, bt_tab9, bt_tab10, bt_tab11;
-    private Button submit, allBrand;
+    private Button submit;
     private boolean[] selectedCategory ;
     private String id;
     private String pw;
@@ -53,7 +53,7 @@ public class RecommendBrand extends AppCompatActivity {
     CollectionReference pathRef;
     private ArrayList<String> selectedUser;
     private CollectionReference RateRef;
-    private HashMap<String, HashMap<String, Object>> AllUserMap;
+    private HashMap<String, HashMap<String, Object>> AllUserMap = new HashMap<>();
     //이전화면에서 받아오기
     @Override
     public boolean onCreateOptionsMenu(Menu menu)//옵션 메뉴바
