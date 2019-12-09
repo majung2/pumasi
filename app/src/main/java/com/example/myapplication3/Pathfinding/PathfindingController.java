@@ -22,8 +22,6 @@ public class PathfindingController { //finding path logic
     private Integer nowX, nowY;
     private Path path1;
     private Path path2;
-    private Path path3;
-    private Path path4;
     private ArrayList<Brand> selectedBrandsNameList; //넘겨받은 브랜드명 정보
     private ArrayList<Brand> brandsList = new ArrayList<>(); //선택된 Brand 위치(좌표, 층수)정보
     private ArrayList<Brand> brands1 = new ArrayList<>(); //사용자가 선택한 매장들 중 1층에 있는 매장
@@ -42,8 +40,6 @@ public class PathfindingController { //finding path logic
         String recdate = getToDay();
         path1 = new Path(recdate);
         path2 = new Path(recdate);
-        path3 = new Path(recdate);
-        path4 = new Path(recdate);
         this.selectedBrandsNameList = selectedBrands;
         this.cat = selectedCat;
         this.nowX = currentX;
@@ -82,13 +78,13 @@ public class PathfindingController { //finding path logic
 
     }
 
-    private SpotsInMall findClosestSpot(Integer nowX, Integer nowY, ArrayList<Brand> spotList){//현재 위치 좌표, 다음 방문 후보 list
+    private SpotsInMall findClosestSpot(Integer thisX, Integer thisY, ArrayList<Brand> spotList){//현재 위치 좌표, 다음 방문 후보 list
         int closestSpotNum =0;
         double m,n;
         double currentDis= 1000000000;
         for(int i=0;i<spotList.size();i++){
-            m=nowX-spotList.get(i).getSpotLocation().get(0);
-            n=nowY-spotList.get(i).getSpotLocation().get(1);
+            m=thisX-spotList.get(i).getSpotLocation().get(0);
+            n=thisY-spotList.get(i).getSpotLocation().get(1);
             if(Math.sqrt((m*m)+(n*n)) < currentDis){
                 currentDis = Math.sqrt((m*m)+(n*n));
                 closestSpotNum = i;
@@ -97,12 +93,12 @@ public class PathfindingController { //finding path logic
         return spotList.get(closestSpotNum);
     }
 
-    private void shortestPathFinder(ArrayList<Brand> brandFloor){ //결과 path, 사용자가 선택한 매장들
+    private void shortestPathFinder(Path nowPath, ArrayList<Brand> brandFloor){ //결과 path, 사용자가 선택한 매장들
         ArrayList<Brand> leftList = brandFloor;
         SpotsInMall next;
         while(leftList.size()!=0){
             next = findClosestSpot(nowX,nowY,leftList);
-            path1.addBrandLast(next.getSpotName()); //Path에 해당 브랜드명 추가
+            nowPath.addBrandLast(next.getSpotName()); //Path에 해당 브랜드명 추가
             nowX = next.getSpotLocation().get(0); //now 좌표 업데이트
             nowY = next.getSpotLocation().get(1);
             leftList.remove(next);
@@ -115,22 +111,32 @@ public class PathfindingController { //finding path logic
             nowX = startX;
             nowY = startY;
             path1.addFirst("현위치");
-            shortestPathFinder(brands1); //1층에 있는 브랜드 먼저 길찾기
+            shortestPathFinder(path1, brands1); //1층에 있는 브랜드 먼저 길찾기
             if(brands2.size()!=0){ //2층 브랜드도 선택한 경우
-                shortestPathFinder(brands2);
+                nowX = startX;
+                nowY = startY;
+                shortestPathFinder(path1, brands2);
             }
             else if(brands3.size()!=0){
-                shortestPathFinder(brands3);
+                nowX = startX;
+                nowY = startY;
+                shortestPathFinder(path1, brands3);
             }
         }
         else if(brands2.size()!=0){
-            shortestPathFinder(brands2);
+            nowX = startX;
+            nowY = startY;
+            shortestPathFinder(path1, brands2);
             if(brands3.size()!=0) {
-                shortestPathFinder(brands3);
+                nowX = startX;
+                nowY = startY;
+                shortestPathFinder(path1, brands3);
             }
         }
         else{
-            shortestPathFinder(brands3);
+            nowX = startX;
+            nowY = startY;
+            shortestPathFinder(path1, brands3);
         }
     }
 
@@ -149,7 +155,37 @@ public class PathfindingController { //finding path logic
                 brands1.remove(x);
         }
 
-        firstPathFinder();
+        if(brands1.size()!=0){ //1층에 있는 브랜드 선택한 것이 있을 경우
+            nowX = startX;
+            nowY = startY;
+            path2.addFirst("현위치");
+            shortestPathFinder(path2, brands1); //1층에 있는 브랜드 먼저 길찾기
+            if(brands2.size()!=0){ //2층 브랜드도 선택한 경우
+                nowX = startX;
+                nowY = startY;
+                shortestPathFinder(path2,brands2);
+            }
+            else if(brands3.size()!=0){
+                nowX = startX;
+                nowY = startY;
+                shortestPathFinder(path2,brands3);
+            }
+        }
+        else if(brands2.size()!=0){
+            nowX = startX;
+            nowY = startY;
+            shortestPathFinder(path2, brands2);
+            if(brands3.size()!=0) {
+                nowX = startX;
+                nowY = startY;
+                shortestPathFinder(path2, brands3);
+            }
+        }
+        else{
+            nowX = startX;
+            nowY = startY;
+            shortestPathFinder(path2, brands3);
+        }
 
     }
 
@@ -168,13 +204,6 @@ public class PathfindingController { //finding path logic
         return path2;
     }
 
-    public Path getPath3(){
-        return path3;
-    }
-
-    public Path getPath4(){
-        return path4;
-    }
 
     public static String getToDay(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

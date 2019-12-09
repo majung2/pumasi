@@ -143,8 +143,12 @@ public class PathSelectBoundary extends AppCompatActivity {
                     path1 = controller.getPath1();
                     path2 = controller.getPath2();
                     pathrecom.add(path1.toString());
-                    pathrecom.add(path2.toString());
-
+                    if(path2.getPathsize()!=0) {
+                        pathrecom.add(path2.toString());
+                    }
+                    else{
+                        pathrecom.add("선택한 브랜드 중 세일 중인 매장이 없습니다.");
+                    }
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -172,8 +176,8 @@ public class PathSelectBoundary extends AppCompatActivity {
                             DocumentSnapshot doc = task.getResult();
                             if (pw.equals(doc.get("password"))) {
                                 System.out.println("DB접근 성공");
-
                                 ppSize = Integer.parseInt(doc.get("pathsize").toString());}}}});
+
                 ppSize++;
 
                 if(position==0){ //첫번째 path 선택시
@@ -276,7 +280,7 @@ public class PathSelectBoundary extends AppCompatActivity {
                                                                 tmpbrand.setSpotName(document.get("bName").toString());
                                                                 tmpbrand.setSpotLocation(Integer.parseInt( document.getData().get("x").toString()),Integer.parseInt(document.getData().get("y").toString()));
                                                                 tmpbrand.setSpotFloor(Integer.parseInt(document.getData().get("floor").toString()));
-                                                                tmpbrand.setSale(Boolean.parseBoolean(document.getData().get("sale").toString()));
+                                                                //tmpbrand.setSale(Boolean.parseBoolean(document.getData().get("sale").toString()));
                                                                 brandList.add(tmpbrand);
                                                                 System.out.println("찾았다 일치");
                                                                 System.out.println(tmpbrand.getSpotName());
