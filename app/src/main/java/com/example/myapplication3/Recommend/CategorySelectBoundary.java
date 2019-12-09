@@ -156,19 +156,24 @@ public class CategorySelectBoundary extends AppCompatActivity  {
 
                 System.out.println("selected = " +result);
 
+                if(selectedCategoryNum.equals("")){
+                    Toast.makeText(getApplicationContext(), "최소 하나의 카테고리를 선택해야 합니다!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(CategorySelectBoundary.this, "카테고리 선택 완료", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(
+                            CategorySelectBoundary.this,
+                            RecommendBrand.class); // 다음 넘어갈 클래스 지정
 
-                Intent intent = new Intent(
-                        CategorySelectBoundary.this,
-                        RecommendBrand.class); // 다음 넘어갈 클래스 지정
-
-                intent.putExtra("id",id);
-                intent.putExtra("pw",pw);
-                intent.putExtra("X",currentX);
-                intent.putExtra("Y",currentY);
-                intent.putExtra("selected",selectedCategory);
+                    intent.putExtra("id",id);
+                    intent.putExtra("pw",pw);
+                    intent.putExtra("X",currentX);
+                    intent.putExtra("Y",currentY);
+                    intent.putExtra("selected",selectedCategory);
 
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
 
 
 
