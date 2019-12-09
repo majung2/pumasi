@@ -64,7 +64,7 @@ public class MallSelectBoundary extends AppCompatActivity {
 
             Intent intent = new Intent(// 다음 화면으로 전환
                     MallSelectBoundary.this,
-                    ShoppingActivity.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+                    MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
             intent.putExtra("id",id);
             intent.putExtra("pw",pw);
 
