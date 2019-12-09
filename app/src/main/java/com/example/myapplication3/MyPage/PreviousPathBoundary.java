@@ -84,10 +84,7 @@ public class PreviousPathBoundary extends AppCompatActivity implements MyPageCon
         controller.setMyPageControlUser(id,pw);
         list = new ArrayList<>();
         list = controller.listUpPreviousPath();
-        if(list.isEmpty()){
-            Toast toast = Toast.makeText(getApplicationContext(),"이전 루트 방문 기록이 없습니다.", Toast.LENGTH_LONG);
-            toast.show();
-        }
+
 
 
     }
@@ -96,6 +93,10 @@ public class PreviousPathBoundary extends AppCompatActivity implements MyPageCon
     public void finishPreviousPath2(ArrayList<String> list){
         System.out.println("previous path 바운더리 콜백 성공");
         System.out.println(list);
+        if(list.isEmpty()){
+            Toast toast = Toast.makeText(getApplicationContext(),"이전 루트 방문 기록이 없습니다.", Toast.LENGTH_LONG);
+            toast.show();
+        }
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,list);
         ListView listview = (ListView) findViewById(R.id.lv);

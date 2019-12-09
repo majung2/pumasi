@@ -27,13 +27,13 @@ android:onClick="onClickAdd"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="224dp"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/selected_1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="205dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,14 +58,21 @@ android:onClick="onClickAdd"/>
             android:text="추가하기" /></LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/selected_2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="194dp" />
     </LinearLayout>
+    <Button
+        android:id="@+id/finishNPButton"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="수정완료"
+        android:onClick="onClickFinishNP"
+        />
 
 </LinearLayout>

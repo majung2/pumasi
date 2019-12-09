@@ -34,6 +34,7 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity implements M
     private ArrayList<String> nonPreferBrands=new ArrayList<>();// 비선호 브랜드 리스트
     private Button changePrefer;
     private Button changeNonPrefer;
+    private Button finishNP;
     private TextView selected_item_textview;
     private TextView selected_item_textview2;
     private ArrayAdapter<String>    adapter;
@@ -114,6 +115,7 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity implements M
        changePrefer = (Button) findViewById(R.id.preferbrandadd);
        changeNonPrefer = (Button) findViewById(R.id.nonpreferbrandadd);
 
+       finishNP = (Button) findViewById(R.id.finishNPButton);
 
        //컨트롤러 통해 선호, 비선호 브랜드 받아옴
         controller = new MyPageController();
@@ -368,6 +370,20 @@ public class PreferNonpreferBrandBoundary extends AppCompatActivity implements M
         Toast.makeText(getApplicationContext(), "해당 브랜드가 삭제되었습니다.", Toast.LENGTH_LONG).show();
     }
 
+    public void onClickFinishNP(View v){//finish버튼 클릭시
+
+        Intent intent = new Intent(// 다음 화면으로 전환
+                PreferNonpreferBrandBoundary.this,
+                MyPageSelectMenu.class); // 선호비선호 브랜드 조회 관련 클래스
+
+        intent.putExtra("id",id);
+        intent.putExtra("pw",pw);
+
+
+        startActivity(intent);
+        adapter.notifyDataSetChanged();
+
+    }
 }
 
 

@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class AddPreferNonPreferBoundary extends AppCompatActivity implements MyP
     private ArrayAdapter<String> adapter;
     private String preferNon;
     private ListView listView;
+    private Button finishbtn;
     MyPageController controller2;
     @Override
     public boolean onCreateOptionsMenu(Menu menu)//옵션 메뉴바
@@ -85,6 +87,8 @@ public class AddPreferNonPreferBoundary extends AppCompatActivity implements MyP
         pw = intent.getStringExtra("pw");
         selectedCategory = intent.getStringExtra("category");
         preferNon = intent.getStringExtra("prefernonprefer");
+        finishbtn = (Button)findViewById(R.id.finish);
+
 
         controller = new MyPageController();
         controller.MyPageControllerBrand(this);
@@ -94,7 +98,6 @@ public class AddPreferNonPreferBoundary extends AppCompatActivity implements MyP
         controller2 = new MyPageController();
         controller2.MyPageAddController(this);
         controller2.setAddControlUser(id,pw);
-
         selectedBrands= new ArrayList<>();
     }
 
@@ -114,7 +117,7 @@ public class AddPreferNonPreferBoundary extends AppCompatActivity implements MyP
                                     View view, int position, long id) {
                 //controller.setAddBrandUser(AddPreferNonPreferBoundary.this);
 
-               controller2.addBrand((String)adapterView.getItemAtPosition(position),preferNon);
+                controller2.addBrand((String)adapterView.getItemAtPosition(position),preferNon);
 
                 adapter.notifyDataSetChanged();
             }
@@ -124,6 +127,23 @@ public class AddPreferNonPreferBoundary extends AppCompatActivity implements MyP
 
     @Override
     public void finishAddBrand2() {
+
         Toast.makeText(getApplicationContext(), "해당 브랜드를 추가하였습니다.", Toast.LENGTH_LONG).show();
     }
+
+    public void onClickComplete(View v){//finish버튼 클릭시
+
+        Intent intent = new Intent(// 다음 화면으로 전환
+                AddPreferNonPreferBoundary.this,
+                PreferNonpreferBrandBoundary.class); // 선호비선호 브랜드 조회 관련 클래스
+
+        intent.putExtra("id",id);
+        intent.putExtra("pw",pw);
+
+
+        startActivity(intent);
+        adapter.notifyDataSetChanged();
+
+    }
 }
+

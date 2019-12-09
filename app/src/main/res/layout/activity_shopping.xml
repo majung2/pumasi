@@ -53,7 +53,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="230dp"
-        android:src="@drawable/path"/>
+        android:src="@drawable/pathimg"/>
 
 
     <!--<com.example.draw.DrawView
