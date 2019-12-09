@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements LoginController.L
       //  System.out.println(currentUser.getAge());
         Intent intent = new Intent(// 다음 화면으로 전환
                 MainActivity.this,
-                PathSelectBoundary.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+                MallSelectBoundary.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
        intent.putExtra("id",currentUser.getId());
        intent.putExtra("pw",currentUser.getPw());
        intent.putExtra("x",100);
