@@ -34,6 +34,10 @@ import static android.content.ContentValues.TAG;
 
 public class FeedbackActivity extends AppCompatActivity {
 
+    private String id;
+    private String pw;
+    private String pathsize;
+
     //---------------------- 레이아웃 관련 변수 ---------------------------------
     Button enter;
     Button close;
@@ -54,6 +58,10 @@ public class FeedbackActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
+        Intent intent=getIntent();
+        id = intent.getStringExtra("id");
+        pw = intent.getStringExtra("pw");
+        pathsize = intent.getStringExtra("pathsize");
 
         // --------------------- 화면 요소 세팅 ----------------------------
         enter = findViewById(R.id.enter);
@@ -65,10 +73,10 @@ public class FeedbackActivity extends AppCompatActivity {
 
         // --------------------- Firebase 변수 세팅 ----------------------------------------
         db = FirebaseFirestore.getInstance();
-        brandRef = db.collection("user").document("abc123")
-                .collection("path").document("1").collection("brand");
-        pathRef = db.collection("user").document("abc123").collection("path");
-        brandRateRef = db.collection("user").document("abc123").collection("brandRate");
+        brandRef = db.collection("user").document(id)
+                .collection("path").document(pathsize).collection("brand");
+        pathRef = db.collection("user").document(id).collection("path");
+        brandRateRef = db.collection("user").document(id).collection("brandRate");
 
         // ------------------------- 작동 기능 정의 --------------------------------
 
