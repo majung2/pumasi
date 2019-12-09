@@ -4,6 +4,7 @@ import com.example.myapplication3.Entity.Brand;
 import com.example.myapplication3.Entity.Category;
 import com.example.myapplication3.Entity.User;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,19 +24,20 @@ public class RecommendBrandController implements User.BrandRateCallback {
         Brand b = new Brand();
         brList=b.getAllBrand();
     }
-    public HashMap pearsonCheck(String id, boolean[] selectedCategory, HashMap<String, HashMap<String, Object>> map){
+    public ArrayList<String> pearsonCheck(String id, boolean[] selectedCategory, HashMap<String, HashMap<String, Object>> map){
         HashMap<String, Object> UserRate =  map.get(id);
-        HashMap<String, String> recommendBrand = new HashMap<>();
-        for(int i = 1; i<selectedCategory.length; i++){
+        ArrayList<String> recommendBrand = new ArrayList<>();
+
+        /*for(int i = 1; i<selectedCategory.length; i++){
             if(selectedCategory[i]==true)recommendBrand.put("", "c"+i);
         }
-        ArrayList<Category> catList = new ArrayList<>();
+        /*ArrayList<Category> catList = new ArrayList<>();
         for(String CNr : recommendBrand.values()){
             Category tmp = new Category();
             tmp.setCNr(CNr);
             tmp.findBrands();
             catList.add(tmp);
-        }
+        }*/
         HashMap<String, Double> list= new HashMap<>();
         for(String userid : map.keySet()){
             double score = 0;
@@ -70,27 +72,22 @@ public class RecommendBrandController implements User.BrandRateCallback {
             String tmp = (String)it.next();
             pearsonList.put(tmp, list.get(tmp));
         }
-        for(int i = 0; i< catList.size(); i++){
+
+        for(String userid:pearsonList.keySet() ){
             String topBr = "";
             int max = 0;
-            for(String userid:pearsonList.keySet() ){
-                int fornum = 0;
-                for(String brand: map.get(userid).keySet()){
-                    for(int j = 0; j<catList.get(i).getCatBrand().size(); j++){
-                        fornum++;
-                        if(catList.get(i).getCatBrand().get(j).equals(brand)){
-                            if(max<Integer.parseInt(map.get(userid).get(brand).toString())){
-                                max=Integer.parseInt(map.get(userid).get(brand).toString());
-                                topBr = brand;
-                            }
-                        }
-                    }
-
+            for(String brand: map.get(userid).keySet()){
+                if(max<Integer.parseInt(map.get(userid).get(brand).toString())){
+                    max=Integer.parseInt(map.get(userid).get(brand).toString());
+                    topBr = brand;
                 }
-                if(fornum>5)break;
             }
-            recommendBrand.put(topBr, catList.get(i).getCNr());
+            recommendBrand.add(topBr);
         }
+
+
+
+
         return recommendBrand;
     }
 

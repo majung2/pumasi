@@ -159,7 +159,7 @@ public class CategorySelectBoundary extends AppCompatActivity  {
 
                 Intent intent = new Intent(
                         CategorySelectBoundary.this,
-                        RecomTest.class); // 다음 넘어갈 클래스 지정
+                        RecommendBrand.class); // 다음 넘어갈 클래스 지정
 
                 intent.putExtra("id",id);
                 intent.putExtra("pw",pw);

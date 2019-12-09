@@ -28,10 +28,8 @@
         <activity android:name=".Recommend.CategorySelectBoundary"/>
         <activity android:name=".Recommend.RecommendBrand"/>
         <activity android:name=".Recommend.PathSelectBoundary"/>
-        <activity android:name=".Recommend.AllBrandList" />
         <activity android:name=".Shopping.ShoppingActivity"/>
         <activity android:name=".Shopping.FeedbackActivity"/>
-        <activity android:name=".Recommend.RecomTest"/>
         <activity android:name=".MyPage.AddPreferNonPreferBoundary"></activity>
         <activity android:name=".Login.LoadingActivity"
             android:screenOrientation="portrait"
