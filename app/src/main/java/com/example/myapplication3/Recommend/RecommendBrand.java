@@ -243,12 +243,12 @@ public class RecommendBrand extends AppCompatActivity {
                 if(brNameList !=null) {
                     Toast.makeText(getApplicationContext(), "브랜드 선택 완료!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RecommendBrand.this, PathSelectBoundary.class);
-                    intent.putStringArrayListExtra("brNameList", brNameList);
+                    intent.putStringArrayListExtra("selectedBrands", brNameList);
                     intent.putStringArrayListExtra("catList", catList);
                     intent.putExtra("id", id);
                     intent.putExtra("pw", pw);
-                    intent.putExtra("X", currentX);
-                    intent.putExtra("Y", currentY);
+                    intent.putExtra("x", currentX);
+                    intent.putExtra("y", currentY);
                     startActivity(intent);
                 }
                 else  Toast.makeText(getApplicationContext(), "브랜드를 선택해주세요.", Toast.LENGTH_LONG).show();

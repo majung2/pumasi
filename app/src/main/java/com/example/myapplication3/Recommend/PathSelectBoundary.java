@@ -134,7 +134,7 @@ public class PathSelectBoundary extends AppCompatActivity {
         //선택된 카테고리 만큼
         BrandRef = db.collection("shoppingMall").document("M1").collection("category").document("c1").collection("brand");
 
-        pathrecom.add("추천된 루트입니다.");
+       // pathrecom.add("추천된 루트입니다.");
         readData(new FirebaseCallback() {
             @Override
             public void onCallback(ArrayList<Brand> recomBrand) {
@@ -195,10 +195,12 @@ public class PathSelectBoundary extends AppCompatActivity {
                             if (pw.equals(doc.get("password"))) {
                                 System.out.println("DB접근 성공");
 
-                                ppSize = Integer.parseInt(doc.get("pathsize").toString());}}}});
-                ppSize++;
+                                ppSize = Integer.parseInt(doc.get("pathsize").toString());
+                                ppSize++;}}}});
 
-                if(position==1){ //첫번째 path 선택시
+                ref.update("pathsize",ppSize);
+
+                if(position==0){ //첫번째 path 선택시
                     Map<String, Object> selectedPathInfo = new HashMap<>();
                     selectedPathInfo.put("brandsize",path1.getPathsize());
                     selectedPathInfo.put("date",path1.getRecdate());
