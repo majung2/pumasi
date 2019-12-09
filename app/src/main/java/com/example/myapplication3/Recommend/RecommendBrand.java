@@ -41,7 +41,6 @@ public class RecommendBrand extends AppCompatActivity {
     private boolean[] selectedCategory ;
     private String id;
     private String pw;
-    private int cnt;
     private Integer currentX;
     private Integer currentY;
     private Integer usercnt;
@@ -276,15 +275,9 @@ public class RecommendBrand extends AppCompatActivity {
                                                 if (task.isSuccessful()) {
                                                     HashMap<String, Object> tmpMap = new HashMap<>();
                                                     for (QueryDocumentSnapshot document : task.getResult()) {
-<<<<<<< HEAD
-                                                        String brand = document.getId();
-                                                        tmpMap.put(brand, document.get);
-                                                        System.out.println(document.getId());
-=======
                                                         String brand = document.getId();//브랜드명
                                                         tmpMap.put(brand, document.get("rate")); //브랜드명, 레이트값
                                                         System.out.println("244번째 줄" + document.getId());
->>>>>>> db3f786051524cda39e541aa08054a834cbec98f
                                                     }
                                                     fb.setUserMap(checked, tmpMap);//유저이름 (브랜드명,레이트값)
                                                 } else {
