@@ -41,6 +41,7 @@ public class RecommendBrand extends AppCompatActivity {
     private boolean[] selectedCategory ;
     private String id;
     private String pw;
+    private int cnt;
     private Integer currentX;
     private Integer currentY;
     private ArrayList<String> brNameList = new ArrayList<>();
@@ -174,6 +175,12 @@ public class RecommendBrand extends AppCompatActivity {
         selectedBrand.add("sample");
 
         RecommendBrandController mController = new RecommendBrandController();
+        ArrayList<String> tmpList = new ArrayList<>();
+        tmpList.addAll(0, mController.pearsonCheck(id, AllUserMap));
+        for(int i = 0; i<tmpList.size(); i++){
+            if(!selectedBrand.contains(tmpList.get(i)))
+                selectedBrand.add(tmpList.get(i));
+        }
         selectedBrand.addAll(0, mController.pearsonCheck(id, AllUserMap));
         System.out.println(selectedBrand);
         adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,selectedBrand);
@@ -187,8 +194,15 @@ public class RecommendBrand extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView,
                                     View view, int position, long id) {
 
-                Toast.makeText(getApplicationContext(), "선호 브랜드는 최소 3개 이상이여야 합니다.", Toast.LENGTH_LONG).show();
-                brNameList.add(((TextView)view).getText().toString());
+
+               if(brNameList.contains(((TextView)view).getText().toString())){
+                   Toast.makeText(getApplicationContext(), "브랜드 취소", Toast.LENGTH_LONG).show();
+                   brNameList.remove(((TextView)view).getText().toString()));
+               }
+               else{
+                   Toast.makeText(getApplicationContext(), "브랜드 추가", Toast.LENGTH_LONG).show();
+                   brNameList.add(((TextView)view).getText().toString());
+               }
                 adapter.notifyDataSetChanged();
             }
         });
@@ -240,7 +254,7 @@ public class RecommendBrand extends AppCompatActivity {
                                                     HashMap<String, Object> tmpMap = new HashMap<>();
                                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                                         String brand = document.getId();
-                                                        tmpMap.put(brand, document.get(brand));
+                                                        tmpMap.put(brand, document.get);
                                                         System.out.println(document.getId());
                                                     }
                                                     fb.setUserMap(checked, tmpMap);
