@@ -48,7 +48,7 @@ public class BrandAdapter extends BaseAdapter {
         final Context context = parent.getContext();
         final Brand b = brandList.get(position);
 
-        BrandViewHolder viewHolder;
+        final BrandViewHolder viewHolder;
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -57,20 +57,33 @@ public class BrandAdapter extends BaseAdapter {
             viewHolder = new BrandViewHolder();
             viewHolder.name = convertView.findViewById(R.id.name);
             viewHolder.bought = convertView.findViewById(R.id.yes_buy);
+
+
             viewHolder.bought.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    boolean checked = ((CheckBox) view).isChecked();
+                    if (checked) ((ShoppingActivity)context).checkBought(b.id, b.name);
+                    //else ((ShoppingActivity)context).checkNotBought(b.id);
+                    }
+            });
+
+
+            /*viewHolder.bought.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ((ShoppingActivity)context).checkBought(b.id, b.name);
                 }
-            });
+            });*/
             viewHolder.notBought = convertView.findViewById(R.id.no_buy);
             viewHolder.notBought.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((ShoppingActivity)context).checkNotBought(b.id);
+                    boolean checked = ((CheckBox) view).isChecked();
+                    if (checked) ((ShoppingActivity)context).checkNotBought(b.id);
+                    //else ((ShoppingActivity)context).checkBought(b.id, b.name);
                 }
             });
-
 
             convertView.setTag(viewHolder);
         }

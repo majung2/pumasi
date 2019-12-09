@@ -116,13 +116,14 @@ public class PathSelectBoundary extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
-        currentX = intent.getIntExtra("X",0);
-        currentY = intent.getIntExtra("Y",0);
-        selectedBrands = intent.getStringArrayListExtra("brNameList");
-        selectedCat = intent.getStringArrayListExtra("catList");
-        //선택된 브랜드 정보
-        System.out.println(selectedBrands);
+        currentX = intent.getIntExtra("x",0);
+        currentY = intent.getIntExtra("y",0);
+        selectedBrands = intent.getStringArrayListExtra("selectedBrands"); //선택된 브랜드 정보
+        System.out.println("시작");
+        System.out.println(selectedBrands.get(0));
+        System.out.println(selectedBrands.get(1));
         //임시로 카테고리 설정
+        selectedCat.add("해외명품");
         System.out.println(currentX);
 
         //경로 1, 4 추출
@@ -143,12 +144,8 @@ public class PathSelectBoundary extends AppCompatActivity {
                     path1 = controller.getPath1();
                     path2 = controller.getPath2();
                     pathrecom.add(path1.toString());
-                    if(path2.getPathsize()!=0) {
-                        pathrecom.add(path2.toString());
-                    }
-                    else{
-                        pathrecom.add("선택한 브랜드 중 세일 중인 매장이 없습니다.");
-                    }
+                    pathrecom.add(path2.toString());
+
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -161,13 +158,34 @@ public class PathSelectBoundary extends AppCompatActivity {
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//사용자가 path를 선택했을 때
-            Integer ppSize;
+            Integer ppSize=0;
             @Override
             public void onItemClick(AdapterView<?> adapterView,
                                     View view, int position, long item) { //path선택: DB에 path 저장
 
                 Toast.makeText(getApplicationContext(), "해당 루트가 선택되었습니다.", Toast.LENGTH_LONG).show();
 
+               /* if(position==1){
+                    DocumentReference ref = db.collection("user").document(id);
+                    ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {//디비 접근에 성공한 경우
+                            if (task.isSuccessful()) {//해당 아이디의 유저를 찾은 경우
+                                DocumentSnapshot doc = task.getResult();
+                                if (pw.equals(doc.get("password"))) {
+                                    System.out.println("DB접근 성공");
+
+                                    ppSize = Integer.parseInt(doc.get("pathsize").toString());
+                                    ppSize++;
+                                    System.out.println(ppSize);
+                                    CollectionReference cf = db.collection("user").document(id).collection("path");
+
+
+                                }}}});
+
+
+
+                }*/
                 DocumentReference ref = db.collection("user").document(id);
                 ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -176,11 +194,11 @@ public class PathSelectBoundary extends AppCompatActivity {
                             DocumentSnapshot doc = task.getResult();
                             if (pw.equals(doc.get("password"))) {
                                 System.out.println("DB접근 성공");
-                                ppSize = Integer.parseInt(doc.get("pathsize").toString());}}}});
 
+                                ppSize = Integer.parseInt(doc.get("pathsize").toString());}}}});
                 ppSize++;
 
-                if(position==0){ //첫번째 path 선택시
+                if(position==1){ //첫번째 path 선택시
                     Map<String, Object> selectedPathInfo = new HashMap<>();
                     selectedPathInfo.put("brandsize",path1.getPathsize());
                     selectedPathInfo.put("date",path1.getRecdate());
@@ -260,7 +278,7 @@ public class PathSelectBoundary extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                             //   selectedUser.add(document.getId());
+                                //   selectedUser.add(document.getId());
                                 String checked = document.getId();
                                 // adapter.notifyDataSetChanged();
                                 System.out.println(document.getId());
@@ -272,7 +290,7 @@ public class PathSelectBoundary extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if (task.isSuccessful()) {
                                                     for (QueryDocumentSnapshot document : task.getResult()) {
-                                                       // selectedBrand.add(document.getId());
+                                                        // selectedBrand.add(document.getId());
                                                         //   selectedBrand.add(document.get("rate"));
                                                         for(String brand: selectedBrands){
                                                             if(brand.equals(document.get("bName"))){
@@ -280,7 +298,7 @@ public class PathSelectBoundary extends AppCompatActivity {
                                                                 tmpbrand.setSpotName(document.get("bName").toString());
                                                                 tmpbrand.setSpotLocation(Integer.parseInt( document.getData().get("x").toString()),Integer.parseInt(document.getData().get("y").toString()));
                                                                 tmpbrand.setSpotFloor(Integer.parseInt(document.getData().get("floor").toString()));
-                                                                tmpbrand.setSale(Boolean.parseBoolean(document.getData().get("sale").toString()));
+                                                                //   tmpbrand.setSale(Boolean.parseBoolean(document.getData().get("sale").toString()));
                                                                 brandList.add(tmpbrand);
                                                                 System.out.println("찾았다 일치");
                                                                 System.out.println(tmpbrand.getSpotName());
@@ -305,8 +323,8 @@ public class PathSelectBoundary extends AppCompatActivity {
                     }
                 });
     }
-public interface FirebaseCallback{
+    public interface FirebaseCallback{
         void onCallback(ArrayList<Brand> recomBrand);
-}
+    }
 
 }
