@@ -46,7 +46,6 @@ public class PathfindingController { //finding path logic
         this.nowY = currentY;
         System.out.println("selected brand");
         System.out.println(selectedBrands.get(0));
-   //     brandInfo();
 
         brandFloor(); //브랜드 층별로 분리
 

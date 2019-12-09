@@ -280,7 +280,7 @@ public class PathSelectBoundary extends AppCompatActivity {
                                                                 tmpbrand.setSpotName(document.get("bName").toString());
                                                                 tmpbrand.setSpotLocation(Integer.parseInt( document.getData().get("x").toString()),Integer.parseInt(document.getData().get("y").toString()));
                                                                 tmpbrand.setSpotFloor(Integer.parseInt(document.getData().get("floor").toString()));
-                                                                //tmpbrand.setSale(Boolean.parseBoolean(document.getData().get("sale").toString()));
+                                                                tmpbrand.setSale(Boolean.parseBoolean(document.getData().get("sale").toString()));
                                                                 brandList.add(tmpbrand);
                                                                 System.out.println("찾았다 일치");
                                                                 System.out.println(tmpbrand.getSpotName());
