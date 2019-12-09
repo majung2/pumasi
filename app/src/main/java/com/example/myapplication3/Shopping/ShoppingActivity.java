@@ -115,7 +115,7 @@ public class ShoppingActivity extends AppCompatActivity {
                 Intent intent = new Intent(ShoppingActivity.this, FeedbackActivity.class);
                 intent.putExtra("id",id);
                 intent.putExtra("pw",pw);
-                intent.putExtra("pathSize",pathsize);
+                intent.putExtra("pathsize",pathsize);
                 startActivityForResult(intent, 100);
 
             }
