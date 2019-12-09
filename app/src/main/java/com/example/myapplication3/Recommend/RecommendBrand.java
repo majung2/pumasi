@@ -209,7 +209,8 @@ public class RecommendBrand extends AppCompatActivity {
                     }
                 });
         RecommendBrandController mController = new RecommendBrandController();
-        selectedBrand = mController.pearsonCheck(id, selectedCategory, AllUserMap);
+        selectedBrand.addAll(0, mController.pearsonCheck(id, selectedCategory, AllUserMap));
+        System.out.println(selectedBrand);
         adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,selectedBrand);
         listView = (ListView) findViewById(R.id.brandlistview);
 
