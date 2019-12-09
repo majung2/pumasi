@@ -214,6 +214,8 @@ public class PathSelectBoundary extends AppCompatActivity {
                         x = i;
                         Map<String, Object> brandInPath = new HashMap<>();
                         brandInPath.put("visited",true);
+                        brandInPath.put("bought",false);
+                        brandInPath.put("grade",0);
                         brandInPath.put("brandname",brandNameList.get(i));
                         db.collection("user").document(id).collection("path").document(ppSize.toString()).collection("brand").document(x.toString()).set(brandInPath);
                         //콘솔확인용
