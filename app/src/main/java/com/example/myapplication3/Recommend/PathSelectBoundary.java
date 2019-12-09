@@ -57,6 +57,7 @@ public class PathSelectBoundary extends AppCompatActivity {
     private ArrayList<String > pathrecom= new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private ListView listView;
+    Integer ppSize=0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)//옵션 메뉴바
@@ -158,7 +159,7 @@ public class PathSelectBoundary extends AppCompatActivity {
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//사용자가 path를 선택했을 때
-            Integer ppSize=0;
+
             @Override
             public void onItemClick(AdapterView<?> adapterView,
                                     View view, int position, long item) { //path선택: DB에 path 저장
@@ -266,6 +267,7 @@ public class PathSelectBoundary extends AppCompatActivity {
                 ShoppingActivity.class); //쇼핑 액티비티로 이동
         intent.putExtra("id",id);
         intent.putExtra("pw",pw);
+        intent.putExtra("pathsize",ppSize);
 
         startActivity(intent);
 
