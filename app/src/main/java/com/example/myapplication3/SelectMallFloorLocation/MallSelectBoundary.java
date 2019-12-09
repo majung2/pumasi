@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.myapplication3.Login.MainActivity;
 import com.example.myapplication3.MyPage.MyPageSelectMenu;
 import com.example.myapplication3.R;
+import com.example.myapplication3.Shopping.ShoppingActivity;
 
 public class MallSelectBoundary extends AppCompatActivity {
 
@@ -59,13 +61,21 @@ public class MallSelectBoundary extends AppCompatActivity {
 
         }
         if(state==0){
+
             Intent intent = new Intent(// 다음 화면으로 전환
+                    MallSelectBoundary.this,
+                    ShoppingActivity.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
+            intent.putExtra("id",id);
+            intent.putExtra("pw",pw);
+
+            startActivity(intent);
+            /*Intent intent = new Intent(// 다음 화면으로 전환
                     MallSelectBoundary.this,
                     MyPageSelectMenu.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
             intent.putExtra("id",id);
             intent.putExtra("pw",pw);
 
-            startActivity(intent);
+            startActivity(intent);*/
         }
         else if(state==1){
 

@@ -78,14 +78,15 @@ public class ShoppingActivity extends AppCompatActivity {
         Intent intent=getIntent();
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
+        //pathNum = intent.getStringExtra("pathNum");
 
         // --------------------- Firebase 변수 세팅 --------------------------------
         // Firestore와 컬렉션을 준비해둔 변수에 연결한다.
         // Firebase Firestore 컨트롤 권한을 db에 할당
         db = FirebaseFirestore.getInstance();
-        pathRef = db.collection("user").document("abc123")
+        pathRef = db.collection("user").document(id)
                 .collection("path").document("1").collection("brand");
-        brandRateRef = db.collection("user").document("abc123").collection("brandRate");
+        brandRateRef = db.collection("user").document(id).collection("brandRate");
         //brandRef = db.collection("user").document("abc123").collection("path").document("1").collection("brand").document("1");
         // -------------------------------------------------------------------------
 
