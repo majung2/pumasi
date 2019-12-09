@@ -130,12 +130,13 @@ public class ShoppingActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                //if(document.getString("brandname").equals("현위치") == false){
-                                Brand brand = new Brand();
-                                brand.id = document.getId();
-                                brand.name = document.getString("brandname");
-                                brand.bought = document.getBoolean("bought");
-                                brandAdapter.addItem(brand);
+                                if(document.getString("brandname").equals("현위치") == false) {
+                                    Brand brand = new Brand();
+                                    brand.id = document.getId();
+                                    brand.name = document.getString("brandname");
+                                    brand.bought = document.getBoolean("bought");
+                                    brandAdapter.addItem(brand);
+                                }
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());

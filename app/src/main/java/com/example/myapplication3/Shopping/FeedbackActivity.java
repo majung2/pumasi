@@ -36,7 +36,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
     private String id;
     private String pw;
-    private String pathsize;
+    private Integer pathsize;
 
     //---------------------- 레이아웃 관련 변수 ---------------------------------
     Button enter;
@@ -61,7 +61,7 @@ public class FeedbackActivity extends AppCompatActivity {
         Intent intent=getIntent();
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
-        pathsize = intent.getStringExtra("pathsize");
+        pathsize = intent.getIntExtra("pathsize", 0);
 
         // --------------------- 화면 요소 세팅 ----------------------------
         enter = findViewById(R.id.enter);
@@ -74,7 +74,7 @@ public class FeedbackActivity extends AppCompatActivity {
         // --------------------- Firebase 변수 세팅 ----------------------------------------
         db = FirebaseFirestore.getInstance();
         brandRef = db.collection("user").document(id)
-                .collection("path").document(pathsize).collection("brand");
+                .collection("path").document(pathsize.toString()).collection("brand");
         pathRef = db.collection("user").document(id).collection("path");
         brandRateRef = db.collection("user").document(id).collection("brandRate");
 
@@ -102,11 +102,13 @@ public class FeedbackActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Brand brand = new Brand();
-                                brand.id = document.getId();
-                                brand.name = document.getString("brandname");
-                                brand.bought = document.getBoolean("bought");
-                                feedbackAdapter.addItem(brand);
+                                if(document.getString("brandname").equals("현위치") == false) {
+                                    Brand brand = new Brand();
+                                    brand.id = document.getId();
+                                    brand.name = document.getString("brandname");
+                                    brand.bought = document.getBoolean("bought");
+                                    feedbackAdapter.addItem(brand);
+                                }
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
