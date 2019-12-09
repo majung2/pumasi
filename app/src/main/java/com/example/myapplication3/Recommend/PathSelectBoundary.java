@@ -145,7 +145,12 @@ public class PathSelectBoundary extends AppCompatActivity {
                     path1 = controller.getPath1();
                     path2 = controller.getPath2();
                     pathrecom.add(path1.toString());
-                    pathrecom.add(path2.toString());
+
+                    if(path2.getPathsize()!=0) {
+                        pathrecom.add(path2.toString());
+                    }else{
+                        pathrecom.add("선택한 매장 중 세일 매장이 없습니다.");
+                    }
 
                     adapter.notifyDataSetChanged();
                 }
