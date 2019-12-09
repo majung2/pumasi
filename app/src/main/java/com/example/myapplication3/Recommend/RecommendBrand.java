@@ -48,6 +48,7 @@ public class RecommendBrand extends AppCompatActivity {
     private ArrayList<String> selectedBrand;
     private  ListView listView;
 
+    private Integer cntcallback = 0;
     FirebaseFirestore db;
     CollectionReference brandRateRef;
     CollectionReference pathRef;
@@ -109,6 +110,7 @@ public class RecommendBrand extends AppCompatActivity {
         selectedBrand = new ArrayList<>();
         selectedCategory = new boolean[12]; //이전화면에서 셀렉한 카테고리 받아옴
         Intent intent=getIntent();
+        cntcallback=0;
         selectedCategory = intent.getBooleanArrayExtra("selected");
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
@@ -127,6 +129,7 @@ public class RecommendBrand extends AppCompatActivity {
         bt_tab9 = (ImageView)findViewById(R.id.ImageView9);
         bt_tab10 = (ImageView)findViewById(R.id.ImageView10);
         bt_tab11 = (ImageView)findViewById(R.id.ImageView11);
+
 
         // 받아온 카테고리의 이미지만 띄움
         if(selectedCategory[1]==false){
@@ -168,15 +171,28 @@ public class RecommendBrand extends AppCompatActivity {
             @Override
             public void setUserMap(String str, HashMap<String, Object> map) {
                 AllUserMap.put(str, map);
+                cntcallback++;
+                System.out.println(cntcallback);
+                if(cntcallback==4){
+                    RecommendBrandController mController = new RecommendBrandController();
+                    ArrayList<String> tmpList = new ArrayList<>();
+                    tmpList.addAll(0, mController.pearsonCheck(id, AllUserMap));
+                    for(int i = 0; i<tmpList.size(); i++){
+                        if(!selectedBrand.contains(tmpList.get(i)))
+                            selectedBrand.add(tmpList.get(i));
+                    }
+                    System.out.println("추천브랜드: "+ selectedBrand);
+                    adapter.notifyDataSetChanged();
+                }
+
             }
         });
         //fragment (추천 브랜드 리스트) 연결
-        selectedBrand.add("sample");
 
-        RecommendBrandController mController = new RecommendBrandController();
-        selectedBrand.addAll(0, mController.pearsonCheck(id, AllUserMap));
-        System.out.println(selectedBrand);
+
         adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,selectedBrand);
+
+
         listView = (ListView) findViewById(R.id.brandlistview);
 
         listView.setAdapter(adapter);
@@ -239,11 +255,11 @@ public class RecommendBrand extends AppCompatActivity {
                                                 if (task.isSuccessful()) {
                                                     HashMap<String, Object> tmpMap = new HashMap<>();
                                                     for (QueryDocumentSnapshot document : task.getResult()) {
-                                                        String brand = document.getId();
-                                                        tmpMap.put(brand, document.get(brand));
-                                                        System.out.println(document.getId());
+                                                        String brand = document.getId();//브랜드명
+                                                        tmpMap.put(brand, document.get("rate")); //브랜드명, 레이트값
+                                                        System.out.println("244번째 줄" + document.getId());
                                                     }
-                                                    fb.setUserMap(checked, tmpMap);
+                                                    fb.setUserMap(checked, tmpMap);//유저이름 (브랜드명,레이트값)
                                                 } else {
                                                     //  Log.d(TAG, "Error getting documents: ", task.getException());
                                                 }
