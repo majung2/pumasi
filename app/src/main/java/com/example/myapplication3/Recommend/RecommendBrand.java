@@ -240,7 +240,7 @@ public class RecommendBrand extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(brNameList !=null) {
+                if(brNameList.size() !=0) {
                     Toast.makeText(getApplicationContext(), "브랜드 선택 완료!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RecommendBrand.this, PathSelectBoundary.class);
                     intent.putStringArrayListExtra("selectedBrands", brNameList);
