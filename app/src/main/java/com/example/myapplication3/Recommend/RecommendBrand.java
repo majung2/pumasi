@@ -164,9 +164,57 @@ public class RecommendBrand extends AppCompatActivity {
         }
 
 
-
+        ReadData(new firebaseCallback() {
+            @Override
+            public void setUserMap(String str, HashMap<String, Object> map) {
+                AllUserMap.put(str, map);
+            }
+        });
         //fragment (추천 브랜드 리스트) 연결
         selectedBrand.add("sample");
+
+        RecommendBrandController mController = new RecommendBrandController();
+        selectedBrand.addAll(0, mController.pearsonCheck(id, AllUserMap));
+        System.out.println(selectedBrand);
+        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,selectedBrand);
+        listView = (ListView) findViewById(R.id.brandlistview);
+
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//사용자가 삭제를 위해 브랜드를 클릭했을 때
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view, int position, long id) {
+
+                Toast.makeText(getApplicationContext(), "선호 브랜드는 최소 3개 이상이여야 합니다.", Toast.LENGTH_LONG).show();
+                brNameList.add(((TextView)view).getText().toString());
+                adapter.notifyDataSetChanged();
+            }
+        });
+        final ArrayList<String> catList = new ArrayList<>();
+        for(int i = 1; i<selectedCategory.length; i++){
+            if(selectedCategory[i]==true){
+                catList.add("c"+i);
+            }
+        }
+
+        submit = (Button) findViewById(R.id.button2);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecommendBrand.this, PathSelectBoundary.class);
+                intent.putStringArrayListExtra("brNameList", brNameList);
+                intent.putStringArrayListExtra("catList", catList);
+                intent.putExtra("id",id);
+                intent.putExtra("pw",pw);
+                intent.putExtra("X",currentX);
+                intent.putExtra("Y",currentY);
+                startActivity(intent);
+            }
+        });
+    }
+    public void ReadData(final firebaseCallback fb){
         db = FirebaseFirestore.getInstance();
         pathRef = db.collection("user");
         selectedUser = new ArrayList<>();
@@ -195,7 +243,7 @@ public class RecommendBrand extends AppCompatActivity {
                                                         tmpMap.put(brand, document.get(brand));
                                                         System.out.println(document.getId());
                                                     }
-                                                    AllUserMap.put(checked, tmpMap);
+                                                    fb.setUserMap(checked, tmpMap);
                                                 } else {
                                                     //  Log.d(TAG, "Error getting documents: ", task.getException());
                                                 }
@@ -208,46 +256,9 @@ public class RecommendBrand extends AppCompatActivity {
                         }
                     }
                 });
-        RecommendBrandController mController = new RecommendBrandController();
-        selectedBrand.addAll(0, mController.pearsonCheck(id, selectedCategory, AllUserMap));
-        System.out.println(selectedBrand);
-        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,selectedBrand);
-        listView = (ListView) findViewById(R.id.brandlistview);
-
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//사용자가 삭제를 위해 브랜드를 클릭했을 때
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView,
-                                    View view, int position, long id) {
-
-                Toast.makeText(getApplicationContext(), "선호 브랜드는 최소 3개 이상이여야 합니다.", Toast.LENGTH_LONG).show();
-                brNameList.add(((TextView)view).getText().toString());
-                adapter.notifyDataSetChanged();
-            }
-        });
-        final ArrayList<String> catList = new ArrayList<>();
-        for(i = 1; i<selectedCategory.length; i++){
-            if(selectedCategory[i]==true){
-                catList.add("c"+i);
-            }
-        }
-
-        submit = (Button) findViewById(R.id.button2);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecommendBrand.this, PathSelectBoundary.class);
-                intent.putStringArrayListExtra("brNameList", brNameList);
-                intent.putStringArrayListExtra("catList", catList);
-                intent.putExtra("id",id);
-                intent.putExtra("pw",pw);
-                intent.putExtra("X",currentX);
-                intent.putExtra("Y",currentY);
-                startActivity(intent);
-            }
-        });
+    }
+    public interface firebaseCallback{
+        void setUserMap(String str , HashMap<String, Object> map);
     }
 
 }

@@ -24,7 +24,7 @@ public class RecommendBrandController implements User.BrandRateCallback {
         Brand b = new Brand();
         brList=b.getAllBrand();
     }
-    public ArrayList<String> pearsonCheck(String id, boolean[] selectedCategory, HashMap<String, HashMap<String, Object>> map){
+    public ArrayList<String> pearsonCheck(String id, HashMap<String, HashMap<String, Object>> map){
         HashMap<String, Object> UserRate =  map.get(id);
         ArrayList<String> recommendBrand = new ArrayList<>();
 
@@ -84,10 +84,6 @@ public class RecommendBrandController implements User.BrandRateCallback {
             }
             recommendBrand.add(topBr);
         }
-
-
-
-
         return recommendBrand;
     }
 
