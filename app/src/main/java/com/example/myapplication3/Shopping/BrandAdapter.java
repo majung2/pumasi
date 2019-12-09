@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -89,8 +90,10 @@ public class BrandAdapter extends BaseAdapter {
 
     public class BrandViewHolder{
         public TextView name;
-        public ImageView bought;
-        public  ImageView notBought;
+        public CheckBox bought;
+        public CheckBox notBought;
+        /*public ImageView bought;
+        public  ImageView notBought;*/
     }
 
     void addItem(Brand brand) {
