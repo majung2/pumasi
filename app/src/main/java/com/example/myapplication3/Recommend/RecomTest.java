@@ -204,7 +204,7 @@ public class RecomTest extends AppCompatActivity {
 
 
         //fragment (추천 브랜드 리스트) 연결
-        selectedBrand.add("sample");
+        //selectedBrand.add("sample");
         db = FirebaseFirestore.getInstance();
         pathRef = db.collection("user");
         selectedUser = new ArrayList<>();
@@ -216,7 +216,7 @@ public class RecomTest extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                selectedUser.add(document.getId());
+                               selectedUser.add(document.getId());
                                 String checked = document.getId();
                                // adapter.notifyDataSetChanged();
                                 System.out.println(document.getId());
@@ -228,7 +228,8 @@ public class RecomTest extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if (task.isSuccessful()) {
                                                     for (QueryDocumentSnapshot document : task.getResult()) {
-                                                        selectedBrand.add(document.getId());
+                                                       selectedBrand.add(document.getId());
+                                                     //   selectedBrand.add(document.get("rate"));
                                                         adapter.notifyDataSetChanged();
                                                         System.out.println(document.getId());
                                                     }
