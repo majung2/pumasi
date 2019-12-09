@@ -44,6 +44,7 @@ public class RecommendBrand extends AppCompatActivity {
     private int cnt;
     private Integer currentX;
     private Integer currentY;
+    private Integer usercnt;
     private ArrayList<String> brNameList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private ArrayList<String> selectedBrand;
@@ -112,6 +113,7 @@ public class RecommendBrand extends AppCompatActivity {
         selectedCategory = new boolean[12]; //이전화면에서 셀렉한 카테고리 받아옴
         Intent intent=getIntent();
         cntcallback=0;
+        usercnt=0;
         selectedCategory = intent.getBooleanArrayExtra("selected");
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
@@ -174,7 +176,7 @@ public class RecommendBrand extends AppCompatActivity {
                 AllUserMap.put(str, map);
                 cntcallback++;
                 System.out.println(cntcallback);
-                if(cntcallback==4){
+                if(cntcallback==usercnt){
                     RecommendBrandController mController = new RecommendBrandController();
                     ArrayList<String> tmpList = new ArrayList<>();
                     tmpList.addAll(0, mController.pearsonCheck(id, AllUserMap));
@@ -264,6 +266,7 @@ public class RecommendBrand extends AppCompatActivity {
                                 final String checked = document.getId();
                                 // adapter.notifyDataSetChanged();
                                 System.out.println(document.getId());
+                                usercnt++;
                                 RateRef = db.collection("user").document(checked).collection("brandRate");
                                 RateRef
                                         .get()
