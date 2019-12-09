@@ -42,10 +42,11 @@ public class PathSelectBoundary extends AppCompatActivity {
     private Path path1;
     private Path path2;
     private Brand tmpbrand;
-
+    private Integer cnt =0;
     private Button select;
     private FirebaseFirestore db;
     private CollectionReference BrandRef;
+    private CollectionReference brRef;
     private ArrayList<Brand> brandList;
     private ArrayList<String > pathrecom= new ArrayList<>();
     private ArrayAdapter<String> adapter;
@@ -119,7 +120,7 @@ public class PathSelectBoundary extends AppCompatActivity {
         System.out.println(currentX);
 
         //경로 1, 4 추출
-       // controller = new PathfindingController(selectedBrands,currentX,currentY,selectedCat);
+        // controller = new PathfindingController(selectedBrands,currentX,currentY,selectedCat);
 
         db = FirebaseFirestore.getInstance();
 
@@ -127,6 +128,20 @@ public class PathSelectBoundary extends AppCompatActivity {
         BrandRef = db.collection("shoppingMall").document("M1").collection("category").document("c1").collection("brand");
 
         pathrecom.add("추천된 루트입니다.");
+        readData(new FirebaseCallback() {
+            @Override
+            public void onCallback(ArrayList<Brand> recomBrand) {
+                cnt++;
+                if(cnt==11){
+                    controller = new PathfindingController(brandList,currentX,currentY,selectedCat);
+                    path1 = controller.getPath1();
+                    path2 = controller.getPath2();
+                    pathrecom.add(path1.toString());
+
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
 
         adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,pathrecom);
         listView = (ListView) findViewById(R.id.brandList);
@@ -147,53 +162,6 @@ public class PathSelectBoundary extends AppCompatActivity {
         });
 
         int i=0;
-        BrandRef
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //  selectedUser.add(document.getId());
-                                String checked = document.getId();
-                                // adapter.notifyDataSetChanged();
-                              //  System.out.println(document.get("bName"));
-                                final Integer index=0;
-                                for(String brand: selectedBrands){
-                                    if(brand.equals(document.get("bName"))){
-                                        tmpbrand = new Brand();
-                                        tmpbrand.setSpotName(document.get("bName").toString());
-                                        tmpbrand.setSpotLocation(Integer.parseInt( document.getData().get("x").toString()),Integer.parseInt(document.getData().get("y").toString()));
-                                        tmpbrand.setSpotFloor(Integer.parseInt(document.getData().get("floor").toString()));
-                                        brandList.add(tmpbrand);
-                                        System.out.println("찾았다 일치");
-                                        System.out.println(tmpbrand.getSpotName());
-                                    }
-                                }
-
-
-                            }
-                           // System.out.println(brandList.get(0).getSpotName());
-                            controller = new PathfindingController(brandList,currentX,currentY,selectedCat);
-                            path1 = controller.getPath1();
-                            path2 = controller.getPath2();
-                            pathrecom.add(path1.toString());
-
-                            adapter.notifyDataSetChanged();
-
-
-
-                        } else {
-                            //  Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-
-
-
-//        path1 = controller.getPath1().toString();
- //       path2 = controller.getPath4().toString();
-
 
 
     }
@@ -214,7 +182,62 @@ public class PathSelectBoundary extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void readData(final FirebaseCallback fb) {
+        db = FirebaseFirestore.getInstance();
+        BrandRef = db.collection("shoppingMall").document("M1").collection("category");
+        BrandRef
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                             //   selectedUser.add(document.getId());
+                                String checked = document.getId();
+                                // adapter.notifyDataSetChanged();
+                                System.out.println(document.getId());
+                                brRef = db.collection("shoppingMall").document("M1").collection("category").document(checked).collection("brand");
+                                brRef
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                                       // selectedBrand.add(document.getId());
+                                                        //   selectedBrand.add(document.get("rate"));
+                                                        for(String brand: selectedBrands){
+                                                            if(brand.equals(document.get("bName"))){
+                                                                tmpbrand = new Brand();
+                                                                tmpbrand.setSpotName(document.get("bName").toString());
+                                                                tmpbrand.setSpotLocation(Integer.parseInt( document.getData().get("x").toString()),Integer.parseInt(document.getData().get("y").toString()));
+                                                                tmpbrand.setSpotFloor(Integer.parseInt(document.getData().get("floor").toString()));
+                                                                brandList.add(tmpbrand);
+                                                                System.out.println("찾았다 일치");
+                                                                System.out.println(tmpbrand.getSpotName());
+                                                            }
+                                                        }
+                                                        adapter.notifyDataSetChanged();
+                                                        System.out.println(document.getId());
+                                                    }
 
+                                                    fb.onCallback(brandList);
 
+                                                } else {
+                                                    //  Log.d(TAG, "Error getting documents: ", task.getException());
+                                                }
+                                            }
+                                        });
+                            }
+
+                        } else {
+                            //  Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+public interface FirebaseCallback{
+        void onCallback(ArrayList<Brand> recomBrand);
+}
 
 }

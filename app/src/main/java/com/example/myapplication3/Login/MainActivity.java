@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements LoginController.L
        ArrayList<String> brands= new ArrayList<>();
        brands.add("COACH");
        brands.add("LANVIN COLLECTION");
+        brands.add("A.P.C");
        intent.putStringArrayListExtra("selectedBrands",brands);
 
         startActivity(intent);
