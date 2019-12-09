@@ -116,13 +116,13 @@ public class PathSelectBoundary extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
-        currentX = intent.getIntExtra("x",0);
-        currentY = intent.getIntExtra("y",0);
-        selectedBrands = intent.getStringArrayListExtra("selectedBrands"); //선택된 브랜드 정보
-        System.out.println(selectedBrands.get(0));
-        System.out.println(selectedBrands.get(1));
+        currentX = intent.getIntExtra("X",0);
+        currentY = intent.getIntExtra("Y",0);
+        selectedBrands = intent.getStringArrayListExtra("brNameList");
+        selectedCat = intent.getStringArrayListExtra("catList");
+        //선택된 브랜드 정보
+        System.out.println(selectedBrands);
         //임시로 카테고리 설정
-        selectedCat.add("해외명품");
         System.out.println(currentX);
 
         //경로 1, 4 추출

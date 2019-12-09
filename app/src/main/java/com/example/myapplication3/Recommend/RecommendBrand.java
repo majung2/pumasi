@@ -219,10 +219,12 @@ public class RecommendBrand extends AppCompatActivity {
                if(brNameList.contains(((TextView)view).getText().toString())){
                    Toast.makeText(getApplicationContext(), "브랜드 취소", Toast.LENGTH_LONG).show();
                    brNameList.remove(((TextView)view).getText().toString());
+                   System.out.println(brNameList);
                }
                else{
                    Toast.makeText(getApplicationContext(), "브랜드 추가", Toast.LENGTH_LONG).show();
                    brNameList.add(((TextView)view).getText().toString());
+                   System.out.println(brNameList);
                }
                 adapter.notifyDataSetChanged();
             }
@@ -238,14 +240,18 @@ public class RecommendBrand extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecommendBrand.this, PathSelectBoundary.class);
-                intent.putStringArrayListExtra("brNameList", brNameList);
-                intent.putStringArrayListExtra("catList", catList);
-                intent.putExtra("id",id);
-                intent.putExtra("pw",pw);
-                intent.putExtra("X",currentX);
-                intent.putExtra("Y",currentY);
-                startActivity(intent);
+
+                if(brNameList !=null) {
+                    Intent intent = new Intent(RecommendBrand.this, PathSelectBoundary.class);
+                    intent.putStringArrayListExtra("brNameList", brNameList);
+                    intent.putStringArrayListExtra("catList", catList);
+                    intent.putExtra("id", id);
+                    intent.putExtra("pw", pw);
+                    intent.putExtra("X", currentX);
+                    intent.putExtra("Y", currentY);
+                    startActivity(intent);
+                }
+                else  Toast.makeText(getApplicationContext(), "브랜드를 선택해주세요.", Toast.LENGTH_LONG).show();
             }
         });
     }
