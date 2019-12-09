@@ -27,6 +27,10 @@ public class Brand extends SpotsInMall {
     }
     public boolean getSale(){return this.sale;}
 
+    public void setSale(boolean bool){
+        this.sale = bool;
+    }
+
     public static ArrayList<ArrayList<Brand>> getAllBrand(){
         ArrayList<ArrayList<Brand>> allBrList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
@@ -63,6 +67,8 @@ public class Brand extends SpotsInMall {
     }
 
     //브랜드명으로 브랜드 속성 모두 출력
+
+/*
     public static Brand findBrandInfoByBrandName(String BrandName){
         Brand BrandInfo = new Brand();
         BrandInfo.setSpotName(BrandName);
@@ -83,5 +89,5 @@ public class Brand extends SpotsInMall {
     }
 
 
-
+*/
 }

@@ -334,7 +334,7 @@ public class User implements Serializable {
         this.id = inputId;
         this.pw = InputPw;
         db = FirebaseFirestore.getInstance();
-        DocumentReference ref = db.collection("user").document(id);
+            DocumentReference ref = db.collection("user").document(id);
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task< DocumentSnapshot > task) {//디비 접근에 성공한 경우
@@ -801,5 +801,17 @@ public class User implements Serializable {
 
         void finishAddBrand();
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

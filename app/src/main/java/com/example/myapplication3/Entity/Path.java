@@ -1,19 +1,23 @@
 package com.example.myapplication3.Entity;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Path { //linked list (Path)
     private int pathNum = 0; // 선택시만 DB에서 마지막 넘버 가져와서 +1로 설정
     private String recdate; //recommend date
     private Node head; // start brand Node
     private Node tail; // end brand Node
     private int pathsize = 0; //path size = brand num
+    private ArrayList<String> brandNameList = new ArrayList<>();
 
     private class Node {
 
-        private Object brandname;
+        private String brandname;
         private Node next;
 
 
-        public Node(Object input) {
+        public Node(String input) {
             this.brandname = input;
             this.next = null;
         }
@@ -26,7 +30,7 @@ public class Path { //linked list (Path)
     }//node class end
 
 
-    public void addFirst(Object input) {
+    public void addFirst(String input) {
         // generate node
         Node newNode = new Node(input);
 
@@ -41,7 +45,7 @@ public class Path { //linked list (Path)
         }
     }
 
-    public void addBrandLast(Object input){
+    public void addBrandLast(String input){
         Node newNode = new Node(input);
         if(pathsize == 0){
             addFirst(input);
@@ -59,12 +63,23 @@ public class Path { //linked list (Path)
         Node temp = head;
         String str = "[";
         while(temp.next != null){
-            str += temp.brandname + ",";
+            str += temp.brandname + "→";
             temp = temp.next;
         }
         str += temp.brandname;
         return str+"]";
     }
+
+    public ArrayList<String> toArrayList(){
+        Node temp = head;
+        while(temp.next!=null){
+            brandNameList.add(temp.brandname);
+            temp = temp.next;
+        }
+        return brandNameList;
+
+    }
+
 
 
     public String getRecdate() {

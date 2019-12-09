@@ -59,41 +59,7 @@ public class PathfindingController { //finding path logic
 
     }
 
-//    private String cat ="c1";
-  /*  private void brandInfo(){ //DB에서 Brand정보 가져오기
 
-        for(String x:selectedBrandsNameList){
-            db = FirebaseFirestore.getInstance();
-            BrandRef = db.collection("shoppingMall").document("M1").collection("category").document("c1").collection("brand");
-
-            int i=0;
-            BrandRef
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                  //  selectedUser.add(document.getId());
-                                    String checked = document.getId();
-                                    // adapter.notifyDataSetChanged();
-                                    System.out.println(document.get("bName"));
-                                    final Integer index=0;
-                                        if(selectedBrandsNameList.get(0).equals(document.get("bName"))){
-                                            System.out.println("찾았다 일치");
-                                        }
-
-                                }
-                            } else {
-                                //  Log.d(TAG, "Error getting documents: ", task.getException());
-                            }
-                        }
-                    });
-
-           // brandsList.add(Brand.findBrandInfoByBrandName(x));
-        }
-
-    }*/
 
 
     private void brandFloor(){ //브랜드 층별로 분리

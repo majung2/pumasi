@@ -2,6 +2,7 @@ package com.example.myapplication3.Recommend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,13 +24,18 @@ import com.example.myapplication3.Pathfinding.PathfindingController;
 import com.example.myapplication3.R;
 import com.example.myapplication3.Shopping.ShoppingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PathSelectBoundary extends AppCompatActivity {
     private String id;
@@ -137,6 +143,7 @@ public class PathSelectBoundary extends AppCompatActivity {
                     path1 = controller.getPath1();
                     path2 = controller.getPath2();
                     pathrecom.add(path1.toString());
+                    pathrecom.add(path2.toString());
 
                     adapter.notifyDataSetChanged();
                 }
@@ -149,15 +156,77 @@ public class PathSelectBoundary extends AppCompatActivity {
         listView.setAdapter(adapter);
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//사용자가 삭제를 위해 브랜드를 클릭했을 때
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {//사용자가 path를 선택했을 때
+            Integer ppSize;
             @Override
             public void onItemClick(AdapterView<?> adapterView,
-                                    View view, int position, long id) {
+                                    View view, int position, long item) { //path선택: DB에 path 저장
 
-                Toast.makeText(getApplicationContext(), "선호 브랜드는 최소 3개 이상이여야 합니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "해당 루트가 선택되었습니다.", Toast.LENGTH_LONG).show();
+
+                DocumentReference ref = db.collection("user").document(id);
+                ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {//디비 접근에 성공한 경우
+                        if (task.isSuccessful()) {//해당 아이디의 유저를 찾은 경우
+                            DocumentSnapshot doc = task.getResult();
+                            if (pw.equals(doc.get("password"))) {
+                                System.out.println("DB접근 성공");
+
+                                ppSize = Integer.parseInt(doc.get("pathsize").toString());}}}});
+                ppSize++;
+
+                if(position==0){ //첫번째 path 선택시
+                    Map<String, Object> selectedPathInfo = new HashMap<>();
+                    selectedPathInfo.put("brandsize",path1.getPathsize());
+                    selectedPathInfo.put("date",path1.getRecdate());
+
+                    db.collection("user").document(id).collection("path").document(ppSize.toString()).set(selectedPathInfo);
+                    ArrayList<String> brandNameList;
+                    brandNameList = path1.toArrayList();
+                    Integer x;
+                    for(int i=0;i<brandNameList.size();i++) {
+                        x = i;
+                        Map<String, Object> brandInPath = new HashMap<>();
+                        brandInPath.put("visited",true);
+                        brandInPath.put("brandname",brandNameList.get(i));
+                        db.collection("user").document(id).collection("path").document(ppSize.toString()).collection("brand").document(x.toString()).set(brandInPath);
+                        //콘솔확인용
+                        for (Map.Entry<String, Object> e : brandInPath.entrySet() ){
+                            String key = e.getKey();
+                            String value = e.getValue().toString();
+                            System.out.println(key + " : " + value);
+                        }
+                    }
+                } else{
+                    Map<String, Object> selectedPathInfo = new HashMap<>();
+                    selectedPathInfo.put("brandsize",path2.getPathsize());
+                    selectedPathInfo.put("date",path2.getRecdate());
+
+                    db.collection("user").document(id).collection("path").document(ppSize.toString()).set(selectedPathInfo);
+                    ArrayList<String> brandNameList;
+                    brandNameList = path2.toArrayList();
+                    Integer x;
+                    for(int i=0;i<brandNameList.size();i++) {
+                        x = i;
+                        Map<String, Object> brandInPath = new HashMap<>();
+                        brandInPath.put("visited",true);
+                        brandInPath.put("brandname",brandNameList.get(i));
+                        db.collection("user").document(id).collection("path").document(ppSize.toString()).collection("brand").document(x.toString()).set(brandInPath);
+                        //콘솔확인용
+                        for (Map.Entry<String, Object> e : brandInPath.entrySet() ){
+                            String key = e.getKey();
+                            String value = e.getValue().toString();
+                            System.out.println(key + " : " + value);
+                        }
+
+                    }
+
+                }
+
 
                 adapter.notifyDataSetChanged();
+                Next();
             }
         });
 
@@ -166,11 +235,6 @@ public class PathSelectBoundary extends AppCompatActivity {
 
     }
 
-    public void onClick1(View v){
-        // 디비에 선택한 패스 저장
-        System.out.println( ); //현재패스 찍어보기
-        Next();
-    }
 
     public void Next(){
         Intent intent = new Intent(// 다음 화면으로 전환
@@ -212,6 +276,7 @@ public class PathSelectBoundary extends AppCompatActivity {
                                                                 tmpbrand.setSpotName(document.get("bName").toString());
                                                                 tmpbrand.setSpotLocation(Integer.parseInt( document.getData().get("x").toString()),Integer.parseInt(document.getData().get("y").toString()));
                                                                 tmpbrand.setSpotFloor(Integer.parseInt(document.getData().get("floor").toString()));
+                                                                tmpbrand.setSale(Boolean.parseBoolean(document.getData().get("sale").toString()));
                                                                 brandList.add(tmpbrand);
                                                                 System.out.println("찾았다 일치");
                                                                 System.out.println(tmpbrand.getSpotName());
