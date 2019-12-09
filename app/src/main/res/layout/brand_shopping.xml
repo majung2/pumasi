@@ -11,17 +11,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        android:src="@drawable/pajuoutlet_logo"
-        />
-
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textAlignment="center"
@@ -29,22 +23,45 @@
                 android:textSize="20sp"
 
                 />
-            <ImageView
+           <!-- <ImageView
                 android:id="@+id/yes_buy"
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/yes"
-                />
-            <ImageView
+                />-->
+            <!--<ImageView
                 android:id="@+id/no_buy"
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:src="@drawable/no"
-                />
+                />-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="yes"
+            />
+        <CheckBox
+            android:id="@+id/yes_buy"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="no"
+            />
 
+        <CheckBox
+            android:id="@+id/no_buy"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            />
 
     </LinearLayout>
 

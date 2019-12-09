@@ -59,15 +59,9 @@ public class MainActivity extends AppCompatActivity implements LoginController.L
 
         }
         if(state==0){
-            Intent intent = new Intent(// 다음 화면으로 전환
-                    MainActivity.this,
-                    ShoppingActivity.class); // ?ㅼ쓬 ?섏뼱媛??대옒??吏??
-            intent.putExtra("id",1);
-            intent.putExtra("pw",1);
 
-            startActivity(intent);
-            /*Toast toast = Toast.makeText(getApplicationContext(),"로그인 해주세요", Toast.LENGTH_LONG);
-            toast.show();*/
+            Toast toast = Toast.makeText(getApplicationContext(),"로그인 해주세요", Toast.LENGTH_LONG);
+            toast.show();
         }
         else if(state==1){
 

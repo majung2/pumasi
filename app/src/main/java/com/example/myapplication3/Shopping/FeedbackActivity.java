@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,6 +76,8 @@ public class FeedbackActivity extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*Toast toast = Toast.makeText(getApplicationContext(),"별점을 매겨주세요.", Toast.LENGTH_LONG);
+                toast.show(); 다 매기지 않았을 경우*/
 
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
@@ -108,6 +111,8 @@ public class FeedbackActivity extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(),"별점을 매겨주세요.", Toast.LENGTH_LONG);
+                toast.show();
 
                 // 새로운 Intent (화면 간에 전달할 소포)를 만든다.
                 Intent intent = new Intent();
